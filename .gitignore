@@ -110,4 +110,9 @@ hs_err_pid*
 # macOS
 .DS_Store
 
+# Eclipse
+.classpath
+.project
+.settings/
+
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,java
