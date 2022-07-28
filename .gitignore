@@ -25,7 +25,7 @@ local.properties
 
 
 # server
-server/
+servers/
 
 # External tool builders
 .externalToolBuilders/
