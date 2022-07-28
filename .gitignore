@@ -115,4 +115,8 @@ hs_err_pid*
 .project
 .settings/
 
+# Maven
+log/
+target/
+
 # End of https://www.toptal.com/developers/gitignore/api/eclipse,java
