@@ -1,8 +1,5 @@
 package com.balloon.service;
 
-import java.util.Map;
-
-import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -45,21 +42,7 @@ public class AuthServiceImpl implements AuthService {
 	public TokenDTO login(EmpRequestDTO requestDto) {
 		UsernamePasswordAuthenticationToken authenticationToken = requestDto.toAuthentication();
 		Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);
-
 		return tokenProvider.generateTokenDTO(authentication);
-	}
-	
-	@Override
-	public Map<String, Object> loginUser(EmpRequestDTO employeeDTO, HttpServletResponse response){
-		
-		if (passwordEncoder.matches(employeeDTO.getPassword(), empRepo.findByEmpId(employeeDTO.getEmpId()).get().getPassword())) {
-			
-			
-		} else {
-			System.out.println("failed");
-		}
-		
-		return null;
 	}
 	
 
