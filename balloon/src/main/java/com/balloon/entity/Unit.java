@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Persistable;
 
@@ -38,9 +40,11 @@ public class Unit implements Persistable<String>{
 	@Column(name="unit_code", length = 10)
 	private String unitCode;
 	
+	@NotBlank
 	@Column(name="unit_name", length = 20)
 	private String unitName;
 	
+	@NotNull
 	@Column(length = 15)
 	private String bell;
 	

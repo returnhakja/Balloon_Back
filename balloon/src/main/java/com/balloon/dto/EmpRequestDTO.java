@@ -2,16 +2,10 @@ package com.balloon.dto;
 
 import java.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.balloon.entity.Authority;
+import com.balloon.entity.UserRole;
 import com.balloon.entity.Employee;
 import com.balloon.entity.Unit;
 
@@ -58,7 +52,7 @@ public class EmpRequestDTO {
 	
 	private Unit unit;
 	
-	private Authority userRoleGrade;
+	private UserRole userRoleGrade;
 
 	
 	public Employee toEntity(EmpRequestDTO employeeDTO) {
@@ -90,8 +84,6 @@ public class EmpRequestDTO {
 	}
 	
 	public UsernamePasswordAuthenticationToken toAuthentication() {
-		System.out.println(empId);
-		System.out.println(password);
 		return new UsernamePasswordAuthenticationToken(empId, password);
 	}
 	

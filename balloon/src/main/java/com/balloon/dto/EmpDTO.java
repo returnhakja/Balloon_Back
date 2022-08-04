@@ -8,7 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
-import com.balloon.entity.Authority;
+import com.balloon.entity.UserRole;
 import com.balloon.entity.Employee;
 import com.balloon.entity.Unit;
 
@@ -55,7 +55,7 @@ public class EmpDTO {
 	
 	private Unit unit;
 	
-	private Authority userRoleGrade;
+	private UserRole userRoleGrade;
 	
 	public Employee toEntity(EmpDTO employeeDTO) {
 		Employee employeeEntity = Employee.builder()

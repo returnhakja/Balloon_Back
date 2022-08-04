@@ -41,6 +41,7 @@ public class TokenProvider {
     // 주의점: 여기서 @Value는 `springframework.beans.factory.annotation.Value`소속이다! lombok의 @Value와 착각하지 말것!
     //     * @param secretKey
     public TokenProvider(@Value("${jwt.secret}") String secretKey) {
+    	System.out.println("44Line");
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }

@@ -4,6 +4,8 @@ package com.balloon.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"}, allowedHeaders = "*")
+//@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"}, allowedHeaders = "*")
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;
@@ -39,6 +41,7 @@ public class UnitRestController {
 			if (unitList == null) {
 				throw new Exception("존재하는 조직이 없습니다.");
 			}
+			
 			List<UnitDTO> unitDTOList = new ArrayList<UnitDTO>();
 			unitList.forEach(unitEntity -> unitDTOList.add(unitEntity.toDTO(unitEntity)));
 			return unitDTOList;
@@ -49,7 +52,7 @@ public class UnitRestController {
 	}
 
 	@GetMapping(value="/unit/{unitCode}")
-	public UnitDTO findUnitByUnitCode(@PathVariable String unitCode) throws Exception{
+	public UnitDTO findUnitByUnitCode(@Valid @PathVariable String unitCode) throws Exception{
 		try {
 			if (unitCode == null) {
 				throw new Exception("조직 번호를 입력받지 못습니다.");
@@ -67,7 +70,7 @@ public class UnitRestController {
 	}
 
 	@PostMapping(value = "/unit", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void insertUnit(@RequestBody UnitDTO unitDTO) throws Exception {
+	public void insertUnit(@Valid @RequestBody UnitDTO unitDTO) throws Exception {
 		try {
 			try {
 				if(unitDTO == null) {

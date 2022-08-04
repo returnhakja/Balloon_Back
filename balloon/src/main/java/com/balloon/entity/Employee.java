@@ -11,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -37,33 +38,41 @@ public class Employee implements Persistable<String>{
 	@Column(name = "emp_id", length = 10)
 	private String empId;
 	
+	@NotNull
 	@Column(name = "password")		
 	private String password;		// ??
 	
+	@NotNull
 	@Column(name = "emp_name", length = 30)
 	private String empName;
 	
+	@NotNull
 	@Column(name = "position", length = 20)
 	private String position;
 	
+	@NotNull
 	@Column(name = "mobile", length = 15)
 	private String mobile;
 	
+	@NotNull
 	@Column(name = "hiredate")
 	private LocalDate hiredate;
 	
+	@NotNull
 	@Column(name = "salary")
 	private Float salary;
 	
 	@Column(name = "commission")
 	private Float commission;
 	
+	@NotNull
 	@Column(name = "emp_mail", length = 30)
 	private String empMail;
 	
 	@Column(name = "photo")
 	private String photo;
-	
+
+	@NotNull
 	@Column(name = "emp_bell", length = 15)
 	private String empBell;
 	
@@ -79,10 +88,12 @@ public class Employee implements Persistable<String>{
 	@Column(name = "responsibility")
 	private String responsibility;
 	
+	@NotNull
 	@Column(name = "user_role_grade", length = 45)
 	@Enumerated(EnumType.STRING)
-	private Authority userRoleGrade;
+	private UserRole userRoleGrade;
 	
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "unit_code")
 	private Unit unit;

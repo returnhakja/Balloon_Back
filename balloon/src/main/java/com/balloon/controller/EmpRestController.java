@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"}, allowedHeaders = "*")
+//@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"})
 public class EmpRestController {
 	
 	
@@ -68,7 +68,7 @@ public class EmpRestController {
 	}
 	
 	/**/
-	@GetMapping("/me")
+	@GetMapping("/emp/me")
 	public ResponseEntity<EmpResponseDTO> getMyEmpInfo(){
 		EmpResponseDTO myInfoBySecurity = empSvc.getMyInfoBySecurity();
 
