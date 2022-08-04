@@ -1,0 +1,50 @@
+package com.balloon.dto;
+
+import java.time.LocalDateTime;
+
+import com.balloon.entity.Cal;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+public class CalDTO {
+	
+	private Long scheduleId;
+	
+	private String scheduleTitle;
+	
+	private LocalDateTime scheduleStart;
+	
+	private LocalDateTime scheduleEnd;
+	
+	private String empName;
+	
+	private String scheduleMemo;
+	
+	private String scheduleLocation;
+	
+	private String empId;
+	
+	public Cal toEntity(CalDTO calDTO) {
+		Cal calEntity = Cal.builder()
+				.scheduleId(calDTO.getScheduleId())
+				.scheduleTitle(calDTO.getScheduleTitle())
+				.scheduleStart(calDTO.getScheduleStart())
+				.scheduleEnd(calDTO.getScheduleEnd())
+				.empName(calDTO.getEmpName())
+				.scheduleMemo(calDTO.getScheduleMemo())
+				.scheduleLocation(calDTO.getScheduleLocation())
+				.empId(calDTO.getEmpId())
+				.build();
+		return calEntity;
+	}
+	
+}
