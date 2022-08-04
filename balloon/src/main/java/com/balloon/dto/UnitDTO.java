@@ -22,7 +22,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UnitDTO {
 
-<<<<<<< HEAD
+
    @Id
    @Column(name="unit_code")
    private String unitCode;
@@ -53,28 +53,7 @@ public class UnitDTO {
    }
    
 }
-=======
-	private String unitCode;
+
 	
-	private String unitName;
-	
-	private String bell;
-	
-	private Unit parentUnit;
-	
-	private List<Unit> childUnits;
-	
-	public Unit toEntity(UnitDTO unitDTO) {
-		Unit unitEntity = Unit.builder()
-						.unitCode(unitDTO.getUnitCode())
-						.unitName(unitDTO.getUnitName())
-						.bell(unitDTO.getBell())
-						.parentUnit(unitDTO.getParentUnit())
-						.childUnits(unitDTO.getChildUnits())
-						.build();
-		
-		return unitEntity;
-	}
-	
-}
->>>>>>> a049122424fba70fa426308a8f4ffd27ef67eb79
+
+

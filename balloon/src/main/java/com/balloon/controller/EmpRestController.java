@@ -1,31 +1,34 @@
 package com.balloon.controller;
 
-<<<<<<< HEAD
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.entity.Cal;
 import com.balloon.service.CalServiceImpl;
-=======
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.balloon.dto.CalDTO;
 import com.balloon.dto.ChangePasswordRequestDTO;
 import com.balloon.dto.EmpDTO;
 import com.balloon.dto.EmpRequestDTO;
@@ -36,38 +39,15 @@ import com.balloon.entity.Employee;
 import com.balloon.service.EmpServiceImpl;
 
 import lombok.RequiredArgsConstructor;
->>>>>>> a049122424fba70fa426308a8f4ffd27ef67eb79
+
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-//@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"})
+@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"})
 public class EmpRestController {
-	@Autowired
-	CalServiceImpl calService;
-	
-<<<<<<< HEAD
-	@GetMapping("/")
-	public String home() {
-		return "되긴하네";
-	}
-	
 
-	@CrossOrigin(origins = {"http://localhost:3000", "https://localhost:4000"})
-	@GetMapping(value = "/calall")
-	public List<Cal> findAll(){
-		System.out.println("--ㄴ-ㅁㄴㅇ-ㅁㄴㅇ-ㅁㄴㅇ-ㅁㄴㅇ-ㄴ");
-		return calService.findAll();
-	}
-	
-//	@CrossOrigin(origins = {"http://localhost:3000", "https://localhost:4000"})
-//	@GetMapping(value = "/calall/{scheduleId}")
-//	public Cal CalByScheduleId(@PathVariable Long scheduleid) {
-//		System.out.println("스케쥬우우울");
-//		return calService.getCalByscheduleId(scheduleid);
-//	}
-=======
-	
+
 	private final EmpServiceImpl empSvc;
 
 	@GetMapping("/emp/list")
@@ -121,12 +101,6 @@ public class EmpRestController {
 		return ResponseEntity.ok(empSvc.changePassword(requestDTO.getEmpId(), requestDTO.getExPassword(), requestDTO.getNewPassword()));
 	}
 	
-	/**/
-//	@GetMapping("/")
-//	public String home() {
-//		return "home";
-//	}
-//	
 	
 	
 	
@@ -189,6 +163,6 @@ public class EmpRestController {
 //	  }
 
 
->>>>>>> a049122424fba70fa426308a8f4ffd27ef67eb79
+
 	
 }

@@ -4,9 +4,15 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 import com.balloon.dto.CalDTO;
 
@@ -22,6 +28,7 @@ import lombok.ToString;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "schedule")
 public class Cal{
 	@Id
 	@Column(name="schedule_id")
@@ -46,8 +53,11 @@ public class Cal{
 	@Column(name="schedule_location")
 	private String scheduleLocation;
 	
-	@Column(name="emp_id")
-	private String empId;
+	
+
+	@ManyToOne
+	@JoinColumn(name = "emp_id")
+	private Employee empId;
 	
 	public CalDTO toDTO(Cal calEntity) {
 		CalDTO calDTO = CalDTO.builder()
@@ -61,5 +71,13 @@ public class Cal{
 				.empId(calEntity.getEmpId())
 				.build();
 		return calDTO;
+	}
+	
+	public void updateCal(CalDTO calDTO) {
+		this.scheduleTitle = calDTO.getScheduleTitle();
+		this.scheduleStart = calDTO.getScheduleStart();
+		this.scheduleEnd = calDTO.getScheduleEnd();
+		this.scheduleMemo = calDTO.getScheduleMemo();
+		this.scheduleLocation = calDTO.getScheduleLocation();
 	}
 }

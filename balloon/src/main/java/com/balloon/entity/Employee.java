@@ -1,6 +1,7 @@
 package com.balloon.entity;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 
@@ -35,6 +37,7 @@ import lombok.ToString;
 public class Employee implements Persistable<String>{
 	
 	@Id
+	
 	@Column(name = "emp_id", length = 10)
 	private String empId;
 	
@@ -98,7 +101,8 @@ public class Employee implements Persistable<String>{
 	@JoinColumn(name = "unit_code")
 	private Unit unit;
 
-	
+	@OneToMany
+	private List<Cal> calList;
 	
 	public void updatePassword(String password) {
 		this.password = password;

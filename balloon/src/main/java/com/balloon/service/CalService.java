@@ -12,5 +12,14 @@ public interface CalService {
 	
 	public List<Cal> findAll();
 	
-//	public Cal getCalByscheduleId(Long scheduleId);
+	public Cal getCalByscheduleId(Long scheduleId);
+	
+	public void deleteByCalId(Long scheduleId);
+	
+	public void insertBycal(CalDTO calDTO);
+	
+	public void updateByCal(CalDTO calDTO);
+	
+	public Cal getCalByempId(CalDTO empId);
+	
 }

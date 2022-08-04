@@ -3,6 +3,7 @@ package com.balloon.dto;
 import java.time.LocalDateTime;
 
 import com.balloon.entity.Cal;
+import com.balloon.entity.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -31,7 +32,7 @@ public class CalDTO {
 	
 	private String scheduleLocation;
 	
-	private String empId;
+	private Employee empId;
 	
 	public Cal toEntity(CalDTO calDTO) {
 		Cal calEntity = Cal.builder()

@@ -25,13 +25,45 @@ public class CalServiceImpl implements CalService{
 
 
 
-//	@Override
-//	public Cal getCalByscheduleId(Long scheduleId) {
-//		System.out.println(scheduleId);
-//		return CalRepository.findAllByscheduleId(scheduleId);
-//	}
-//	
+	@Override
+	public Cal getCalByscheduleId(Long scheduleId) {
+		
+		return CalRepository.findAllByscheduleId(scheduleId);
+	}
 
+
+
+	@Override
+	public void deleteByCalId(Long scheduleId) {
+		CalRepository.deleteById(scheduleId);
+	}
+
+
+
+	@Override
+	public void insertBycal(CalDTO calDTO) {
+		Cal calEntity = calDTO.toEntity(calDTO);
+		CalRepository.save(calEntity);
+	}
+
+
+
+	@Override
+	public void updateByCal(CalDTO calDTO) {
+		Cal cal = getCalByscheduleId(calDTO.getScheduleId());
+		cal.updateCal(calDTO);
+		CalRepository.save(cal);
+	}
+
+
+
+	@Override
+	public Cal getCalByempId(CalDTO empId) {
+		return CalRepository.findAllByempId(empId);
+		
+	}
+	
+	
 
 
 	
