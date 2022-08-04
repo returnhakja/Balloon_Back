@@ -69,10 +69,12 @@ public class EmpRestController {
 	
 	/**/
 	@GetMapping("/emp/me")
-	public ResponseEntity<EmpResponseDTO> getMyEmpInfo(){
+	public EmpResponseDTO getMyEmpInfo(){
 		EmpResponseDTO myInfoBySecurity = empSvc.getMyInfoBySecurity();
-
-		return ResponseEntity.ok((myInfoBySecurity));
+		
+//		System.out.println(ResponseEntity.ok((myInfoBySecurity)));
+		
+		return myInfoBySecurity;
 	}
 	
 	@PostMapping("/empName")
@@ -85,16 +87,7 @@ public class EmpRestController {
 		return ResponseEntity.ok(empSvc.changePassword(requestDTO.getEmpId(), requestDTO.getExPassword(), requestDTO.getNewPassword()));
 	}
 	
-	/**/
-//	@GetMapping("/")
-//	public String home() {
-//		return "home";
-//	}
-//	
 	
-	
-	
-//	
 //	  private UserMapper userMapper;
 //	  private Bcrypt bcrypt;
 //

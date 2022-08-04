@@ -14,5 +14,4 @@ public interface AuthService {
 	
 	public TokenDTO login(EmpRequestDTO requestDto);
 	
-	public Map<String, Object> loginUser(EmpRequestDTO requestDto, HttpServletResponse response);
 }

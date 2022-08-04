@@ -40,30 +40,24 @@ public class TokenProvider {
 
     // 주의점: 여기서 @Value는 `springframework.beans.factory.annotation.Value`소속이다! lombok의 @Value와 착각하지 말것!
     //     * @param secretKey
+    /* JwtAuthTokenProvider */
     public TokenProvider(@Value("${jwt.secret}") String secretKey) {
-    	System.out.println("44Line");
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         this.key = Keys.hmacShaKeyFor(keyBytes);
     }
-
+    
 
     // 토큰 생성
     public TokenDTO generateTokenDTO(Authentication authentication) {
-    	System.out.println("1111111111111111111111111111111111");
         String authorities = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.joining(","));
 
-        System.out.println("22222222222222222222222222222222222");
         long now = (new Date()).getTime();
 
-
-        System.out.println("33333333333333333333333333333333333");
         Date tokenExpiresIn = new Date(now + ACCESS_TOKEN_EXPIRE_TIME);
 
-        System.out.println(tokenExpiresIn);
 
-        System.out.println("44444444444444444444444444444444444");
         String accessToken = Jwts.builder()
                 .setSubject(authentication.getName())
                 .claim(AUTHORITIES_KEY, authorities)
@@ -71,11 +65,11 @@ public class TokenProvider {
                 .signWith(key, SignatureAlgorithm.HS512)
                 .compact();
 
-        System.out.println("55555555555555555555555555555555555");
         return TokenDTO.builder()
                 .grantType(BEARER_TYPE)
                 .accessToken(accessToken)
                 .tokenExpiresIn(tokenExpiresIn.getTime())
+                .partitionKey(authentication.getName())
                 .build();
     }
 
