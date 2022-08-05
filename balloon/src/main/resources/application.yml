@@ -25,6 +25,11 @@ spring:
       repositories:
         enabled: true
     
+  # jackson  
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      
      
 logging:
   level:

@@ -1,5 +1,7 @@
 package com.balloon.service;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.function.Function;
 
 //import javax.transaction.Transactional;
@@ -77,6 +79,11 @@ public class EmpServiceImpl implements EmpService{
 		}
 		employee.updatePassword(passwordEncoder.encode(newPassword));
 		return EmpResponseDTO.of(empRepo.save(employee));
+	}
+
+	@Override
+	public List<Employee> findEmpListInUnitCode(String unitCode) {
+		return empRepo.findEmpListInUnitCode(unitCode);
 	}
 	
 	

@@ -2,6 +2,7 @@ package com.balloon.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -53,10 +54,16 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         http
                 .authorizeRequests()
 //                .antMatchers("/", "/**").permitAll()
-                .antMatchers("/loginPage").permitAll()
-                .antMatchers("/login").permitAll()
-                .antMatchers("/auth/**").permitAll()
-                .antMatchers("/api/**").permitAll()
+//                .antMatchers("/").hasRole("MANAGER")
+
+                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/signup").hasRole("ADMIN")
+//                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
+                .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
+                .antMatchers("/api/emp/me").authenticated()
+                
+                .antMatchers("/api/**").authenticated()
                 .anyRequest().authenticated()
                 ;
         

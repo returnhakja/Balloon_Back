@@ -54,9 +54,10 @@ public class Unit implements Persistable<String>{
 	private Unit parentUnit;
 	
 	@JsonManagedReference
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "parentUnit")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parentUnit")
 	private List<Unit> childUnits;
 
+	
 	
 	public UnitDTO toDTO(Unit unitEntity) {
 		UnitDTO unitDTO = UnitDTO.builder()
