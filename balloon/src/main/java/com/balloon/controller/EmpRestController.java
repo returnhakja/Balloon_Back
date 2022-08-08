@@ -1,8 +1,11 @@
 package com.balloon.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -50,7 +53,7 @@ public class EmpRestController {
 	}
 	
 	@GetMapping(value = "/emp/{empId}")
-	public EmpDTO findEmpByEmpId(@PathVariable String empId) throws Exception{
+	public EmpDTO findEmpByEmpId(@Valid @PathVariable String empId) throws Exception{
 		try {
 			if(empId == null) {
 				throw new Exception("사원번호를 입력받지 못했습니다.");
@@ -72,8 +75,6 @@ public class EmpRestController {
 	public EmpResponseDTO getMyEmpInfo(){
 		EmpResponseDTO myInfoBySecurity = empSvc.getMyInfoBySecurity();
 		
-//		System.out.println(ResponseEntity.ok((myInfoBySecurity)));
-		
 		return myInfoBySecurity;
 	}
 	
@@ -85,6 +86,31 @@ public class EmpRestController {
 	@PostMapping("/password")
 	public ResponseEntity<EmpResponseDTO> updatePassword(@RequestBody ChangePasswordRequestDTO requestDTO){
 		return ResponseEntity.ok(empSvc.changePassword(requestDTO.getEmpId(), requestDTO.getExPassword(), requestDTO.getNewPassword()));
+	}
+	
+	@GetMapping("/approval/line/{unitCode}")
+	public List<EmpDTO> findEmpListInUnitCode(@Valid @PathVariable String unitCode) throws Exception{
+		try {
+			if(unitCode == null) {
+				throw new Exception("조직이 존재하지 않습니다.");
+			} else {
+				List<Employee> empEntityList = empSvc.findEmpListInUnitCode(unitCode);
+				if (empEntityList == null) {
+//					throw new Exception("사원이 존재하지 않습니다.");
+					return null;
+				} else {
+					List<EmpDTO> empDTOList = new ArrayList<EmpDTO>();
+					
+					empEntityList.forEach(empEntity -> empDTOList.add(empEntity.toDTO(empEntity)));
+				
+					
+					return empDTOList;
+				}
+			}
+		} catch (Exception e) {
+			throw new Exception("입력받은 조직번호가 없습니다.");
+		}
+		
 	}
 	
 	
