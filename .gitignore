@@ -27,6 +27,12 @@ application-mysql.properties
 
 # servers
 servers/
+catalina.policy
+catalina.properties
+context.xml
+server.xml
+tomcat-users.xml
+web.xml
 
 # External tool builders
 .externalToolBuilders/

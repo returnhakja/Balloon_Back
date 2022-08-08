@@ -1,0 +1,43 @@
+spring:
+  # DB
+  profiles:
+    include: mysql
+
+  # JPA
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        show_sql: true
+#        # batch
+#        generate_statistics: true
+#        jdbc:
+#          batch_size: 50
+#        order_inserts: true
+    # DB    
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+  # data  
+  data:
+    jpa:
+      repositories:
+        enabled: true
+    
+  # jackson  
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+      
+     
+logging:
+  level:
+    com.balloon: debug    
+
+jwt:
+  header: Authorization
+  #Because it will use the HS512 algorithm, it should use 512 bits, or a secret key of 64 bytes or more.
+  secret: YmFsbG9vbi1wcm9qZWN0LWFpci13ZS1tYWRlLW1lc3Nlbmdlci1jYWxlbmRhci1lbGVjdHJvbmljQXBwcm92YWwtc3ByaW5nLXNlY3VyaXR5Cg==
+  token-validity-in-seconds: 86400
+
