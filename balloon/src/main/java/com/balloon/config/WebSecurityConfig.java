@@ -56,13 +56,23 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //                .antMatchers("/").hasRole("MANAGER")
 
                 .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/auth/signup").hasRole("ADMIN")
+                .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
 //                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
                 .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/allChatroom").permitAll()
+                .antMatchers("/createChatroom").permitAll()
+                .antMatchers("/chat/**").permitAll()
+                .antMatchers("/allChat/**").permitAll()
+                .antMatchers("/topic/**").permitAll()
+                .antMatchers("/app/**").permitAll()
+                .antMatchers("/chatstart/**").permitAll()
+                
+                
                 .antMatchers("/api/emp/me").authenticated()
                 
                 .antMatchers("/api/**").authenticated()
+                
                 .anyRequest().authenticated()
                 ;
         
