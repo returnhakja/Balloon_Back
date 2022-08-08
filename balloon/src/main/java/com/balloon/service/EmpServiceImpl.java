@@ -99,4 +99,10 @@ public class EmpServiceImpl implements EmpService{
 	
 	
 	/* site 참조 */
+	
+	
+	@Override
+	public List<Employee> getEmp() {
+	return empRepo.findAll();
+}
 }

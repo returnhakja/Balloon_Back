@@ -1,10 +1,10 @@
 package com.balloon.vo;
 
 import com.balloon.dto.ChatroomDTO;
-//import com.balloon.dto.EmployeeDTO;
+import com.balloon.dto.EmpDTO;
 import com.balloon.entity.Chat;
 import com.balloon.entity.Chatroom;
-//import com.balloon.entity.Employee;
+import com.balloon.entity.Employee;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -26,14 +26,14 @@ public class MessageDTO {
 		Chatroom chatRoomId = chatroomDTO.toEntity(chatroomDTO);
 		//--------------------------------------------------
 		//---------------EmployeeId 값을 entity로 변환해준 것-----------------------
-//		EmployeeDTO employeeDTO = new EmployeeDTO();
-//		employeeDTO.setEmpId(messageDTO.getWriter());
-//		Employee employeeId = employeeDTO.toEntity(employeeDTO);
+		EmpDTO employeeDTO = new EmpDTO();
+		employeeDTO.setEmpId(messageDTO.getWriter());
+		Employee employeeId = employeeDTO.toEntity(employeeDTO);
 		// ---------------------------------------------
 		Chat chatEntity = Chat.builder()
 				.chatroom(chatRoomId)
 				.chatContent(messageDTO.getChatContent())
-//				.employee(employeeId)
+				.employee(employeeId)
 				.build();
 		return chatEntity; 
 	}

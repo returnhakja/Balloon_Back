@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -49,9 +50,9 @@ public class Chat {
 	@JoinColumn(name = "chatroom_id")
 	private Chatroom chatroom;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "emp_id")
-//	private Employee employee;
+	private Employee employee;
 	
 	public ChatDTO toDTO(Chat chatEntity) {
 		ChatDTO chatDTO = ChatDTO.builder()
@@ -59,7 +60,7 @@ public class Chat {
 									.chatContent(chatEntity.getChatContent())
 									.chatTime(chatEntity.getChatTime())
 									.chatroom(chatEntity.getChatroom())
-//									.employee(chatEntity.getEmployee())
+									.employee(chatEntity.getEmployee())
 									.build();
 		return chatDTO;
 	}

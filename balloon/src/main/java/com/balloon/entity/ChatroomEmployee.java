@@ -6,6 +6,7 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.balloon.dto.ChatroomDTO;
 import com.balloon.dto.ChatroomEmployeeDTO;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.ToString;
 @ToString
 @IdClass(ChatroomEmployeeId.class)
 public class ChatroomEmployee {
+
 	
 	@Id
 	@ManyToOne
@@ -31,14 +33,14 @@ public class ChatroomEmployee {
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "emp_id")
-//	private Employee empId;
+	private Employee empId;
 	
 	public ChatroomEmployeeDTO toDTO(ChatroomEmployee chatroomEmployeeEntity) {
 		Chatroom chatroom = chatroomEmployeeEntity.getChatroomId();
-//		Employee employee = chatroomEmployeeEntity.getEmpId();
+		Employee employee = chatroomEmployeeEntity.getEmpId();
 		ChatroomEmployeeDTO chatroomEmployeeDTO = ChatroomEmployeeDTO.builder()
 																		.chatroomId(chatroom.toDTO(chatroom))
-//																		.empId(employee.toDTO(employee))
+																		.empId(employee.toDTO(employee))
 																		.build();
 		return chatroomEmployeeDTO;
 	}

@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import com.balloon.entity.Chat;
 import com.balloon.entity.Chatroom;
+import com.balloon.entity.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -26,7 +27,7 @@ public class ChatDTO {
 	
 	private Chatroom chatroom;
 	
-//	private Employee employee;
+	private Employee employee;
 	
 	public Chat toEntity(ChatDTO chatDTO) {
 		Chat chatEntity = Chat.builder()
@@ -34,7 +35,7 @@ public class ChatDTO {
 									.chatContent(chatDTO.getChatContent())
 									.chatTime(chatDTO.getChatTime())
 									.chatroom(chatDTO.getChatroom())
-//									.employee(chatDTO.getEmployee())
+									.employee(chatDTO.getEmployee())
 									.build();
 		return chatEntity;
 	}

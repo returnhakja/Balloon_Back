@@ -19,6 +19,7 @@ public class MessageController {
 	//특정 broker로 메세지를 전달
 	private final SimpMessagingTemplate template;
 	private final ChatServiceImpl chatService;
+	
 	@MessageMapping(value = "/chat/message")
 		public void message(@Payload MessageDTO messageDTO) {
 		System.out.println(messageDTO);

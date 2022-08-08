@@ -14,4 +14,6 @@ public interface EmpService{
 	public Employee findEmpByEmpId(String empId);
 	
 	public List<Employee> findEmpListInUnitCode(String unitCode);
+	
+	public List<Employee> getEmp();
 }
