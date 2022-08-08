@@ -100,7 +100,6 @@ public class Employee implements Persistable<String>{
 	private Unit unit;
 
 	
-	
 	public void updatePassword(String password) {
 		this.password = password;
 	}

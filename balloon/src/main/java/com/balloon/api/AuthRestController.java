@@ -1,4 +1,4 @@
-package com.balloon.controller;
+package com.balloon.api;
 
 
 import javax.servlet.http.Cookie;
