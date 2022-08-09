@@ -1,6 +1,10 @@
 package com.balloon.entity;
 
 import java.time.LocalDate;
+<<<<<<< HEAD
+=======
+import java.util.ArrayList;
+>>>>>>> d10d5572429061e3a2a7bfb68429fa7e133b05b1
 import java.util.List;
 
 import javax.persistence.Column;
@@ -8,8 +12,12 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+<<<<<<< HEAD
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+=======
+import javax.persistence.FetchType;
+>>>>>>> d10d5572429061e3a2a7bfb68429fa7e133b05b1
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -21,6 +29,7 @@ import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.balloon.dto.EmpDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -98,11 +107,18 @@ public class Employee implements Persistable<String>{
 	private UserRole userRoleGrade;
 	
 	@NotNull
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "unit_code")
 	private Unit unit;
-
 	
+	@OneToMany(mappedBy = "employee")
+    @JsonIgnore
+	List<Chat> chat = new ArrayList<Chat>();
+	   
+	@OneToMany(mappedBy = "empId")
+	@JsonIgnore
+	List<ChatroomEmployee> chatroomEmployee = new ArrayList<ChatroomEmployee>();
+
 	
 	public void updatePassword(String password) {
 		this.password = password;

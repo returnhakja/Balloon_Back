@@ -10,7 +10,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -32,10 +31,63 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 	private final long MAX_AGE_SECS = 3600;
 
+<<<<<<< HEAD
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
+=======
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+//                .httpBasic().disable()
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                ;
+        
+        http
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+                ;
+        
+        http
+                .authorizeRequests()
+//                .antMatchers("/", "/**").permitAll()
+//                .antMatchers("/").hasRole("MANAGER")
+
+                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
+//                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
+                .antMatchers(HttpMethod.GET, "/api/emp/list/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
+                .antMatchers("/allChatroom").permitAll()
+                .antMatchers("/createChatroom").permitAll()
+                .antMatchers("/chat/**").permitAll()
+                .antMatchers("/allChat/**").permitAll()
+                .antMatchers("/topic/**").permitAll()
+                .antMatchers("/app/**").permitAll()
+                .antMatchers("/chatstart/**").permitAll()
+                
+                
+                .antMatchers("/api/emp/me").authenticated()
+                
+                .antMatchers("/api/**").authenticated()
+                
+                .anyRequest().authenticated()
+                ;
+        
+        http
+                .logout().permitAll()
+                ;
+        
+        http
+        		.exceptionHandling()
+        			.accessDeniedPage("/accesDenied");
+        http
+                .apply(new JwtSecurityConfig(tokenProvider));
+>>>>>>> d10d5572429061e3a2a7bfb68429fa7e133b05b1
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
