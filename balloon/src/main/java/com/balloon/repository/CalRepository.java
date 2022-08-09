@@ -5,8 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.balloon.dto.CalDTO;
 import com.balloon.entity.Cal;
+import com.balloon.entity.Employee;
 
 
 
@@ -23,5 +23,5 @@ public interface CalRepository extends JpaRepository<Cal, Long>{
 		public void deleteCalByscheduleId(Long scheduleId);
 		
 		//empId로 스케쥴 찾기
-		public List<Cal> findAllByempId(String empId);
+		public List<Cal> findAllByempId(Employee empId);
 }
