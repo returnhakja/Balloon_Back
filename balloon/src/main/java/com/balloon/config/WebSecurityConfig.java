@@ -68,6 +68,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .antMatchers("/topic/**").permitAll()
                 .antMatchers("/app/**").permitAll()
                 .antMatchers("/chatstart/**").permitAll()
+                .antMatchers("/api/cal/**").permitAll()
                 
                 
                 .antMatchers("/api/emp/me").authenticated()
