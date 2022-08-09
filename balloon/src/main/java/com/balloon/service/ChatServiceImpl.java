@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.balloon.dto.ChatDTO;
 import com.balloon.entity.Chat;
 import com.balloon.entity.Employee;
 import com.balloon.repository.ChatRepository;
@@ -23,8 +24,13 @@ public class ChatServiceImpl implements ChatService {
 	
 	@Override
 	@Transactional
-	public List<Chat> getChat(Employee empId) {
-		return chatRepository.findAll(empId);
+	public List<ChatDTO> getChat(Employee empId) {
+		List<Chat> chatEntityList = chatRepository.findAll(empId);
+		List<ChatDTO> chatDTOList = new ArrayList<ChatDTO>(); 
+		
+		chatEntityList.forEach(chatEntity -> chatDTOList.add(chatEntity.toDTO(chatEntity)));
+		
+		return chatDTOList;
 	}
 
 	@Override
