@@ -1,10 +1,12 @@
 package com.balloon.entity;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.balloon.dto.ChatroomEmployeeDTO;
 
@@ -20,17 +22,17 @@ import lombok.ToString;
 @NoArgsConstructor
 @Entity
 @ToString
+@Table(name = "chatroom_employee")
 @IdClass(ChatroomEmployeeId.class)
 public class ChatroomEmployee {
-
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "chatroom_id")
 	private Chatroom chatroomId;
 	
 	@Id
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "emp_id")
 	private Employee empId;
 	

@@ -11,7 +11,7 @@ public interface ChatroomService {
 	
 	public Chatroom getOneChatroom(Long chatroomId);
 	
-	public Long gerCreateChatroom(ChatroomDTO chatroomDTO);
+	public Long getCreateChatroom(ChatroomDTO chatroomDTO);
 	
 	public void getUpdateChatroom(ChatroomDTO chatroomDTO);
 	

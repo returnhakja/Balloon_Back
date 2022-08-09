@@ -1,5 +1,6 @@
 package com.balloon.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.transaction.Transactional;
 
@@ -7,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.balloon.entity.Chat;
+import com.balloon.entity.Employee;
 import com.balloon.repository.ChatRepository;
 import com.balloon.vo.MessageDTO;
 
@@ -21,20 +23,8 @@ public class ChatServiceImpl implements ChatService {
 	
 	@Override
 	@Transactional
-	public List<Chat> getChat() {
-		return chatRepository.findAll();
-	}
-
-	@Override
-	@Transactional
-	public Chat getOneChat(Long chatroomId) {
-		return chatRepository.findChatByChatroomId(chatroomId);
-	}
-
-	@Override
-	@Transactional
-	public Chat getChatContent(String chatContent) {
-		return chatRepository.findChatByChatContent(chatContent);
+	public List<Chat> getChat(Employee empId) {
+		return chatRepository.findAll(empId);
 	}
 
 	@Override
@@ -42,7 +32,16 @@ public class ChatServiceImpl implements ChatService {
 		Chat chat = messageDTO.toChat(messageDTO);
 		chatRepository.save(chat);
 	}
-
+	
+	@Override
+	public List<ChatDTO> getChatroomId(Long chatroomId) {
+		List<ChatDTO> ChatList = new ArrayList<ChatDTO>();
+		for(Chat chat: chatRepository.findAllByChatroomChatroomId(chatroomId)) {
+			ChatList.add(chat.toChatDTO(chat));
+		}
+		return ChatList;
+	}
+	
 	
 	
 	

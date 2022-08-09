@@ -63,8 +63,8 @@ public class Chatroom {
 		return chatroomDTO;
 	}
 	
-	public void updateEntity(Long chatroomId, Long headCount) {
-		this.chatroomId = chatroomId;
+	public void updateEntity(String chatroomName, Long headCount) {
+		this.chatroomName = chatroomName;
 		this.headCount = headCount;
 	}
 

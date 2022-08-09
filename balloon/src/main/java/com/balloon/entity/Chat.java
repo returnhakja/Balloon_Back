@@ -64,5 +64,14 @@ public class Chat {
 									.build();
 		return chatDTO;
 	}
-
+	
+	public ChatDTO toChatDTO(Chat chatEntity) {
+		ChatDTO chatDTO = ChatDTO.builder()
+				.chatContent(chatEntity.getChatContent())
+				.chatTime(chatEntity.getChatTime())
+				.chatroom(chatEntity.getChatroom())
+				.employee(chatEntity.getEmployee())
+				.build();
+		return chatDTO;
+	}
 }
