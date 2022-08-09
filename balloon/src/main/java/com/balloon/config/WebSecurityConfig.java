@@ -41,7 +41,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         http
 //                .httpBasic().disable()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement
+                (session -> session.maximumSessions(2)
+                .maxSessionsPreventsLogin(true)
+                        .expiredUrl("/login?exprie=true"))
+                
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 ;
         
         http
@@ -62,21 +67,31 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .antMatchers(HttpMethod.GET, "/api/emp/list/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
-                
-                .antMatchers("/allChatroom").permitAll()
+
+               
+                .antMatchers(HttpMethod.GET, "/allChatroom").permitAll()
+
                 .antMatchers("/createChatroom").permitAll()
                 .antMatchers("/chat/**").permitAll()
                 .antMatchers("/allChat/**").permitAll()
                 .antMatchers("/topic/**").permitAll()
                 .antMatchers("/app/**").permitAll()
                 .antMatchers("/chatstart/**").permitAll()
+
+                .antMatchers("/deleteChatroom/**").permitAll()
+                .antMatchers("/**").permitAll()
+
+                .antMatchers(HttpMethod.POST, "/api/cal/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/cal/**").permitAll()
+
                 
-//                -- 평등좌
+
+   
                 .antMatchers("/**").permitAll()
                 
                 
                 .antMatchers("/api/emp/me").authenticated()
-                
+             
                 .antMatchers("/api/**").authenticated()
                 
                 .anyRequest().authenticated()

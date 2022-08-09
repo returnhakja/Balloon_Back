@@ -4,14 +4,19 @@ import java.util.List;
 
 import com.balloon.dto.CalDTO;
 import com.balloon.entity.Cal;
+
 import com.balloon.entity.Employee;
+
+
 
 
 
 
 public interface CalService {
 	
-	public List<Cal> findAll();
+
+	public List<CalDTO> findAll();
+
 	
 	public Cal getCalByscheduleId(Long scheduleId);
 	
@@ -21,6 +26,8 @@ public interface CalService {
 	
 	public void updateByCal(CalDTO calDTO);
 	
-	public List<Cal> getCalByempId(Employee empId);
+
+	public List<CalDTO> getCalByempId(String empId);
+
 	
 }

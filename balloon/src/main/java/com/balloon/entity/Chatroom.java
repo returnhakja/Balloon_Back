@@ -12,7 +12,6 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.DynamicInsert;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -64,8 +63,8 @@ public class Chatroom {
 		return chatroomDTO;
 	}
 	
-	public void updateEntity(Long chatroomId, Long headCount) {
-		this.chatroomId = chatroomId;
+	public void updateEntity(String chatroomName, Long headCount) {
+		this.chatroomName = chatroomName;
 		this.headCount = headCount;
 	}
 
