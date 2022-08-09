@@ -41,7 +41,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         http
 //                .httpBasic().disable()
                 .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionManagement
+                (session -> session.maximumSessions(2)
+                .maxSessionsPreventsLogin(true)
+                        .expiredUrl("/login?exprie=true"))
+                
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 ;
         
         http
@@ -60,6 +65,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
                 .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
+                
                 .antMatchers(HttpMethod.GET, "/allChatroom").permitAll()
                 .antMatchers("/createChatroom").permitAll()
                 .antMatchers("/chat/**").permitAll()
@@ -67,7 +73,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .antMatchers("/topic/**").permitAll()
                 .antMatchers("/app/**").permitAll()
                 .antMatchers("/chatstart/**").permitAll()
-                
+                .antMatchers("/deleteChatroom/**").permitAll()
+                .antMatchers("/**").permitAll()
                 
                 .antMatchers("/api/emp/me").authenticated()
                 

@@ -1,5 +1,7 @@
 package com.balloon.vo;
 
+import java.time.LocalDate;
+
 import com.balloon.dto.ChatroomDTO;
 import com.balloon.dto.EmpDTO;
 import com.balloon.entity.Chat;
@@ -19,6 +21,7 @@ public class MessageDTO {
 	
 	String chatContent;
 	
+	
 	public Chat toChat(MessageDTO messageDTO) {
 		//---------------chatRoomId 값을 entity로 변환해준 것-----------------------
 		ChatroomDTO chatroomDTO = new ChatroomDTO();
@@ -34,6 +37,7 @@ public class MessageDTO {
 				.chatroom(chatRoomId)
 				.chatContent(messageDTO.getChatContent())
 				.employee(employeeId)
+				
 				.build();
 		return chatEntity; 
 	}
