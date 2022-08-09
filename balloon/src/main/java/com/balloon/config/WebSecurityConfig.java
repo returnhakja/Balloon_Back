@@ -72,7 +72,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .antMatchers(HttpMethod.GET, "/api/cal/**").permitAll()
                 
                 
-                .antMatchers("/api/emp/me").authenticated()
+                .antMatchers("/api/emp/me").permitAll()
                 
                 .antMatchers("/api/**").authenticated()
                 

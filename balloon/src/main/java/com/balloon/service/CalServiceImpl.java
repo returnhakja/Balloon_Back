@@ -74,7 +74,7 @@ public class CalServiceImpl implements CalService{
 		List<CalDTO> calDTOList = new ArrayList<CalDTO>();
 			
 		calEntityList.forEach(calEntity -> calDTOList.add(calEntity.toDTO(calEntity)));
-		
+	
 		return calDTOList;
 		
 	}
