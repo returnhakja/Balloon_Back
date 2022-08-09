@@ -42,13 +42,11 @@ public class ChatroomRestController {
 	@PostMapping(value = "/createChatroom")
 	public Long createChatroom(@RequestBody ChatroomDTO chatroomDTO) {
 		System.out.println(chatroomDTO);
-		return chatroomServiceImpl.gerCreateChatroom(chatroomDTO);
-		
+		return chatroomServiceImpl.getCreateChatroom(chatroomDTO);
 	}
 	
-	
 	@PutMapping(value = "/updateroomName/{chatroomId}")
-	public void updateChatroom(@PathVariable Long chatroomId, @RequestBody ChatroomDTO chatroomDTO) {
+	public void updateChatroom(@PathVariable(value = "chatroomId") Long chatroomId, @RequestBody ChatroomDTO chatroomDTO) {
 		chatroomDTO.setChatroomId(chatroomId);
 		chatroomServiceImpl.getUpdateChatroom(chatroomDTO);
 	}

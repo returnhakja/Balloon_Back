@@ -17,7 +17,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChatroomServiceImpl implements ChatroomService{
 	
-	@Autowired
 	private final ChatroomRepository chatroomRepository;
 	
 	@Override
@@ -34,7 +33,7 @@ public class ChatroomServiceImpl implements ChatroomService{
 
 	@Override
 	@Transactional
-	public Long gerCreateChatroom(ChatroomDTO chatroomDTO) {
+	public Long getCreateChatroom(ChatroomDTO chatroomDTO) {
 		Chatroom chatroomEntity = chatroomDTO.toEntity(chatroomDTO);
 		return chatroomRepository.save(chatroomEntity).getChatroomId();
 	}
@@ -43,7 +42,7 @@ public class ChatroomServiceImpl implements ChatroomService{
 	@Transactional
 	public void getUpdateChatroom(ChatroomDTO chatroomDTO) {
 		Chatroom chatroomEntity = chatroomDTO.toEntity(chatroomDTO);
-		chatroomEntity.updateEntity(chatroomDTO.getChatroomId(), chatroomDTO.getHeadCount());
+		chatroomEntity.updateEntity(chatroomDTO.getChatroomName(), chatroomDTO.getHeadCount());
 		chatroomRepository.save(chatroomEntity);
 	}
 
