@@ -6,7 +6,6 @@ import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import com.balloon.dto.ChatroomDTO;
 import com.balloon.dto.ChatroomEmployeeDTO;
 
 import lombok.AllArgsConstructor;
