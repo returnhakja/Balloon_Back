@@ -1,8 +1,6 @@
 package com.balloon.dto;
 
-import com.balloon.entity.Chatroom;
 import com.balloon.entity.ChatroomEmployee;
-import com.balloon.entity.Employee;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
