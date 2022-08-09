@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.balloon.dto.CalDTO;
 import com.balloon.entity.Cal;
+import com.balloon.entity.Employee;
 import com.balloon.repository.CalRepository;
 
 @Service
@@ -58,7 +59,7 @@ public class CalServiceImpl implements CalService{
 
 
 	@Override
-	public List<Cal> getCalByempId(String empId) {
+	public List<Cal> getCalByempId(Employee empId) {
 		return CalRepository.findAllByempId(empId);
 		
 	}

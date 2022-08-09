@@ -39,27 +39,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 public class Unit implements Persistable<String>{
-<<<<<<< HEAD
+
 
    
-//   @JsonIgnore
-   @Id
-   @Column(name="unit_code", length = 10)
-   private String unitCode;
-   
-   @Column(name="unit_name", length = 20)
-   private String unitName;
-   
-   @Column(length = 15)
-   private String bell;
-   
-   @ManyToOne(fetch = FetchType.EAGER)
-   @JoinColumn(name = "parent_unit", referencedColumnName = "unit_code")
-   private Unit parentUnit;
-   
-   @OneToMany(fetch = FetchType.LAZY, mappedBy = "parentUnit")
-   private List<Unit> childUnits;
-=======
 	
 //	@JsonIgnore
 	@Id
@@ -84,19 +66,6 @@ public class Unit implements Persistable<String>{
 	private List<Unit> childUnits;
 
 	
-	
-	public UnitDTO toDTO(Unit unitEntity) {
-		UnitDTO unitDTO = UnitDTO.builder()
-						.unitCode(unitEntity.getUnitCode())
-						.unitName(unitEntity.getUnitName())
-						.bell(unitEntity.getBell())
-						.parentUnit(unitEntity.getParentUnit())
-						.childUnits(unitEntity.getChildUnits())
-						.build();
-		
-		return unitDTO;
-	}
->>>>>>> d10d5572429061e3a2a7bfb68429fa7e133b05b1
 
    
    public UnitDTO toDTO(Unit unitEntity) {

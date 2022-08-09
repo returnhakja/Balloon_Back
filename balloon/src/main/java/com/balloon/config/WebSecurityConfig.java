@@ -26,17 +26,16 @@ import lombok.RequiredArgsConstructor;
 //@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"})
 public class WebSecurityConfig implements WebMvcConfigurer {
 
-	private final TokenProvider tokenProvider;
-	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-	private final long MAX_AGE_SECS = 3600;
+    private final TokenProvider tokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final long MAX_AGE_SECS = 3600;
+    
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-<<<<<<< HEAD
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
-	}
-=======
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -58,10 +57,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
                 .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/cal/**").permitAll()
 //                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
                 .antMatchers(HttpMethod.GET, "/api/emp/list/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
+                
                 .antMatchers("/allChatroom").permitAll()
                 .antMatchers("/createChatroom").permitAll()
                 .antMatchers("/chat/**").permitAll()
@@ -69,6 +70,9 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .antMatchers("/topic/**").permitAll()
                 .antMatchers("/app/**").permitAll()
                 .antMatchers("/chatstart/**").permitAll()
+                
+//                -- 평등좌
+                .antMatchers("/**").permitAll()
                 
                 
                 .antMatchers("/api/emp/me").authenticated()
@@ -87,68 +91,17 @@ public class WebSecurityConfig implements WebMvcConfigurer {
         			.accessDeniedPage("/accesDenied");
         http
                 .apply(new JwtSecurityConfig(tokenProvider));
->>>>>>> d10d5572429061e3a2a7bfb68429fa7e133b05b1
 
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http
-		//                .httpBasic().disable()
-		.csrf().disable()
-		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-		;
-
-		http
-		.exceptionHandling()
-		.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-		.accessDeniedHandler(jwtAccessDeniedHandler)
-		;
-
-		http
-		.authorizeRequests()
-
-		.antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-		.antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
-		//        .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
-		.antMatchers(HttpMethod.GET, "/api/emp/list/**").permitAll()
-		.antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
-		.antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
-		.antMatchers("/allChatroom").permitAll()
-		.antMatchers("/createChatroom").permitAll()
-		.antMatchers("/chat/**").permitAll()
-		.antMatchers("/allChat/**").permitAll()
-		.antMatchers("/topic/**").permitAll()
-		.antMatchers("/app/**").permitAll()
-		.antMatchers("/chatstart/**").permitAll()
-		.antMatchers("/api/cal/**").permitAll()
-		.antMatchers("/api/calall/**").permitAll()
-
-
-		.antMatchers("/api/emp/me").authenticated()
-
-		.antMatchers("/api/**").authenticated()
-		  .anyRequest().authenticated()
-          ;
-		http
-		.logout().permitAll()
-		;
-
-		http
-		.exceptionHandling()
-		.accessDeniedPage("/accesDenied");
-		http
-		.apply(new JwtSecurityConfig(tokenProvider));
-
-		return http.build();
-	}
-
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
-		.allowedOrigins("http://localhost:3000")
-		.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
-		.allowedHeaders("*")
-		.allowCredentials(true)
-		.maxAge(MAX_AGE_SECS);
-	}
-
+        return http.build();
+    }
+    
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+       registry.addMapping("/**")
+                   .allowedOrigins("http://localhost:3000")
+                   .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+                   .allowedHeaders("*")
+                   .allowCredentials(true)
+                   .maxAge(MAX_AGE_SECS);
+    }
 }

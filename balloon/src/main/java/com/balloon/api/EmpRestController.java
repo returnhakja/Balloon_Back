@@ -1,6 +1,6 @@
 package com.balloon.api;
 
-<<<<<<< HEAD:balloon/src/main/java/com/balloon/controller/EmpRestController.java
+
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.balloon.entity.Cal;
 import com.balloon.service.CalServiceImpl;
 
-=======
+
 import java.util.ArrayList;
->>>>>>> d10d5572429061e3a2a7bfb68429fa7e133b05b1:balloon/src/main/java/com/balloon/api/EmpRestController.java
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,8 +107,7 @@ public class EmpRestController {
 		return ResponseEntity.ok(empSvc.changePassword(requestDTO.getEmpId(), requestDTO.getExPassword(), requestDTO.getNewPassword()));
 	}
 	
-<<<<<<< HEAD:balloon/src/main/java/com/balloon/controller/EmpRestController.java
-=======
+
 	@GetMapping("/approval/line/{unitCode}")
 	public List<EmpDTO> findEmpListInUnitCode(@Valid @PathVariable String unitCode) throws Exception{
 		try {
@@ -133,7 +132,7 @@ public class EmpRestController {
 		}
 		
 	}
->>>>>>> d10d5572429061e3a2a7bfb68429fa7e133b05b1:balloon/src/main/java/com/balloon/api/EmpRestController.java
+
 	
 	
 //	  private UserMapper userMapper;

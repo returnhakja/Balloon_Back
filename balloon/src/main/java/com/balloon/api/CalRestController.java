@@ -1,4 +1,4 @@
-package com.balloon.controller;
+package com.balloon.api;
 
 import java.util.List;
 
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.CalDTO;
 import com.balloon.entity.Cal;
+import com.balloon.entity.Employee;
 import com.balloon.service.CalServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -60,7 +61,7 @@ public class CalRestController {
 		}
 		
 		@GetMapping(value = "/cal/{empId}")
-		public List<Cal> CalByScheduleId(@PathVariable(name = "empId") String empId) {
+		public List<Cal> CalByScheduleId(@PathVariable(name = "empId") Employee empId) {
 			System.out.println("이엠피아이디");
 			return calService.getCalByempId(empId);
 		}

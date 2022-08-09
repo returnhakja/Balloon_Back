@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.balloon.dto.CalDTO;
 import com.balloon.entity.Cal;
+import com.balloon.entity.Employee;
 
 
 
@@ -20,6 +21,6 @@ public interface CalService {
 	
 	public void updateByCal(CalDTO calDTO);
 	
-	public List<Cal> getCalByempId(String empId);
+	public List<Cal> getCalByempId(Employee empId);
 	
 }
