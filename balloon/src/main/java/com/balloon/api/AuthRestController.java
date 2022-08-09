@@ -35,7 +35,6 @@ public class AuthRestController {
 //    	return "access Deny. but why?";
 //    }
     
-    
     @PostMapping("/signup")
     public ResponseEntity<EmpResponseDTO> signup(@Valid @RequestBody EmpRequestDTO requestDto) {
     	return ResponseEntity.ok(authSvc.signup(requestDto));
@@ -53,7 +52,6 @@ public class AuthRestController {
     		createCookie.setPath("/");
     		response.addCookie(createCookie);
     		
-//    		return 
     	} else {
     		throw new Exception("토큰 생성 에러입니다.");
     	}
