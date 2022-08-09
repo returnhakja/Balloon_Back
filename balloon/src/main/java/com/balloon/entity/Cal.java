@@ -10,8 +10,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
 
 import com.balloon.dto.CalDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -30,12 +38,12 @@ import lombok.ToString;
 @NoArgsConstructor
 @Table(name = "schedule")
 public class Cal{
-	
 	@Id
 	@Column(name="schedule_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long scheduleId;
 	
+
 
 	@NotNull
 	@Column(name="schedule_title")
@@ -82,7 +90,8 @@ public class Cal{
 				.empName(calEntity.getEmpName())
 				.scheduleMemo(calEntity.getScheduleMemo())
 				.scheduleLocation(calEntity.getScheduleLocation())
-				.employee(calEntity.getEmpId())
+				.empId(calEntity.getEmpId())
+
 				.build();
 		return calDTO;
 	}
@@ -94,5 +103,5 @@ public class Cal{
 		this.scheduleMemo = calDTO.getScheduleMemo();
 		this.scheduleLocation = calDTO.getScheduleLocation();
 	}
-	
+
 }

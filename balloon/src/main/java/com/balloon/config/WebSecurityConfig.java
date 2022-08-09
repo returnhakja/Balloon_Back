@@ -62,10 +62,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
                 .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/cal/**").permitAll()
 //                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
                 .antMatchers(HttpMethod.GET, "/api/emp/list/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
+
                
                 .antMatchers(HttpMethod.GET, "/allChatroom").permitAll()
 
@@ -83,8 +85,13 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .antMatchers(HttpMethod.GET, "/api/cal/**").permitAll()
 
                 
-                .antMatchers("/api/emp/me").permitAll()
+
+   
+                .antMatchers("/**").permitAll()
                 
+                
+                .antMatchers("/api/emp/me").authenticated()
+             
                 .antMatchers("/api/**").authenticated()
                 
                 .anyRequest().authenticated()
@@ -112,5 +119,4 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                    .allowCredentials(true)
                    .maxAge(MAX_AGE_SECS);
     }
-
 }
