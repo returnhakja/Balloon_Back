@@ -60,7 +60,7 @@ public class CalRestController {
 		}
 		
 		@GetMapping(value = "/cal/{empId}")
-		public Cal CalByScheduleId(@PathVariable(name = "empId") CalDTO empId) {
+		public List<Cal> CalByScheduleId(@PathVariable(name = "empId") String empId) {
 			System.out.println("이엠피아이디");
 			return calService.getCalByempId(empId);
 		}

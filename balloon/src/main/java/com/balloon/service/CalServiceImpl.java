@@ -58,7 +58,7 @@ public class CalServiceImpl implements CalService{
 
 
 	@Override
-	public Cal getCalByempId(CalDTO empId) {
+	public List<Cal> getCalByempId(String empId) {
 		return CalRepository.findAllByempId(empId);
 		
 	}

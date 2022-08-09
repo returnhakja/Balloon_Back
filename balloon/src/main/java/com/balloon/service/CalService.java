@@ -20,6 +20,6 @@ public interface CalService {
 	
 	public void updateByCal(CalDTO calDTO);
 	
-	public Cal getCalByempId(CalDTO empId);
+	public List<Cal> getCalByempId(String empId);
 	
 }

@@ -23,5 +23,5 @@ public interface CalRepository extends JpaRepository<Cal, Long>{
 		public void deleteCalByscheduleId(Long scheduleId);
 		
 		//empId로 스케쥴 찾기
-		public Cal findAllByempId(CalDTO empId);
+		public List<Cal> findAllByempId(String empId);
 }
