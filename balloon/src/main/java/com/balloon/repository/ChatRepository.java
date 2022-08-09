@@ -8,21 +8,31 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import com.balloon.entity.Chat;
+import com.balloon.entity.Employee;
 
 @Repository
 public interface ChatRepository extends JpaRepository<Chat, Long>{
+	
+//	@Query(value = "select * " + 
+//			"from chat " + 
+//			"where chat_time in(select max(chat_time) " + 
+//			"from chat " + 
+//			"group by chatroom_id );", nativeQuery = true)
+//	public List<Chat> findAll();
 	
 	@Query(value = "select * " + 
 			"from chat " + 
 			"where chat_time in(select max(chat_time) " + 
 			"from chat " + 
-			"group by chatroom_id );", nativeQuery = true)
-	public List<Chat> findAll();
+			"group by chatroom_id ) " + 
+			"HAVING chatroom_id IN (select chatroom_id from chatroom_employee " + 
+			"WHERE emp_id = :emp_id) ", nativeQuery = true)
+	public List<Chat> findAll(@Param("emp_id") Employee empId);
 	
-	@Query(value = "select * "+ 
-			"from chat " + 
-			"where chat_time = (SELECT MAX(chat_time) FROM chat WHERE chatroom_id = :chatroomId);", nativeQuery = true)
-	public Chat findChatByChatroomId(@Param("chatroomId") Long chatroomId);
 	
-	public Chat findChatByChatContent(String chatContent);
+//	@Query(value = "select * "+ 
+//			"from chat " + 
+//			"where chat_time = (SELECT MAX(chat_time) FROM chat WHERE chatroom_id = :chatroomId);", nativeQuery = true)
+//	public Chat findChatByChatroomId(@Param("chatroomId") Long chatroomId);
+	public List<Chat> findAllByChatroomChatroomId(Long chatroomId);
 }
