@@ -16,6 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.balloon.dto.BizRptDTO;
 import com.balloon.vo.DocVO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -79,10 +80,12 @@ public class BusinessReport {
 //	@JoinColumn(name = "emp_id")
 //	private String empId;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = Unit.class)
 	@JoinColumn(name = "unit_code")
 	private Unit unit;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = Employee.class)
 	@JoinColumn(name = "emp_id")
 	private Employee emp;

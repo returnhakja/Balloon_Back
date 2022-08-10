@@ -14,6 +14,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.balloon.dto.BizTpDTO;
 import com.balloon.vo.DocVO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -30,7 +31,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EntityListeners(AuditingEntityListener.class)
-
 public class BusinessTripPlan {
 
 	@Id
@@ -85,10 +85,12 @@ public class BusinessTripPlan {
 	@Column(name = "unit_name", length = 20)
 	private String unitName;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = Unit.class)
 	@JoinColumn(name = "unit_code")
 	private Unit unit;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = Employee.class)
 	@JoinColumn(name = "emp_id")
 	private Employee emp;

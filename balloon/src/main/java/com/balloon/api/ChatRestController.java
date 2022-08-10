@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.ChatDTO;
-import com.balloon.entity.Chat;
 import com.balloon.entity.Employee;
 import com.balloon.service.ChatServiceImpl;
 import com.balloon.service.EmpServiceImpl;
@@ -29,7 +28,7 @@ public class ChatRestController {
 	}
 	
 	@GetMapping(value = "/allChat/{empId}")
-	public List<Chat> allChat(@PathVariable(name = "empId") Employee empId) {
+	public List<ChatDTO> allChat(@PathVariable(name = "empId") Employee empId) {
 		return chatServiceImpl.getChat(empId);
 	}
 	

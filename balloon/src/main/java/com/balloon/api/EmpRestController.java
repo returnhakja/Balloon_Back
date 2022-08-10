@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -119,6 +120,22 @@ public class EmpRestController {
 			throw new Exception("입력받은 조직번호가 없습니다.");
 		}
 
+	}
+
+	@GetMapping("/emp/unit/list/{empId}")
+	public List<EmpDTO> findEmpListInSameUnit(@Valid @PathVariable String empId) throws Exception {
+		try {
+			if (empId == null) {
+				throw new Exception("empId 값이 들어오지 않음.");
+			} else {
+				List<EmpDTO> sameUnitList = empSvc.findEmpListInSameUnit(empId);
+
+				return sameUnitList;
+			}
+
+		} catch (Exception e) {
+			throw new Exception("터짐.");
+		}
 	}
 
 //	  private UserMapper userMapper;

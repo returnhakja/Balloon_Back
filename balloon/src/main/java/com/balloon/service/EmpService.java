@@ -17,5 +17,9 @@ public interface EmpService {
 
 	public List<Employee> getEmp();
 
+
+	public List<EmpDTO> findEmpListInSameUnit(String empId);
+
 	public List<EmpDTO> findEmps();
+
 }

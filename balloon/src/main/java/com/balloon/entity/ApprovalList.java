@@ -13,6 +13,7 @@ import javax.persistence.Table;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.balloon.dto.ApvlDTO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -29,7 +30,6 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString
 @EntityListeners(AuditingEntityListener.class)
-
 public class ApprovalList {
 
 	@Id
@@ -58,19 +58,23 @@ public class ApprovalList {
 	@Column(name = "process_date")
 	private LocalDateTime processDate;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = Employee.class)
 	@NotNull
 	@JoinColumn(name = "emp_id")
 	private String empId;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = BusinessReport.class)
 	@JoinColumn(name = "business_report_id")
 	private String businessReportId;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = BusinessTripPlan.class)
 	@JoinColumn(name = "business_trip_id")
 	private String businessTripId;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = PersonnelAppointment.class)
 	@JoinColumn(name = "personnel_appointment_id")
 	private String personnelAppointmentId;
