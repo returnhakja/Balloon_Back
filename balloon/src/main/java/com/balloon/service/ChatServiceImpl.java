@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.balloon.dto.ChatDTO;
 import com.balloon.entity.Chat;
 import com.balloon.entity.Employee;
 import com.balloon.repository.ChatRepository;
