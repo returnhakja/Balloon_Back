@@ -90,8 +90,7 @@ public class Cal{
 				.empName(calEntity.getEmpName())
 				.scheduleMemo(calEntity.getScheduleMemo())
 				.scheduleLocation(calEntity.getScheduleLocation())
-				.empId(calEntity.getEmpId())
-
+				.employee(calEntity.getEmpId())
 				.build();
 		return calDTO;
 	}
