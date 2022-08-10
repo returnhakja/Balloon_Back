@@ -40,6 +40,17 @@ public class EmpServiceImpl implements EmpService {
 
 	@Transactional(readOnly = true)
 	@Override
+	public List<EmpDTO> findEmps() {
+		List<Employee> empEntityList = empRepo.findAll();
+		List<EmpDTO> empDTOList = new ArrayList<EmpDTO>();
+
+		empEntityList.forEach(empEntity -> empDTOList.add(empEntity.toDTO(empEntity)));
+
+		return empDTOList;
+	};
+
+	@Transactional(readOnly = true)
+	@Override
 	public Employee findEmpByEmpId(String empId) {
 		return empRepo.findEmpByEmpId(empId);
 	}
@@ -82,6 +93,7 @@ public class EmpServiceImpl implements EmpService {
 	public List<Employee> findEmpListInUnitCode(String unitCode) {
 		return empRepo.findEmpListInUnitCode(unitCode);
 	}
+
 
 	@Override
 	public List<EmpDTO> findEmpListInSameUnit(String empId) {

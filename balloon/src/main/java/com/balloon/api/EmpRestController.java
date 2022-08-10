@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" })
 public class EmpRestController {
+
 	private final EmpServiceImpl empSvc;
 
 	@GetMapping("/emp/list")
@@ -46,6 +50,16 @@ public class EmpRestController {
 			throw new Exception("출력할 사원 정보가 없습니다.");
 		}
 	}
+
+
+	@GetMapping("/emp/emps")
+	public List<EmpDTO> findEmps() {
+
+		List<EmpDTO> empDTOList = empSvc.findEmps();
+
+		return empDTOList;
+	};
+
 
 	@GetMapping(value = "/emp/{empId}")
 	public EmpDTO findEmpByEmpId(@Valid @PathVariable String empId) throws Exception {
