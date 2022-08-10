@@ -71,7 +71,6 @@ public class Cal {
 				.scheduleEnd(calEntity.getScheduleEnd()).empName(calEntity.getEmpName())
 				.scheduleMemo(calEntity.getScheduleMemo()).scheduleLocation(calEntity.getScheduleLocation())
 				.employee(calEntity.getEmpId())
-
 				.build();
 		return calDTO;
 	}

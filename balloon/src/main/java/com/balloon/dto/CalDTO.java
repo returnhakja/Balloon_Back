@@ -45,9 +45,7 @@ public class CalDTO {
 				.empName(calDTO.getEmpName())
 				.scheduleMemo(calDTO.getScheduleMemo())
 				.scheduleLocation(calDTO.getScheduleLocation())
-
 				.empId(calDTO.getEmployee())
-
 				.build();
 		return calEntity;
 	}

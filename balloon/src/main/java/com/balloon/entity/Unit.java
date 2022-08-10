@@ -46,13 +46,14 @@ public class Unit implements Persistable<String> {
 	@Column(length = 15)
 	private String bell;
 
-//	@JsonBackReference
+//	@JsonManagedReference
 	@ManyToOne
 	@JoinColumn(name = "parent_unit", referencedColumnName = "unit_code")
 	@JsonIgnore
 	private Unit parentUnit;
 
-//	@JsonManagedReference
+
+	@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parentUnit")
 	private List<Unit> childUnits;
 

@@ -25,8 +25,13 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	@Transactional
-	public List<Chat> getChat(Employee empId) {
-		return chatRepository.findAll(empId);
+	public List<ChatDTO> getChat(Employee empId) {
+		List<Chat> chatEntityList = chatRepository.findAll(empId);
+		List<ChatDTO> chatDTOList = new ArrayList<ChatDTO>(); 
+		
+		chatEntityList.forEach(chatEntity -> chatDTOList.add(chatEntity.toDTO(chatEntity)));
+		
+		return chatDTOList;
 	}
 
 	@Override

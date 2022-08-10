@@ -24,6 +24,7 @@ public class DocRestController {
 	private final BizTpSvcImpl BizTpSvc;
 	private final PASvcImpl PASvc;
 
+
 	// READ -------------------------------
 //	@GetMapping(value = "/dd")
 //	public PageResultDTO<BizRptDTO, BusinessReport> getAlldd(PageRequestDTO pageRequestDTO) {
