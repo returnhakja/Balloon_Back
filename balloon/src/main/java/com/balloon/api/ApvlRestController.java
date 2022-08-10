@@ -1,4 +1,4 @@
-package com.balloon.controller;
+package com.balloon.api;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

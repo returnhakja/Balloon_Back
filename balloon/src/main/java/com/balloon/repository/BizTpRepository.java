@@ -13,4 +13,6 @@ public interface BizTpRepository extends JpaRepository<BusinessTripPlan, String>
 	public BusinessTripPlan findBusinessTripPlanByBusinessTripId(String businessTripId);
 
 	public List<BusinessTripPlan> findBusinessTripIdAndDocumentTitleAndUpdateDateByEmpEmpId(String empId);
+
+//	public BusinessTripPlan findBusinessTripPlanByEmpId(String empId);
 }
