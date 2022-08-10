@@ -26,67 +26,50 @@ import lombok.RequiredArgsConstructor;
 //@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"})
 public class WebSecurityConfig implements WebMvcConfigurer {
 
-    private final TokenProvider tokenProvider;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-    private final long MAX_AGE_SECS = 3600;
-    
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	private final TokenProvider tokenProvider;
+	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+	private final long MAX_AGE_SECS = 3600;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http
 //                .httpBasic().disable()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                ;
-        
-        http
-                .exceptionHandling()
-                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
-                ;
-        
-        http
-                .authorizeRequests()
+				.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+				.accessDeniedHandler(jwtAccessDeniedHandler);
+
+		http.authorizeRequests()
 //                .antMatchers("/", "/**").permitAll()
 //                .antMatchers("/").hasRole("MANAGER")
 
-                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
-                .antMatchers(HttpMethod.POST, "/auth/signup").hasRole("ADMIN")
+				.antMatchers(HttpMethod.POST, "/auth/login").permitAll().antMatchers(HttpMethod.POST, "/auth/signup")
+				.permitAll()
 //                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
-                .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
-                .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
-                .antMatchers("/api/emp/me").authenticated()
-                
-                .antMatchers("/api/**").authenticated()
-                .anyRequest().authenticated()
-                ;
-        
-        http
-                .logout().permitAll()
-                ;
-        
-        http
-        		.exceptionHandling()
-        			.accessDeniedPage("/accesDenied");
-        http
-                .apply(new JwtSecurityConfig(tokenProvider));
+				.antMatchers(HttpMethod.GET, "/api/emp/**").permitAll().antMatchers(HttpMethod.GET, "/api/unit/**")
+				.permitAll().antMatchers("/**").permitAll().antMatchers("/api/emp/me").authenticated()
 
-        return http.build();
-    }
-    
-    @Override
-    public void addCorsMappings(CorsRegistry registry) {
-       registry.addMapping("/**")
-                   .allowedOrigins("http://localhost:3000")
-                   .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
-                   .allowedHeaders("*")
-                   .allowCredentials(true)
-                   .maxAge(MAX_AGE_SECS);
-    }
+				.antMatchers("/api/**").authenticated().anyRequest().authenticated();
+
+		http.logout().permitAll();
+
+		http.exceptionHandling().accessDeniedPage("/accesDenied");
+		http.apply(new JwtSecurityConfig(tokenProvider));
+
+		return http.build();
+	}
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("http://localhost:3000")
+				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
+				.allowCredentials(true).maxAge(MAX_AGE_SECS);
+	}
 
 }
