@@ -40,36 +40,85 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		http
 //                .httpBasic().disable()
-				.csrf().disable().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-				.accessDeniedHandler(jwtAccessDeniedHandler);
-
-		http.authorizeRequests()
+                .csrf().disable()
+                .sessionManagement
+                (session -> session.maximumSessions(2)
+                .maxSessionsPreventsLogin(true)
+                        .expiredUrl("/login?exprie=true"))
+                
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                ;
+        
+        http
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
+                ;
+        
+        http
+                .authorizeRequests()
 //                .antMatchers("/", "/**").permitAll()
 //                .antMatchers("/").hasRole("MANAGER")
 
-				.antMatchers(HttpMethod.POST, "/auth/login").permitAll().antMatchers(HttpMethod.POST, "/auth/signup")
-				.permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
+                .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/cal/**").permitAll()
 //                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
-				.antMatchers(HttpMethod.GET, "/api/emp/**").permitAll().antMatchers(HttpMethod.GET, "/api/unit/**")
-				.permitAll().antMatchers("/**").permitAll().antMatchers("/api/emp/me").authenticated()
+                .antMatchers(HttpMethod.GET, "/api/emp/list/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
 
-				.antMatchers("/api/**").authenticated().anyRequest().authenticated();
+               
+                .antMatchers(HttpMethod.GET, "/allChatroom").permitAll()
 
-		http.logout().permitAll();
+                .antMatchers("/createChatroom").permitAll()
+                .antMatchers("/chat/**").permitAll()
+                .antMatchers("/allChat/**").permitAll()
+                .antMatchers("/topic/**").permitAll()
+                .antMatchers("/app/**").permitAll()
+                .antMatchers("/chatstart/**").permitAll()
 
-		http.exceptionHandling().accessDeniedPage("/accesDenied");
-		http.apply(new JwtSecurityConfig(tokenProvider));
+                .antMatchers("/deleteChatroom/**").permitAll()
+                .antMatchers("/**").permitAll()
 
-		return http.build();
-	}
+                .antMatchers(HttpMethod.POST, "/api/cal/**").permitAll()
+                .antMatchers(HttpMethod.GET, "/api/cal/**").permitAll()
 
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("http://localhost:3000")
-				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
-				.allowCredentials(true).maxAge(MAX_AGE_SECS);
-	}
+                
+
+   
+                .antMatchers("/**").permitAll()
+                
+                
+                .antMatchers("/api/emp/me").authenticated()
+             
+                .antMatchers("/api/**").authenticated()
+                
+                .anyRequest().authenticated()
+                ;
+        
+        http
+                .logout().permitAll()
+                ;
+        
+        http
+        		.exceptionHandling()
+        			.accessDeniedPage("/accesDenied");
+        http
+                .apply(new JwtSecurityConfig(tokenProvider));
+
+        return http.build();
+    }
+    
+    @Override
+    public void addCorsMappings(CorsRegistry registry) {
+       registry.addMapping("/**")
+                   .allowedOrigins("http://localhost:3000")
+                   .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")
+                   .allowedHeaders("*")
+                   .allowCredentials(true)
+                   .maxAge(MAX_AGE_SECS);
+    }
 
 }

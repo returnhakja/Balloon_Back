@@ -29,5 +29,7 @@ public interface EmpRepository extends JpaRepository<Employee, String>{
 	EmpResponseDTO getByEmpId(String empId);
 	boolean existsEmpByEmpId(String empId);
 	
+	public List<Employee> findAll();
+	
 	
 }
