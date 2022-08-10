@@ -66,7 +66,6 @@ public class Cal {
 	private Employee empId;
 
 	public CalDTO toDTO(Cal calEntity) {
-
 		CalDTO calDTO = CalDTO.builder().scheduleId(calEntity.getScheduleId())
 				.scheduleTitle(calEntity.getScheduleTitle()).scheduleStart(calEntity.getScheduleStart())
 				.scheduleEnd(calEntity.getScheduleEnd()).empName(calEntity.getEmpName())

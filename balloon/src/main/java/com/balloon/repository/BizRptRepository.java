@@ -12,8 +12,10 @@ public interface BizRptRepository extends JpaRepository<BusinessReport, String> 
 
 	public BusinessReport findBusinessReportByBusinessReportId(String businessReportId);
 
-	public List<BusinessReport> findAllByEmpEmpId(String empId);
+//	public List<BusinessReport> findAllByEmpEmpId(String empId);
 
 	public List<BusinessReport> findBusinessReportIdAndDocumentTitleAndUpdateDateByEmpEmpId(String empId);
+
+//	public BusinessReport findBusinessReportByEmpId(String empId);
 
 }
