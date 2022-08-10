@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -48,6 +50,7 @@ public class EmpRestController {
 		}
 	}
 
+
 	@GetMapping("/emp/emps")
 	public List<EmpDTO> findEmps() {
 
@@ -55,6 +58,7 @@ public class EmpRestController {
 
 		return empDTOList;
 	};
+
 
 	@GetMapping(value = "/emp/{empId}")
 	public EmpDTO findEmpByEmpId(@Valid @PathVariable String empId) throws Exception {

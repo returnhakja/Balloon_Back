@@ -26,20 +26,21 @@ import lombok.RequiredArgsConstructor;
 //@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"})
 public class WebSecurityConfig implements WebMvcConfigurer {
 
-    private final TokenProvider tokenProvider;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-    private final long MAX_AGE_SECS = 3600;
-    
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	private final TokenProvider tokenProvider;
+	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+	private final long MAX_AGE_SECS = 3600;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http
 //                .httpBasic().disable()
+
                 .csrf().disable()
                 .sessionManagement
                 (session -> session.maximumSessions(2)
@@ -119,4 +120,5 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                    .allowCredentials(true)
                    .maxAge(MAX_AGE_SECS);
     }
+
 }

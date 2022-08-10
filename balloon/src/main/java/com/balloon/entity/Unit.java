@@ -22,6 +22,7 @@ import com.balloon.dto.UnitDTO;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 //import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -38,36 +39,31 @@ import lombok.ToString;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-public class Unit implements Persistable<String>{
+public class Unit implements Persistable<String> {
 
-
-   
-	
 //	@JsonIgnore
 	@Id
-	@Column(name="unit_code", length = 10)
+	@Column(name = "unit_code", length = 10)
 	private String unitCode;
-	
+
 	@NotBlank
-	@Column(name="unit_name", length = 20)
+	@Column(name = "unit_name", length = 20)
 	private String unitName;
-	
+
 	@NotNull
 	@Column(length = 15)
 	private String bell;
-	
+
 	@JsonBackReference
 	@ManyToOne
 	@JoinColumn(name = "parent_unit", referencedColumnName = "unit_code")
+	@JsonIgnore
 	private Unit parentUnit;
-	
+
 	@JsonManagedReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parentUnit")
 	private List<Unit> childUnits;
 
-	
-
-   
    public UnitDTO toDTO(Unit unitEntity) {
       UnitDTO unitDTO = UnitDTO.builder()
                   .unitCode(unitEntity.getUnitCode())
@@ -90,9 +86,16 @@ public class Unit implements Persistable<String>{
       return unitCode == null;
    }
    
+   	/* 부서전화번호만 업데이트할 때 */
+	//public void updateBell(UnitDTO unitDTO) {
+	//	this.bell = unitDTO.getBell();
+	//}
+
+	/* 부서전화번호와 부서명만 업데이트 할 때 */
+	//public void updateUnitNameAndBell(UnitDTO unitDTO) {
+	//	this.unitName = unitDTO.getUnitName();
+	//	this.bell = unitDTO.getBell();
+	//}
+   
+   
 }
-
-	
-	
-	
-
