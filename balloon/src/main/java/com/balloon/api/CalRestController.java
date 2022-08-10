@@ -1,9 +1,7 @@
 package com.balloon.api;
 
 import java.util.List;
-
 import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -18,6 +16,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.CalDTO;
 import com.balloon.entity.Cal;
+
+import com.balloon.entity.Employee;
+
 import com.balloon.service.CalServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -33,13 +34,16 @@ public class CalRestController {
 	//캘린더
 	
 		@GetMapping(value = "/cal/list")
-		public List<CalDTO> findAll(){
+
+		public List<Cal> findAll(){
+			System.out.println("--ㄴ-ㅁㄴㅇ-ㅁㄴㅇ-ㅁㄴㅇ-ㅁㄴㅇ-ㄴ");
 
 			return calService.findAll();
 		}
 		
-		
+
 		@GetMapping(value = "/cal/all/{scheduleId}")
+
 		public Cal CalByScheduleId(@PathVariable(name = "scheduleId") Long scheduleid) {
 			System.out.println("스케쥬우우울");
 			return calService.getCalByscheduleId(scheduleid);
@@ -62,9 +66,10 @@ public class CalRestController {
 		}
 		
 		@GetMapping(value = "/cal/{empId}")
-		public List<CalDTO> CalByScheduleId(@Valid @PathVariable(name = "empId") String empId) {
-			System.out.println(empId);
-			
+
+		public List<Cal> CalByScheduleId(@PathVariable(name = "empId") Employee empId) {
+			System.out.println("이엠피아이디");
+
 			return calService.getCalByempId(empId);
 		}
 }

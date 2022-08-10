@@ -26,20 +26,21 @@ import lombok.RequiredArgsConstructor;
 //@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"})
 public class WebSecurityConfig implements WebMvcConfigurer {
 
-    private final TokenProvider tokenProvider;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
-    private final long MAX_AGE_SECS = 3600;
-    
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+	private final TokenProvider tokenProvider;
+	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+	private final long MAX_AGE_SECS = 3600;
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
+	@Bean
+	public PasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+		http
 //                .httpBasic().disable()
+
                 .csrf().disable()
                 .sessionManagement
                 (session -> session.maximumSessions(2)
@@ -62,10 +63,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
                 .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                 .antMatchers(HttpMethod.POST, "/auth/signup").permitAll()
+                .antMatchers(HttpMethod.POST, "/api/cal/**").permitAll()
 //                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
                 .antMatchers(HttpMethod.GET, "/api/emp/list/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/emp/**").permitAll()
                 .antMatchers(HttpMethod.GET, "/api/unit/**").permitAll()
+
                
                 .antMatchers(HttpMethod.GET, "/allChatroom").permitAll()
 
@@ -83,8 +86,13 @@ public class WebSecurityConfig implements WebMvcConfigurer {
                 .antMatchers(HttpMethod.GET, "/api/cal/**").permitAll()
 
                 
-                .antMatchers("/api/emp/me").permitAll()
+
+   
+                .antMatchers("/**").permitAll()
                 
+                
+                .antMatchers("/api/emp/me").authenticated()
+             
                 .antMatchers("/api/**").authenticated()
                 
 //                .anyRequest().authenticated()
