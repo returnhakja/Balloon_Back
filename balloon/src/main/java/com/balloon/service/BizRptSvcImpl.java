@@ -2,16 +2,11 @@ package com.balloon.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.balloon.dto.BizRptDTO;
-import com.balloon.dto.PageRequestDTO;
-import com.balloon.dto.PageResultDTO;
 import com.balloon.entity.BusinessReport;
 import com.balloon.repository.BizRptRepository;
 import com.balloon.vo.DocVO;
@@ -20,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class BizRptSvcImpl implements BizRptSvc {
 	private final BizRptRepository bizRptRepo;
 
@@ -29,20 +25,20 @@ public class BizRptSvcImpl implements BizRptSvc {
 		bizRptRepo.save(bizRptEntity);
 	}
 
+//	@Override
+//	public PageResultDTO<BizRptDTO, BusinessReport> getList(PageRequestDTO pageRequestDTO) {
+//		Pageable pageable = pageRequestDTO.getPageable(Sort.by("businessReportId").descending());
+//
+//		Page<BusinessReport> result = bizRptRepo.findAll(pageable);
+//
+//		Function<BusinessReport, BizRptDTO> function = (businessReport -> businessReport.toDTO(businessReport));
+//
+//		return new PageResultDTO<BizRptDTO, BusinessReport>(result, function);
+//	}
+
 	@Override
-	public PageResultDTO<BizRptDTO, BusinessReport> getList(PageRequestDTO pageRequestDTO) {
-		Pageable pageable = pageRequestDTO.getPageable(Sort.by("businessReportId").descending());
-
-		Page<BusinessReport> result = bizRptRepo.findAll(pageable);
-
-		Function<BusinessReport, BizRptDTO> function = (businessReport -> businessReport.toDTO(businessReport));
-
-		return new PageResultDTO<BizRptDTO, BusinessReport>(result, function);
-	}
-
-	public List<DocVO> getDoc() {
-//		SecurityUtil.getCurrentEmpId();
-		String id = "A0000006"; // 테스트용
+	public List<DocVO> getDoc(String empId) {
+		String id = empId;
 		List<DocVO> voList = new ArrayList<DocVO>();
 		List<BusinessReport> businessReportsList = bizRptRepo
 				.findBusinessReportIdAndDocumentTitleAndUpdateDateByEmpEmpId(id);
@@ -53,6 +49,18 @@ public class BizRptSvcImpl implements BizRptSvc {
 			voList.add(businessReport.toVO(businessReport));
 		}
 		return voList;
+	}
+
+	@Override
+	public BizRptDTO getBizRptByBizRptId(String bizRptId) {
+		BusinessReport businessReport = bizRptRepo.findBusinessReportByBusinessReportId(bizRptId);
+		BizRptDTO bizRptDTO = businessReport.toDTO(businessReport);
+		return bizRptDTO;
+	}
+
+	@Override
+	public void deleteBizRptByBizRptId(String bizRptId) {
+		bizRptRepo.deleteById(bizRptId);
 	}
 
 }

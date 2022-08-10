@@ -11,6 +11,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.balloon.dto.PADTO;
@@ -69,11 +71,11 @@ public class PersonnelAppointment {
 	@Column(name = "emp_name", length = 30)
 	private String empName;
 
-	@NotNull
+	@CreatedDate
 	@Column(name = "write_date")
 	private LocalDateTime writeDate;
 
-	@NotNull
+	@LastModifiedDate
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 

@@ -23,8 +23,9 @@ public class BizTpSvcImpl implements BizTpSvc {
 		bizTpRepo.save(bizTpEntity);
 	}
 
-	public List<DocVO> getDoc() {
-		String id = "A0000006"; // 테스트용
+	@Override
+	public List<DocVO> getDoc(String empId) {
+		String id = empId;
 		List<DocVO> voList = new ArrayList<DocVO>();
 		List<BusinessTripPlan> businessTripPlanList = bizTpRepo
 				.findBusinessTripIdAndDocumentTitleAndUpdateDateByEmpEmpId(id);
@@ -32,6 +33,18 @@ public class BizTpSvcImpl implements BizTpSvc {
 			voList.add(businessTripPlan.toVO(businessTripPlan));
 		}
 		return voList;
+	}
+
+	@Override
+	public BizTpDTO getBizTpByBizTpId(String bizTpId) {
+		BusinessTripPlan businessTripPlan = bizTpRepo.findBusinessTripPlanByBusinessTripId(bizTpId);
+		BizTpDTO bizTpDTO = businessTripPlan.toDTO(businessTripPlan);
+		return bizTpDTO;
+	}
+
+	@Override
+	public void deleteBizTpByBizTpId(String bizTpId) {
+		bizTpRepo.deleteById(bizTpId);
 	}
 
 }

@@ -71,14 +71,6 @@ public class BusinessReport {
 	@Column(name = "unit_name")
 	private String unitName;
 
-//	@ManyToOne(targetEntity = Unit.class)
-//	@JoinColumn(name = "unit_code")
-//	private String unitCode;
-//
-//	@ManyToOne(targetEntity = Employee.class)
-//	@JoinColumn(name = "emp_id")
-//	private String empId;
-
 	@ManyToOne(targetEntity = Unit.class)
 	@JoinColumn(name = "unit_code")
 	private Unit unit;
@@ -88,12 +80,6 @@ public class BusinessReport {
 	private Employee emp;
 
 	public BizRptDTO toDTO(BusinessReport businessReport) {
-//		BizRptDTO bizRptDTO = BizRptDTO.builder().businessReportId(businessReport.getBusinessReportId())
-//				.documentTitle(businessReport.getDocumentTitle()).documentContent(businessReport.getDocumentContent())
-//				.documentStatus(businessReport.getDocumentStatus()).empName(businessReport.getEmpName())
-//				.position(businessReport.getPosition()).writeDate(businessReport.getWriteDate())
-//				.updateDate(businessReport.getUpdateDate()).unitCode(businessReport.getUnitCode())
-//				.empId(businessReport.getEmpId()).build();
 
 		BizRptDTO bizRptDTO = BizRptDTO.builder().businessReportId(businessReport.getBusinessReportId())
 				.documentTitle(businessReport.getDocumentTitle()).documentContent(businessReport.getDocumentContent())
