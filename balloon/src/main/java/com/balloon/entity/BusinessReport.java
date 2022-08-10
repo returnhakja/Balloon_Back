@@ -16,6 +16,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.balloon.dto.BizRptDTO;
 import com.balloon.vo.DocVO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -71,29 +72,17 @@ public class BusinessReport {
 	@Column(name = "unit_name")
 	private String unitName;
 
-//	@ManyToOne(targetEntity = Unit.class)
-//	@JoinColumn(name = "unit_code")
-//	private String unitCode;
-//
-//	@ManyToOne(targetEntity = Employee.class)
-//	@JoinColumn(name = "emp_id")
-//	private String empId;
-
+	@JsonIgnore
 	@ManyToOne(targetEntity = Unit.class)
 	@JoinColumn(name = "unit_code")
 	private Unit unit;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = Employee.class)
 	@JoinColumn(name = "emp_id")
 	private Employee emp;
 
 	public BizRptDTO toDTO(BusinessReport businessReport) {
-//		BizRptDTO bizRptDTO = BizRptDTO.builder().businessReportId(businessReport.getBusinessReportId())
-//				.documentTitle(businessReport.getDocumentTitle()).documentContent(businessReport.getDocumentContent())
-//				.documentStatus(businessReport.getDocumentStatus()).empName(businessReport.getEmpName())
-//				.position(businessReport.getPosition()).writeDate(businessReport.getWriteDate())
-//				.updateDate(businessReport.getUpdateDate()).unitCode(businessReport.getUnitCode())
-//				.empId(businessReport.getEmpId()).build();
 
 		BizRptDTO bizRptDTO = BizRptDTO.builder().businessReportId(businessReport.getBusinessReportId())
 				.documentTitle(businessReport.getDocumentTitle()).documentContent(businessReport.getDocumentContent())

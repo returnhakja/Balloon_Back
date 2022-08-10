@@ -9,10 +9,10 @@ import com.balloon.vo.MessageDTO;
 
 public interface ChatService {
 	
-	public List<Chat> getChat(Employee empId);
+	public List<ChatDTO> getChat(Employee empId);
 	
 	public void insertChat(MessageDTO messageDTO);
-	
+
 	public List<ChatDTO> getChatroomId(Long chatroomId);
 
 }

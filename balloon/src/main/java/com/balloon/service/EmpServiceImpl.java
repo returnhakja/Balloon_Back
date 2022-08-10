@@ -94,6 +94,22 @@ public class EmpServiceImpl implements EmpService {
 		return empRepo.findEmpListInUnitCode(unitCode);
 	}
 
+
+	@Override
+	public List<EmpDTO> findEmpListInSameUnit(String empId) {
+
+		List<Employee> parentCodeList = empRepo.findEmpListOnParentCode(empId);
+		List<Employee> sameParentCodeList = empRepo.findEmpListOnSameParentCode(empId);
+
+		List<EmpDTO> empDTOList = new ArrayList<EmpDTO>();
+
+		parentCodeList.forEach(empEntity -> empDTOList.add(empEntity.toDTO(empEntity)));
+		sameParentCodeList.forEach(empEntity -> empDTOList.add(empEntity.toDTO(empEntity)));
+
+		return empDTOList;
+
+	}
+
 	/* site 참조 */
 //	@Transactional(readOnly = true)
 //	public EmpDTO getEmpInfo(String empId) {

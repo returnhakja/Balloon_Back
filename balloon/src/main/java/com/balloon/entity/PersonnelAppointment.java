@@ -11,10 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import com.balloon.dto.PADTO;
 import com.balloon.vo.DocVO;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sun.istack.NotNull;
 
 import lombok.AllArgsConstructor;
@@ -69,22 +72,25 @@ public class PersonnelAppointment {
 	@Column(name = "emp_name", length = 30)
 	private String empName;
 
-	@NotNull
+	@CreatedDate
 	@Column(name = "write_date")
 	private LocalDateTime writeDate;
 
-	@NotNull
+	@LastModifiedDate
 	@Column(name = "update_date")
 	private LocalDateTime updateDate;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = Employee.class)
 	@JoinColumn(name = "moved_emp_id")
 	private Employee movedEmpId;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = Employee.class)
 	@JoinColumn(name = "emp_id")
 	private Employee emp;
 
+	@JsonIgnore
 	@ManyToOne(targetEntity = Unit.class)
 	@JoinColumn(name = "unit_code")
 	private Unit unit;
