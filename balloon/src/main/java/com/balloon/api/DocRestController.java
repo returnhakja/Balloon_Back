@@ -34,7 +34,7 @@ public class DocRestController {
 
 	// CREATE -------------------------------
 
-	@PostMapping(value = "/uu", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/uu", produces = MediaType.APPLICATION_JSON_VALUE)
 	public void insertBizRpt(@RequestBody BizRptDTO bizRptDTO) {
 		bizRptDTO.setBusinessReportId(bizRptDTO.getBusinessReportId());
 		bizRptDTO.setDocumentTitle(bizRptDTO.getDocumentTitle());
@@ -51,7 +51,7 @@ public class DocRestController {
 		BizRptSvc.insertBizRpt(bizRptDTO);
 	}
 
-	@PostMapping(value = "/zz", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/zz", produces = MediaType.APPLICATION_JSON_VALUE)
 	public void insertBizTP(@RequestBody BizTpDTO bizTpDTO) {
 		bizTpDTO.setBusinessTripId(bizTpDTO.getBusinessTripId());
 		bizTpDTO.setDocumentTitle(bizTpDTO.getDocumentTitle());
@@ -70,7 +70,7 @@ public class DocRestController {
 		BizTpSvc.insertBizTp(bizTpDTO);
 	}
 
-	@PostMapping(value = "/ee", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "/ee", produces = MediaType.APPLICATION_JSON_VALUE)
 	public void insertPA(@RequestBody PADTO paDTO) {
 		paDTO.setPersonnelAppointmentId(paDTO.getPersonnelAppointmentId());
 		paDTO.setDocumentTitle(paDTO.getDocumentTitle());
