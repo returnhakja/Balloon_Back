@@ -5,9 +5,6 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -51,7 +48,6 @@ public class EmpRestController {
 		}
 	}
 
-
 	@GetMapping("/emp/emps")
 	public List<EmpDTO> findEmps() {
 
@@ -59,7 +55,6 @@ public class EmpRestController {
 
 		return empDTOList;
 	};
-
 
 	@GetMapping(value = "/emp/{empId}")
 	public EmpDTO findEmpByEmpId(@Valid @PathVariable String empId) throws Exception {
@@ -129,7 +124,6 @@ public class EmpRestController {
 				throw new Exception("empId 값이 들어오지 않음.");
 			} else {
 				List<EmpDTO> sameUnitList = empSvc.findEmpListInSameUnit(empId);
-
 				return sameUnitList;
 			}
 
