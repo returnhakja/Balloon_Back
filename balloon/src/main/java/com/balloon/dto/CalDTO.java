@@ -32,7 +32,9 @@ public class CalDTO {
 	
 	private String scheduleLocation;
 	
+
 	private Employee employee;
+
 	
 	public Cal toEntity(CalDTO calDTO) {
 		Cal calEntity = Cal.builder()
@@ -48,6 +50,7 @@ public class CalDTO {
 		return calEntity;
 	}
 	
+
 	public Employee toEmpId(String empId) {
 		Employee employeeId = Employee.builder()
 									.empId(empId)
@@ -56,4 +59,5 @@ public class CalDTO {
 		return employeeId;
 	}
 	
+
 }

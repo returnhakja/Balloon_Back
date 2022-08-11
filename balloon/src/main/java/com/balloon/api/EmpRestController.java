@@ -6,6 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,16 +28,15 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-//@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"})
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" })
 public class EmpRestController {
-	
-	
+
 	private final EmpServiceImpl empSvc;
 
 	@GetMapping("/emp/list")
-	public PageResultDTO<EmpDTO, Employee> findEmpList(PageRequestDTO pageRequestDTO) throws Exception{
+	public PageResultDTO<EmpDTO, Employee> findEmpList(PageRequestDTO pageRequestDTO) throws Exception {
 		try {
-			if(pageRequestDTO == null) {
+			if (pageRequestDTO == null) {
 				throw new Exception("입력받은 page, size 값이 없습니다.");
 			} else {
 				PageResultDTO<EmpDTO, Employee> pageResultDTO = empSvc.findEmpList(pageRequestDTO);
@@ -47,11 +47,19 @@ public class EmpRestController {
 			throw new Exception("출력할 사원 정보가 없습니다.");
 		}
 	}
-	
+
+	@GetMapping("/emp/emps")
+	public List<EmpDTO> findEmps() {
+
+		List<EmpDTO> empDTOList = empSvc.findEmps();
+
+		return empDTOList;
+	};
+
 	@GetMapping(value = "/emp/{empId}")
-	public EmpDTO findEmpByEmpId(@Valid @PathVariable String empId) throws Exception{
+	public EmpDTO findEmpByEmpId(@Valid @PathVariable String empId) throws Exception {
 		try {
-			if(empId == null) {
+			if (empId == null) {
 				throw new Exception("사원번호를 입력받지 못했습니다.");
 			} else {
 				Employee empEntity = empSvc.findEmpByEmpId(empId);
@@ -65,29 +73,30 @@ public class EmpRestController {
 			throw new Exception("입력받은 사원번호가 없습니다.");
 		}
 	}
-	
+
 	/**/
 	@GetMapping("/emp/me")
-	public EmpResponseDTO getMyEmpInfo(){
+	public EmpResponseDTO getMyEmpInfo() {
 		EmpResponseDTO myInfoBySecurity = empSvc.getMyInfoBySecurity();
-		
+
 		return myInfoBySecurity;
 	}
-	
+
 	@PostMapping("/empName")
-	public ResponseEntity<EmpResponseDTO> updateEmpName(@RequestBody EmpRequestDTO empRequestDTO){
+	public ResponseEntity<EmpResponseDTO> updateEmpName(@RequestBody EmpRequestDTO empRequestDTO) {
 		return ResponseEntity.ok(empSvc.changeEmpName(empRequestDTO.getEmpId(), empRequestDTO.getEmpName()));
 	}
 
 	@PostMapping("/password")
-	public ResponseEntity<EmpResponseDTO> updatePassword(@RequestBody ChangePasswordRequestDTO requestDTO){
-		return ResponseEntity.ok(empSvc.changePassword(requestDTO.getEmpId(), requestDTO.getExPassword(), requestDTO.getNewPassword()));
+	public ResponseEntity<EmpResponseDTO> updatePassword(@RequestBody ChangePasswordRequestDTO requestDTO) {
+		return ResponseEntity.ok(
+				empSvc.changePassword(requestDTO.getEmpId(), requestDTO.getExPassword(), requestDTO.getNewPassword()));
 	}
-	
+
 	@GetMapping("/approval/line/{unitCode}")
-	public List<EmpDTO> findEmpListInUnitCode(@Valid @PathVariable String unitCode) throws Exception{
+	public List<EmpDTO> findEmpListInUnitCode(@Valid @PathVariable String unitCode) throws Exception {
 		try {
-			if(unitCode == null) {
+			if (unitCode == null) {
 				throw new Exception("조직이 존재하지 않습니다.");
 			} else {
 				List<Employee> empEntityList = empSvc.findEmpListInUnitCode(unitCode);
@@ -96,20 +105,33 @@ public class EmpRestController {
 					return null;
 				} else {
 					List<EmpDTO> empDTOList = new ArrayList<EmpDTO>();
-					
+
 					empEntityList.forEach(empEntity -> empDTOList.add(empEntity.toDTO(empEntity)));
-				
-					
+
 					return empDTOList;
 				}
 			}
 		} catch (Exception e) {
 			throw new Exception("입력받은 조직번호가 없습니다.");
 		}
-		
+
 	}
-	
-	
+
+	@GetMapping("/emp/unit/list/{empId}")
+	public List<EmpDTO> findEmpListInSameUnit(@Valid @PathVariable String empId) throws Exception {
+		try {
+			if (empId == null) {
+				throw new Exception("empId 값이 들어오지 않음.");
+			} else {
+				List<EmpDTO> sameUnitList = empSvc.findEmpListInSameUnit(empId);
+				return sameUnitList;
+			}
+
+		} catch (Exception e) {
+			throw new Exception("터짐.");
+		}
+	}
+
 //	  private UserMapper userMapper;
 //	  private Bcrypt bcrypt;
 //
@@ -167,6 +189,4 @@ public class EmpRestController {
 //	    return new ResponseEntity<>(map, HttpStatus.OK); // 생성자로 ResponseEntity를 만들어서 map이랑 status클라이언트에 보내줌
 //	  }
 
-
-	
 }
