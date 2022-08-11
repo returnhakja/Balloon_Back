@@ -12,19 +12,17 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Data
 public class ChatroomDTO {
-	
+
 	private Long chatroomId;
-	
+
 	private String chatroomName;
-	
+
 	private Long headCount;
-	
+
 	public Chatroom toEntity(ChatroomDTO chatroomDTO) {
-		Chatroom chatroomEntity = Chatroom.builder()
-												.chatroomId(chatroomDTO.getChatroomId())
-												.chatroomName(chatroomDTO.getChatroomName())
-												.headCount(chatroomDTO.getHeadCount())
-												.build();
+		Chatroom chatroomEntity = Chatroom.builder().chatroomId(chatroomDTO.getChatroomId())
+				.chatroomName(chatroomDTO.getChatroomName()).headCount(chatroomDTO.getHeadCount()).build();
 		return chatroomEntity;
 	}
+
 }

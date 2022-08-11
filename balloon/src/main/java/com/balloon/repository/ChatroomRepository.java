@@ -6,7 +6,8 @@ import org.springframework.stereotype.Repository;
 import com.balloon.entity.Chatroom;
 
 @Repository
-public interface ChatroomRepository extends JpaRepository<Chatroom, Long>{
-	
+public interface ChatroomRepository extends JpaRepository<Chatroom, Long> {
+
 	public Chatroom findChatroomByChatroomId(Long chatroomId);
+
 }

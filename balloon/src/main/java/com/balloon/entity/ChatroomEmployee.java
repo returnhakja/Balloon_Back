@@ -25,24 +25,23 @@ import lombok.ToString;
 @Table(name = "chatroom_employee")
 @IdClass(ChatroomEmployeeId.class)
 public class ChatroomEmployee {
-	
+
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "chatroom_id")
 	private Chatroom chatroomId;
-	
+
 	@Id
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "emp_id")
 	private Employee empId;
-	
+
 	public ChatroomEmployeeDTO toDTO(ChatroomEmployee chatroomEmployeeEntity) {
 		Chatroom chatroom = chatroomEmployeeEntity.getChatroomId();
 		Employee employee = chatroomEmployeeEntity.getEmpId();
-		ChatroomEmployeeDTO chatroomEmployeeDTO = ChatroomEmployeeDTO.builder()
-																		.chatroomId(chatroom.toDTO(chatroom))
-																		.empId(employee.toDTO(employee))
-																		.build();
+		ChatroomEmployeeDTO chatroomEmployeeDTO = ChatroomEmployeeDTO.builder().chatroomId(chatroom.toDTO(chatroom))
+				.empId(employee.toDTO(employee)).build();
 		return chatroomEmployeeDTO;
 	}
+
 }
