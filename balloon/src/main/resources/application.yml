@@ -25,12 +25,15 @@ spring:
     jpa:
       repositories:
         enabled: true
-    
   # jackson  
   jackson:
     serialization:
       fail-on-empty-beans: false
+
+
+
     default-property-inclusion: non-null  
+
      
 logging:
   level:

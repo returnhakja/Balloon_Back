@@ -35,12 +35,14 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 	@Override
+	@Transactional
 	public void insertChat(MessageDTO messageDTO) {
 		Chat chat = messageDTO.toChat(messageDTO);
 		chatRepository.save(chat);
 	}
 
 	@Override
+	@Transactional
 	public List<ChatDTO> getChatroomId(Long chatroomId) {
 		List<ChatDTO> ChatList = new ArrayList<ChatDTO>();
 		for (Chat chat : chatRepository.findAllByChatroomChatroomId(chatroomId)) {

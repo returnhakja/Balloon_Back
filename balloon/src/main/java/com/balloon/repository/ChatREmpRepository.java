@@ -7,7 +7,8 @@ import com.balloon.entity.ChatroomEmployee;
 import com.balloon.entity.ChatroomEmployeeId;
 
 @Repository
-public interface ChatREmpRepository extends JpaRepository<ChatroomEmployee, ChatroomEmployeeId>{
-	
+public interface ChatREmpRepository extends JpaRepository<ChatroomEmployee, ChatroomEmployeeId> {
+
 	public ChatroomEmployee findChatroomEmployeeBychatroomId(Long chatroomId);
+
 }

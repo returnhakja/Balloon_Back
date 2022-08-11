@@ -34,35 +34,32 @@ import lombok.ToString;
 @EntityListeners(AuditingEntityListener.class)
 @DynamicInsert
 public class Chatroom {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "chatroom_id")
 	private Long chatroomId;
-	
+
 	@Column(name = "chatroom_name")
 	private String chatroomName;
-	
+
 	@Column(name = "head_count")
 	private Long headCount;
-	
+
 	@OneToMany(mappedBy = "chatroom")
 	@JsonIgnore
 	List<Chat> chat = new ArrayList<Chat>();
-	
+
 	@OneToMany(mappedBy = "chatroomId")
 	@JsonIgnore
 	List<ChatroomEmployee> chatroomEmployee = new ArrayList<ChatroomEmployee>();
-	
+
 	public ChatroomDTO toDTO(Chatroom chatroomEntity) {
-		ChatroomDTO chatroomDTO = ChatroomDTO.builder()
-												.chatroomId(chatroomEntity.getChatroomId())
-												.chatroomName(chatroomEntity.getChatroomName())
-												.headCount(chatroomEntity.getHeadCount())
-												.build();
+		ChatroomDTO chatroomDTO = ChatroomDTO.builder().chatroomId(chatroomEntity.getChatroomId())
+				.chatroomName(chatroomEntity.getChatroomName()).headCount(chatroomEntity.getHeadCount()).build();
 		return chatroomDTO;
 	}
-	
+
 	public void updateEntity(String chatroomName, Long headCount) {
 		this.chatroomName = chatroomName;
 		this.headCount = headCount;
