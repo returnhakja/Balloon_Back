@@ -1,5 +1,5 @@
 spring:
-  jackson.default-property-inclusion: non-null
+
   # DB
   profiles:
     include: mysql
@@ -25,12 +25,12 @@ spring:
     jpa:
       repositories:
         enabled: true
-    
   # jackson  
   jackson:
     serialization:
       fail-on-empty-beans: false
       
+    default-property-inclusion: non-null
      
 logging:
   level:

@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.balloon.dto.ChatroomDTO;
@@ -15,16 +14,16 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ChatroomServiceImpl implements ChatroomService{
-	
+public class ChatroomServiceImpl implements ChatroomService {
+
 	private final ChatroomRepository chatroomRepository;
-	
+
 	@Override
 	@Transactional
 	public List<Chatroom> getAllChatroom() {
 		return chatroomRepository.findAll();
 	}
-	
+
 	@Override
 	@Transactional
 	public Chatroom getOneChatroom(Long chatroomId) {

@@ -20,37 +20,38 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = { "http://localhost:3000" })
 public class ChatroomRestController {
-	
+
 	@Autowired
 	private final ChatroomServiceImpl chatroomServiceImpl;
-	
-	//채팅방 목록 조회
+
+	// 채팅방 목록 조회
 	@GetMapping(value = "/allChatroom")
-	public List<Chatroom> allChatroom(){
+	public List<Chatroom> allChatroom() {
 		return chatroomServiceImpl.getAllChatroom();
 	}
-	
-	//채팅방 조회
+
+	// 채팅방 조회
 	@GetMapping(value = "/oneChatroom/{chatroomId}")
 	public Chatroom oneChatroom(@PathVariable Long chatroomId) {
-		return chatroomServiceImpl.getOneChatroom(chatroomId);	
+		return chatroomServiceImpl.getOneChatroom(chatroomId);
 	}
-	
-	//채팅방 개설
+
+	// 채팅방 개설
 	@PostMapping(value = "/createChatroom")
 	public Long createChatroom(@RequestBody ChatroomDTO chatroomDTO) {
 		System.out.println(chatroomDTO);
 		return chatroomServiceImpl.getCreateChatroom(chatroomDTO);
 	}
-	
-	@PutMapping(value = "/updateroomName/{chatroomId}")
-	public void updateChatroom(@PathVariable(value = "chatroomId") Long chatroomId, @RequestBody ChatroomDTO chatroomDTO) {
+
+	@PutMapping(value = "/updateroom/{chatroomId}")
+	public void updateChatroom(@PathVariable(value = "chatroomId") Long chatroomId,
+			@RequestBody ChatroomDTO chatroomDTO) {
 		chatroomDTO.setChatroomId(chatroomId);
 		chatroomServiceImpl.getUpdateChatroom(chatroomDTO);
 	}
-	
+
 	@DeleteMapping(value = "/deleteChatroom/{chatroomId}")
 	public void deleteChatroom(@PathVariable Long chatroomId) {
 		chatroomServiceImpl.deleteChatroom(chatroomId);

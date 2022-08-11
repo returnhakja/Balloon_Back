@@ -4,12 +4,15 @@ import java.util.List;
 
 import com.balloon.dto.ChatroomEmployeeDTO;
 import com.balloon.entity.ChatroomEmployee;
+import com.balloon.entity.Employee;
 
 public interface ChatREmpService {
-	
+
 	public List<ChatroomEmployee> getallChatEmp();
-	
+
 	public ChatroomEmployee getoneChatEmp(Long chatroomId);
-	
-	public void getInsertChatEmp(ChatroomEmployeeDTO chatroomEmployeeDTO);
+
+	public Employee getInsertChatEmp(ChatroomEmployeeDTO chatroomEmployeeDTO);
+
+	public void getdeleteChatroom(Long chatroomId, String empId);
 }
