@@ -8,7 +8,9 @@ import com.balloon.vo.DocVO;
 public interface PASvc {
 	public void insertPA(PADTO paDTO);
 
-	public List<DocVO> getDoc(String empId);
+	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte documentStatus);
+
+	public List<DocVO> getDocbyUnitCode(String unitCode);
 
 	public PADTO getPAByPAId(String personnelAppointmentId);
 

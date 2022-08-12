@@ -16,12 +16,18 @@ import lombok.ToString;
 public class DocVO {
 
 	// 문서 번호
-	private String Docid; // -> 이거 말도안된
+	private String docId;
 
 	// 기안 제목
 	private String documentTitle;
 
 	// 상신일
-	private LocalDateTime upDateTime;
+	private LocalDateTime updateTime;
+
+	// 문서 상태
+//	private Byte documentStatus;
+
+	// 부서 번호
+//	private Unit unit;
 
 }

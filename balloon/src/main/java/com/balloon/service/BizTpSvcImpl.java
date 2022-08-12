@@ -24,11 +24,27 @@ public class BizTpSvcImpl implements BizTpSvc {
 	}
 
 	@Override
-	public List<DocVO> getDoc(String empId) {
+	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte docStatus) {
 		String id = empId;
+		Byte status = docStatus;
 		List<DocVO> voList = new ArrayList<DocVO>();
 		List<BusinessTripPlan> businessTripPlanList = bizTpRepo
-				.findBusinessTripIdAndDocumentTitleAndUpdateDateByEmpEmpId(id);
+				.findBusinessTripIdAndDocumentTitleAndUpdateDateByEmpEmpIdAndDocumentStatus(id, status);
+		for (BusinessTripPlan businessTripPlan : businessTripPlanList) {
+			voList.add(businessTripPlan.toVO(businessTripPlan));
+		}
+		return voList;
+	}
+
+	@Override
+	public List<DocVO> getDocbyUnitCode(String unitCode) {
+		String code = unitCode.substring(0, 4);
+		System.out.println(code);
+		Byte status = 5;
+		List<DocVO> voList = new ArrayList<DocVO>();
+		List<BusinessTripPlan> businessTripPlanList = bizTpRepo
+				.findBusinessTripIdAndDocumentTitleAndUpdateDateByUnitUnitCodeStartingWithAndDocumentStatus(code,
+						status);
 		for (BusinessTripPlan businessTripPlan : businessTripPlanList) {
 			voList.add(businessTripPlan.toVO(businessTripPlan));
 		}

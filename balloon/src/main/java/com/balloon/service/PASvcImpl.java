@@ -24,11 +24,27 @@ public class PASvcImpl implements PASvc {
 	}
 
 	@Override
-	public List<DocVO> getDoc(String empId) {
-		String id = empId; // 테스트용
+	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte docStatus) {
+		String id = empId;
+		Byte status = docStatus;
 		List<DocVO> voList = new ArrayList<DocVO>();
 		List<PersonnelAppointment> personnelAppointmentList = PARepo
-				.findPersonnelAppointmentIdAndDocumentTitleAndUpdateDateByEmpEmpId(id);
+				.findPersonnelAppointmentIdAndDocumentTitleAndUpdateDateByEmpEmpIdAndDocumentStatus(id, status);
+		for (PersonnelAppointment personnelAppointment : personnelAppointmentList) {
+			voList.add(personnelAppointment.toVO(personnelAppointment));
+		}
+		return voList;
+	}
+
+	@Override
+	public List<DocVO> getDocbyUnitCode(String unitCode) {
+		String code = unitCode.substring(0, 4);
+		System.out.println(code);
+		Byte status = 5;
+		List<DocVO> voList = new ArrayList<DocVO>();
+		List<PersonnelAppointment> personnelAppointmentList = PARepo
+				.findPersonnelAppointmentIdAndDocumentTitleAndUpdateDateByUnitUnitCodeStartingWithAndDocumentStatus(
+						code, status);
 		for (PersonnelAppointment personnelAppointment : personnelAppointmentList) {
 			voList.add(personnelAppointment.toVO(personnelAppointment));
 		}

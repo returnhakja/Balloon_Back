@@ -110,8 +110,11 @@ public class PersonnelAppointment {
 	}
 
 	public DocVO toVO(PersonnelAppointment personnelAppointment) {
-		DocVO docVO = DocVO.builder().Docid(personnelAppointment.getPersonnelAppointmentId())
-				.documentTitle(personnelAppointment.getDocumentTitle()).upDateTime(personnelAppointment.getUpdateDate())
+//		DocVO docVO = DocVO.builder().docId(personnelAppointment.getPersonnelAppointmentId())
+//				.documentTitle(personnelAppointment.getDocumentTitle()).updateTime(personnelAppointment.getUpdateDate())
+//				.documentStatus(personnelAppointment.getDocumentStatus()).unit(personnelAppointment.getUnit()).build();
+		DocVO docVO = DocVO.builder().docId(personnelAppointment.getPersonnelAppointmentId())
+				.documentTitle(personnelAppointment.getDocumentTitle()).updateTime(personnelAppointment.getUpdateDate())
 				.build();
 		return docVO;
 	}

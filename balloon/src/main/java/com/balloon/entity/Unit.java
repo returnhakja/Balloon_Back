@@ -16,6 +16,7 @@ import javax.validation.constraints.NotNull;
 import org.springframework.data.domain.Persistable;
 
 import com.balloon.dto.UnitDTO;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -51,7 +52,6 @@ public class Unit implements Persistable<String> {
 	@JoinColumn(name = "parent_unit", referencedColumnName = "unit_code")
 	@JsonIgnore
 	private Unit parentUnit;
-
 
 	@JsonBackReference
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "parentUnit")
