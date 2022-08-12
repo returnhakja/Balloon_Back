@@ -30,18 +30,27 @@ public class ChatREmpRestController {
 		return chatREmpServicImpl.getallChatEmp();
 	}
 
-	@GetMapping(value = "/OneChatEmp/{chatroomId}")
-	public ChatroomEmployee oneChatEmp(Long chatroomId) {
-		return chatREmpServicImpl.getoneChatEmp(chatroomId);
+	@GetMapping(value = "/oneChatEmp/{chatroomId}")
+	public List<ChatroomEmployee> chatroomEmp(@PathVariable(value = "chatroomId") Long chatroomId) {
+		return chatREmpServicImpl.getChatroomEmp(chatroomId);
 	}
+
+//	@GetMapping(value = "/OneChatEmp/{chatroomId}")
+//	public ChatroomEmployee oneChatEmp(Long chatroomId) {
+//		return chatREmpServicImpl.getoneChatEmp(chatroomId);
+//	}
 
 	@PostMapping(value = "/insertChatEmp/{chatroomId}")
 	public Employee insertChatEmp(@PathVariable(name = "chatroomId") Long chatroomId,
-			@RequestBody ChatroomEmployeeDTO chatroomEmployeeDTO) {
+			@RequestBody List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
+		// 채팅방 id 값 넣기
 		ChatroomDTO chatroomDTO = new ChatroomDTO();
 		chatroomDTO.setChatroomId(chatroomId);
-		chatroomEmployeeDTO.setChatroomId(chatroomDTO);
-		System.out.println(chatroomEmployeeDTO);
+
+		// 모든 사원 리스트
+		for (ChatroomEmployeeDTO chatroomEmpDto : chatroomEmployeeDTO) {
+			chatroomEmpDto.setChatroomId(chatroomDTO);
+		}
 		return chatREmpServicImpl.getInsertChatEmp(chatroomEmployeeDTO);
 	}
 

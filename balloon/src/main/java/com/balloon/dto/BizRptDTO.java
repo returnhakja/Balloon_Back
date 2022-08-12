@@ -36,22 +36,11 @@ public class BizRptDTO {
 
 	private String unitName;
 
-//	private String unitCode;
-//
-//	private String empId;
-
 	private Unit unit;
 
 	private Employee emp;
 
 	public BusinessReport toEntity(BizRptDTO bizRptDTO) {
-//		BusinessReport businessReport = BusinessReport.builder().businessReportId(bizRptDTO.getBusinessReportId())
-//				.documentTitle(bizRptDTO.getDocumentTitle()).documentContent(bizRptDTO.getDocumentContent())
-//				.documentStatus(bizRptDTO.getDocumentStatus()).empName(bizRptDTO.getEmpName())
-//				.position(bizRptDTO.getPosition()).writeDate(bizRptDTO.getWriteDate())
-//				.updateDate(bizRptDTO.getUpdateDate()).unitName(bizRptDTO.getUnitName())
-//				.unitCode(bizRptDTO.getUnitCode()).empId(bizRptDTO.getEmpId()).build();
-
 		BusinessReport businessReport = BusinessReport.builder().businessReportId(bizRptDTO.getBusinessReportId())
 				.documentTitle(bizRptDTO.getDocumentTitle()).documentContent(bizRptDTO.getDocumentContent())
 				.documentStatus(bizRptDTO.getDocumentStatus()).empName(bizRptDTO.getEmpName())

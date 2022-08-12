@@ -16,24 +16,35 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequiredArgsConstructor
-@CrossOrigin(origins = {"http://localhost:3000"})
+@CrossOrigin(origins = { "http://localhost:3000" })
 public class ChatRestController {
-	
+
 	private final EmpServiceImpl empSvc;
 	private final ChatServiceImpl chatServiceImpl;
-	
+
 	@GetMapping(value = "/allEmp")
 	public List<Employee> allEmp() {
 		return empSvc.getEmp();
 	}
-	
+
 	@GetMapping(value = "/allChat/{empId}")
 	public List<ChatDTO> allChat(@PathVariable(name = "empId") Employee empId) {
 		return chatServiceImpl.getChat(empId);
 	}
-	
-	@GetMapping(value = "/onechatroom/{chatroomId}")
-	public List<ChatDTO> oneChatoom(@PathVariable(value = "chatroomId") Long chatroomId) {
+
+	@GetMapping(value = "/chatRecord/{chatroomId}")
+	public List<ChatDTO> chattingRecord(@PathVariable(value = "chatroomId") Long chatroomId) {
 		return chatServiceImpl.getChatroomId(chatroomId);
-	}	
+	}
+
+//	@PostMapping(value = "/insertChat/{chatroomId}")
+//	public void createChatroom(@PathVariable(value = "chatroomId") Long chatroomId, @RequestBody ChatDTO chatDTO) {
+//		ChatroomDTO chatroomDTO = new ChatroomDTO();
+//		chatroomDTO.setChatroomId(chatroomId);
+//		chatDTO.setChatroom(chatroomDTO.toEntity(chatroomDTO));
+//		System.out.println(chatroomDTO);
+//		System.out.println(chatDTO);
+//
+//		chatServiceImpl.getInsertChat(chatDTO);
+//	}
 }
