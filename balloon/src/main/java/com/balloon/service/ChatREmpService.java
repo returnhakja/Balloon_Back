@@ -10,9 +10,13 @@ public interface ChatREmpService {
 
 	public List<ChatroomEmployee> getallChatEmp();
 
+	public List<ChatroomEmployee> getChatroomEmp(Long chatroomId);
+
 	public ChatroomEmployee getoneChatEmp(Long chatroomId);
 
-	public Employee getInsertChatEmp(ChatroomEmployeeDTO chatroomEmployeeDTO);
+//	public Employee getInsertChatEmp(ChatroomEmployeeDTO chatroomEmployeeDTO);
 
 	public void getdeleteChatroom(Long chatroomId, String empId);
+
+	public Employee getInsertChatEmp(List<ChatroomEmployeeDTO> chatroomEmployeeDTO);
 }

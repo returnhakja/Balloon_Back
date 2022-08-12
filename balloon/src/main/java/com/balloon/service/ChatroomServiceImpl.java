@@ -42,6 +42,7 @@ public class ChatroomServiceImpl implements ChatroomService {
 	public void getUpdateChatroom(ChatroomDTO chatroomDTO) {
 		Chatroom chatroomEntity = chatroomDTO.toEntity(chatroomDTO);
 		chatroomEntity.updateEntity(chatroomDTO.getChatroomName(), chatroomDTO.getHeadCount());
+		System.out.println(chatroomEntity);
 		chatroomRepository.save(chatroomEntity);
 	}
 

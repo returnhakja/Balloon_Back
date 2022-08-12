@@ -95,8 +95,11 @@ public class BusinessReport {
 	}
 
 	public DocVO toVO(BusinessReport businessReport) {
-		DocVO docVO = DocVO.builder().Docid(businessReport.getBusinessReportId())
-				.documentTitle(businessReport.getDocumentTitle()).upDateTime(businessReport.getUpdateDate()).build();
+//		DocVO docVO = DocVO.builder().docId(businessReport.getBusinessReportId())
+//				.documentTitle(businessReport.getDocumentTitle()).updateTime(businessReport.getUpdateDate())
+//				.documentStatus(businessReport.getDocumentStatus()).unit(businessReport.getUnit()).build();
+		DocVO docVO = DocVO.builder().docId(businessReport.getBusinessReportId())
+				.documentTitle(businessReport.getDocumentTitle()).updateTime(businessReport.getUpdateDate()).build();
 		return docVO;
 	}
 
