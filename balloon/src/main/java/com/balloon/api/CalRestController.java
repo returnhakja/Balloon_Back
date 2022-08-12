@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.CalDTO;
-import com.balloon.entity.Cal;
 import com.balloon.service.CalServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -34,14 +33,12 @@ public class CalRestController {
 	@GetMapping(value = "/cal/list")
 
 	public List<CalDTO> findAll() {
-		System.out.println("--ㄴ-ㅁㄴㅇ-ㅁㄴㅇ-ㅁㄴㅇ-ㅁㄴㅇ-ㄴ");
 
 		return calService.findAll();
 	}
 
 	@GetMapping(value = "/cal/all/{scheduleId}")
-
-	public Cal CalByScheduleId(@PathVariable(name = "scheduleId") Long scheduleid) {
+	public CalDTO CalByScheduleId(@PathVariable(name = "scheduleId") Long scheduleid) {
 		System.out.println("스케쥬우우울");
 		return calService.getCalByscheduleId(scheduleid);
 	}
@@ -59,12 +56,16 @@ public class CalRestController {
 
 	@PutMapping(value = "/cal/update", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public void updateCalByscheduleId(@RequestBody CalDTO calDTO) {
-		calService.updateByCal(calDTO);
+		try {
+			calService.updateByCal(calDTO);
+		} catch (Exception e) {
+			System.out.println("에러에러");
+			throw new NullPointerException("scheduleId is null.");
+		}
 	}
 
 	@GetMapping(value = "/cal/{empId}")
-
-	public List<CalDTO> CalByScheduleId(@PathVariable(name = "empId") String empId) {
+	public List<CalDTO> CalByEmpId(@PathVariable(name = "empId") String empId) {
 		System.out.println("이엠피아이디");
 
 		return calService.getCalByempId(empId);

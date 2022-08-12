@@ -29,9 +29,12 @@ public class CalServiceImpl implements CalService {
 	}
 
 	@Override
-	public Cal getCalByscheduleId(Long scheduleId) {
+	public CalDTO getCalByscheduleId(Long scheduleId) {
+		Cal calEntity = CalRepository.findAllByscheduleId(scheduleId);
+		CalDTO calDTO = new CalDTO();
 
-		return CalRepository.findAllByscheduleId(scheduleId);
+		calDTO = calEntity.toDTO(calEntity);
+		return calDTO;
 	}
 
 	@Override
@@ -46,14 +49,20 @@ public class CalServiceImpl implements CalService {
 	}
 
 	@Override
-	public void updateByCal(CalDTO calDTO) {
-		Cal cal = getCalByscheduleId(calDTO.getScheduleId());
-		cal.updateCal(calDTO);
-		CalRepository.save(cal);
+	public void updateByCal(CalDTO requestDTO) throws Exception {
+		CalDTO calDTO = null;
+		calDTO = getCalByscheduleId(requestDTO.getScheduleId());
+		if (calDTO == null) {
+			Cal cal = calDTO.toEntity(calDTO);
+
+			cal.updateCal(requestDTO);
+			CalRepository.save(cal);
+		} else {
+			throw new NullPointerException("scheduleId is null.");
+		}
 	}
 
 	@Override
-
 	public List<CalDTO> getCalByempId(String empId) {
 
 		CalDTO calDTO = new CalDTO();
