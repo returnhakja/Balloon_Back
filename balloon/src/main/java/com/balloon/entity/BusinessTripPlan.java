@@ -112,8 +112,11 @@ public class BusinessTripPlan {
 	}
 
 	public DocVO toVO(BusinessTripPlan businessTripPlan) {
-		DocVO docVO = DocVO.builder().Docid(businessTripPlan.getBusinessTripId())
-				.documentTitle(businessTripPlan.getDocumentTitle()).upDateTime(businessTripPlan.getUpdateDate())
+//		DocVO docVO = DocVO.builder().docId(businessTripPlan.getBusinessTripId())
+//				.documentTitle(businessTripPlan.getDocumentTitle()).updateTime(businessTripPlan.getUpdateDate())
+//				.documentStatus(businessTripPlan.getDocumentStatus()).unit(businessTripPlan.getUnit()).build();
+		DocVO docVO = DocVO.builder().docId(businessTripPlan.getBusinessTripId())
+				.documentTitle(businessTripPlan.getDocumentTitle()).updateTime(businessTripPlan.getUpdateDate())
 				.build();
 		return docVO;
 	}

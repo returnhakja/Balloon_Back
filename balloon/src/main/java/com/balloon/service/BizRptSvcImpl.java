@@ -37,15 +37,27 @@ public class BizRptSvcImpl implements BizRptSvc {
 //	}
 
 	@Override
-	public List<DocVO> getDoc(String empId) {
+	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte docStatus) {
 		String id = empId;
+		Byte status = docStatus;
 		List<DocVO> voList = new ArrayList<DocVO>();
 		List<BusinessReport> businessReportsList = bizRptRepo
-				.findBusinessReportIdAndDocumentTitleAndUpdateDateByEmpEmpId(id);
+				.findBusinessReportIdAndDocumentTitleAndUpdateDateByEmpEmpIdAndDocumentStatus(id, status);
 		for (BusinessReport businessReport : businessReportsList) {
-			System.out.println(businessReport.getDocumentTitle());
-			System.out.println(businessReport.getUpdateDate());
-			System.out.println(businessReport.getBusinessReportId());
+			voList.add(businessReport.toVO(businessReport));
+		}
+		return voList;
+	}
+
+	@Override
+	public List<DocVO> getDocbyUnitCode(String unitCode) {
+		String code = unitCode.substring(0, 4);
+		Byte status = 5;
+		List<DocVO> voList = new ArrayList<DocVO>();
+		List<BusinessReport> businessReportsList = bizRptRepo
+				.findBusinessReportIdAndDocumentTitleAndUpdateDateByUnitUnitCodeStartingWithAndDocumentStatus(code,
+						status);
+		for (BusinessReport businessReport : businessReportsList) {
 			voList.add(businessReport.toVO(businessReport));
 		}
 		return voList;

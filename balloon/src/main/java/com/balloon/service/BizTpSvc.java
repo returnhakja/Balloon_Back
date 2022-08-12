@@ -8,7 +8,9 @@ import com.balloon.vo.DocVO;
 public interface BizTpSvc {
 	public void insertBizTp(BizTpDTO bizTpDTO);
 
-	public List<DocVO> getDoc(String empId);
+	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte documentStatus);
+
+	public List<DocVO> getDocbyUnitCode(String unitCode);
 
 	BizTpDTO getBizTpByBizTpId(String businessTripId);
 
