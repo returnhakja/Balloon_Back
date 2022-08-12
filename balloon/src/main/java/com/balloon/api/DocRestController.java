@@ -16,14 +16,13 @@ import com.balloon.vo.DocVO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/box")
+@RequestMapping("/api/boxes")
 @RequiredArgsConstructor
 public class DocRestController {
 
 	private final BizRptSvcImpl BizRptSvc;
 	private final BizTpSvcImpl BizTpSvc;
 	private final PASvcImpl PASvc;
-
 
 	// READ -------------------------------
 //	@GetMapping(value = "/dd")
