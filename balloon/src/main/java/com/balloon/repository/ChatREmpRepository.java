@@ -1,5 +1,7 @@
 package com.balloon.repository;
 
+import java.util.List;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -11,4 +13,5 @@ public interface ChatREmpRepository extends JpaRepository<ChatroomEmployee, Chat
 
 	public ChatroomEmployee findChatroomEmployeeBychatroomId(Long chatroomId);
 
+	public List<ChatroomEmployee> findAllByChatroomIdChatroomId(Long chatroomId);
 }
