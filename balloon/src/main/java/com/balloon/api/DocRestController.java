@@ -24,37 +24,37 @@ public class DocRestController {
 	private final BizTpSvcImpl BizTpSvc;
 	private final PASvcImpl PASvc;
 
+//	@GetMapping(value = "/empdocs/{empId}")
+//	public List<DocVO> getDocbyEmpId(@PathVariable("empId") String empId) {
+//		System.out.println(empId);
+//		List<DocVO> list = new ArrayList<DocVO>();
+//		list.addAll(BizRptSvc.getDocbyEmpId(empId));
+//		list.addAll(BizTpSvc.getDocbyEmpId(empId));
+//		list.addAll(PASvc.getDocbyEmpId(empId));
 
-	// READ -------------------------------
-//	@GetMapping(value = "/dd")
-//	public PageResultDTO<BizRptDTO, BusinessReport> getAlldd(PageRequestDTO pageRequestDTO) {
-//		PageResultDTO<BizRptDTO, BusinessReport> pageResultDTO = BizRptSvc.getList(pageRequestDTO);
-//		return pageResultDTO;
-//	}
-
-	@GetMapping(value = "/docs/{empId}")
-	public List<DocVO> getDocbyEmpId(@PathVariable("empId") String empId) {
+	@GetMapping(value = { "/empdocs/{empId}/{docStatus}" })
+	public List<DocVO> getDocbyEmpId(@PathVariable("empId") String empId, @PathVariable("docStatus") Byte docStatus) {
 		System.out.println(empId);
+		System.out.println(docStatus);
 		List<DocVO> list = new ArrayList<DocVO>();
-		list.addAll(BizRptSvc.getDoc(empId));
-		list.addAll(BizTpSvc.getDoc(empId));
-		list.addAll(PASvc.getDoc(empId));
+		list.addAll(BizRptSvc.getDocbyEmpIdAndDocStatus(empId, docStatus));
+		list.addAll(BizTpSvc.getDocbyEmpIdAndDocStatus(empId, docStatus));
+		list.addAll(PASvc.getDocbyEmpIdAndDocStatus(empId, docStatus));
+
+//		System.out.println(list); -> stackoverflow
+		return list;
+	}
+
+	@GetMapping(value = "/unitdocs/{unitCode}")
+	public List<DocVO> getDocbyUnitCode(@PathVariable("unitCode") String unitCode) {
+		List<DocVO> list = new ArrayList<DocVO>();
+		list.addAll(BizRptSvc.getDocbyUnitCode(unitCode));
+		list.addAll(BizTpSvc.getDocbyUnitCode(unitCode));
+		list.addAll(PASvc.getDocbyUnitCode(unitCode));
 
 		return list;
 	}
 
-	// UPDATE -------------------------------
-
-	// DELETE -------------------------------
-
-//	// CREATE -------------------------------
-//	// READ   -------------------------------
-////	@GetMapping(value = "/dd")
-////	public PageResultDTO<DTO, EN> getAlldd(PageRequestDTO pageRequestDTO) {
-////		PageResultDTO<DTO, EN> pageResultDTO = Svc.getList(pageRequestDTO);
-////		return pageResultDTO;
-////	}
-//	
 //	@GetMapping(value = "/dc")
 //	@GetMapping(value = "/ds")
 //	@GetMapping(value = "/dr")

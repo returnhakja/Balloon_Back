@@ -10,7 +10,9 @@ public interface BizRptSvc {
 
 //	public PageResultDTO<BizRptDTO, BusinessReport> getList(PageRequestDTO pageRequestDTO);
 
-	public List<DocVO> getDoc(String empId);
+	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte documentStatus);
+
+	public List<DocVO> getDocbyUnitCode(String unitCode);
 
 	public BizRptDTO getBizRptByBizRptId(String businessReportId);
 
