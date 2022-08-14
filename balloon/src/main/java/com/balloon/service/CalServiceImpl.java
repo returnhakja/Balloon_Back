@@ -32,7 +32,6 @@ public class CalServiceImpl implements CalService {
 	public CalDTO getCalByscheduleId(Long scheduleId) {
 		Cal calEntity = CalRepository.findAllByscheduleId(scheduleId);
 		CalDTO calDTO = new CalDTO();
-
 		calDTO = calEntity.toDTO(calEntity);
 		return calDTO;
 	}
@@ -50,11 +49,11 @@ public class CalServiceImpl implements CalService {
 
 	@Override
 	public void updateByCal(CalDTO requestDTO) throws Exception {
-		CalDTO calDTO = null;
+		System.out.println(requestDTO);
+		CalDTO calDTO = new CalDTO();
 		calDTO = getCalByscheduleId(requestDTO.getScheduleId());
-		if (calDTO == null) {
+		if (calDTO != null) {
 			Cal cal = calDTO.toEntity(calDTO);
-
 			cal.updateCal(requestDTO);
 			CalRepository.save(cal);
 		} else {

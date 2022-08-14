@@ -16,7 +16,7 @@ import com.balloon.vo.DocVO;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/boxes")
+@RequestMapping("/api/box")
 @RequiredArgsConstructor
 public class DocRestController {
 
