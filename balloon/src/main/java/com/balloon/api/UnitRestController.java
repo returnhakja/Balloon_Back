@@ -32,13 +32,13 @@ public class UnitRestController {
 	@GetMapping(value = "/unit/units")
 	public List<UnitDTO> findUnits() throws Exception {
 		try {
-			List<Unit> unitList = unitSvc.findUnitAll();
-			if (unitList == null) {
+			List<UnitDTO> unitDTOList = unitSvc.findUnitAll();
+			if (unitDTOList == null) {
 				throw new Exception("존재하는 조직이 없습니다.");
 			}
 
-			List<UnitDTO> unitDTOList = new ArrayList<UnitDTO>();
-			unitList.forEach(unitEntity -> unitDTOList.add(unitEntity.toDTO(unitEntity)));
+// 			List<UnitDTO> unitDTOList = new ArrayList<UnitDTO>();
+// 			unitList.forEach(unitEntity -> unitDTOList.add(unitEntity.toDTO(unitEntity)));
 			return unitDTOList;
 
 		} catch (Exception e) {
@@ -52,11 +52,11 @@ public class UnitRestController {
 			if (unitCode == null) {
 				throw new Exception("조직 번호를 입력받지 못습니다.");
 			}
-			Unit unitEntity = unitSvc.findUnitByUnitCode(unitCode);
-			if (unitEntity == null) {
-				throw new Exception("조직 번호가 존재하지 않습니다.");
-			}
-			return unitEntity.toDTO(unitEntity);
+			UnitDTO unitDTO = unitSvc.findUnitByUnitCode(unitCode);
+// 			if (unitEntity == null) {
+// 				throw new Exception("조직 번호가 존재하지 않습니다.");
+// 			}
+			return unitDTO;
 
 		} catch (Exception e) {
 			throw new Exception("조직 번호가 없습니다요.");
