@@ -6,9 +6,9 @@ import com.balloon.dto.UnitDTO;
 import com.balloon.entity.Unit;
 
 public interface UnitService {
-	public List<Unit> findUnitAll();
+	public List<UnitDTO> findUnitAll();
 	
-	public Unit findUnitByUnitCode(String unitCode);
+	public UnitDTO findUnitByUnitCode(String unitCode);
 	
 	public void insertUnit(UnitDTO unitDTO);
 	
