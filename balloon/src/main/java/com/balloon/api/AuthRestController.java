@@ -26,16 +26,6 @@ import lombok.RequiredArgsConstructor;
 public class AuthRestController {
 	private final AuthServiceImpl authSvc;
 
-//    @GetMapping("/loginPage")
-//    public String loginPage() {
-//    	return "loginPage.html";
-//    }
-//    
-//    @GetMapping("/accesDenied")
-//    public String accesDeniedPage() {
-//    	return "access Deny. but why?";
-//    }
-
 	@PostMapping(value = "/signup")
 	public ResponseEntity<EmpResponseDTO> signup(@Valid @RequestBody EmpRequestDTO requestDto)
 			throws JsonProcessingException {
