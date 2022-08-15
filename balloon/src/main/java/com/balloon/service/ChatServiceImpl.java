@@ -11,7 +11,6 @@ import com.balloon.dto.ChatDTO;
 import com.balloon.entity.Chat;
 import com.balloon.entity.Employee;
 import com.balloon.repository.ChatRepository;
-import com.balloon.repository.ChatroomRepository;
 import com.balloon.vo.MessageDTO;
 
 import lombok.RequiredArgsConstructor;
@@ -21,7 +20,6 @@ import lombok.RequiredArgsConstructor;
 public class ChatServiceImpl implements ChatService {
 
 	private final ChatRepository chatRepository;
-	private final ChatroomRepository chatroomRepository;
 
 	@Override
 	@Transactional
