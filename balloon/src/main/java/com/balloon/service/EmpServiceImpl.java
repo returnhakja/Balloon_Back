@@ -94,7 +94,6 @@ public class EmpServiceImpl implements EmpService {
 		return empRepo.findEmpListInUnitCode(unitCode);
 	}
 
-
 	@Override
 	public List<EmpDTO> findEmpListInSameUnit(String empId) {
 
@@ -108,6 +107,11 @@ public class EmpServiceImpl implements EmpService {
 
 		return empDTOList;
 
+	}
+
+	@Override
+	public void deleteByEmpId(String empId) {
+		empRepo.deleteById(empId);
 	}
 
 	/* site 참조 */

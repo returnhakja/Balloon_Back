@@ -7,6 +7,7 @@ import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -132,6 +133,20 @@ public class EmpRestController {
 		}
 	}
 
+	// delete
+	@DeleteMapping("/emp/delete/{empId}")
+	public void deleteByEmpId(@Valid @PathVariable String empId) {
+		try {
+			if (empId == null) {
+				throw new Exception("empId 값이 들어오지 않음.");
+			} else {
+				empSvc.deleteByEmpId(empId);
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+	}
+
 //	  private UserMapper userMapper;
 //	  private Bcrypt bcrypt;
 //
@@ -169,16 +184,7 @@ public class EmpRestController {
 //	    return new ResponseEntity<>(map, HttpStatus.OK);
 //	  }
 //
-//	  // delete
-//	  @PostMapping("/delete") 
-//	  public ResponseEntity<Map<String,String>> DeleteUser(@RequestBody User req) {
-//	    userMapper.Delete(req);
-//	    
-//	    Map<String,String> map = new HashMap<>();
-//	    map.put("result", "success");
-//
-//	    return new ResponseEntity<>(map, HttpStatus.OK);
-//	  }
+//	
 //
 //
 //	  @GetMapping("/hello") // get /api/hello
