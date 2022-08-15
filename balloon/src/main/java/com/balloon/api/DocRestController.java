@@ -24,14 +24,6 @@ public class DocRestController {
 	private final BizTpSvcImpl BizTpSvc;
 	private final PASvcImpl PASvc;
 
-//	@GetMapping(value = "/empdocs/{empId}")
-//	public List<DocVO> getDocbyEmpId(@PathVariable("empId") String empId) {
-//		System.out.println(empId);
-//		List<DocVO> list = new ArrayList<DocVO>();
-//		list.addAll(BizRptSvc.getDocbyEmpId(empId));
-//		list.addAll(BizTpSvc.getDocbyEmpId(empId));
-//		list.addAll(PASvc.getDocbyEmpId(empId));
-
 	@GetMapping(value = { "/empdocs/{empId}/{docStatus}" })
 	public List<DocVO> getDocbyEmpId(@PathVariable("empId") String empId, @PathVariable("docStatus") Byte docStatus) {
 		System.out.println(empId);
