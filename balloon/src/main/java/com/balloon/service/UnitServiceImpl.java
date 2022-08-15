@@ -20,14 +20,23 @@ public class UnitServiceImpl implements UnitService{
 	
 	@Transactional
 	@Override
-	public List<Unit> findUnitAll(){
-		return unitRepo.findAll();
+	public List<UnitDTO> findUnitAll(){
+		List<Unit> unitList = unitRepo.findAll();
+		List<UnitDTO> unitDTOList = new ArrayList<UnitDTO>();
+		unitList.forEach(unitEntity -> unitDTOList.add(unitEntity.toDTO(unitEntity)));
+		
+		return unitDTOList;
 	}
 
 	@Transactional
 	@Override
-	public Unit findUnitByUnitCode(String unitCode) {
-		return unitRepo.findUnitByUnitCode(unitCode);
+	public UnitDTO findUnitByUnitCode(String unitCode) {
+		Unit unitEntity = unitRepo.findUnitByUnitCode(unitCode);
+		if (unitEntity == null) {
+				throw new Exception("조직 번호가 존재하지 않습니다.");
+			}
+		UnitDTO unitDTO = unitEntity.toDTO(unitEntity)
+		return unitDTO;
 	};
 
 	@Transactional
