@@ -18,4 +18,6 @@ public interface CalService {
 
 	public List<CalDTO> getCalByempId(String empId);
 
+	public void scheduleListAdd(List<CalDTO> calDTOs);
+
 }
