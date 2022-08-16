@@ -28,27 +28,27 @@ public class EmpRequestDTO {
 
 	private String position;
 	
-	private String mobile;
-	
-	private LocalDate hiredate;
+	private String responsibility;
 	
 	private Float salary;
 	
 	private Float commission;
 	
-	private String empMail;
-	
-	private String photo;
+	private LocalDate hiredate;
 	
 	private String empBell;
+
+	private String empMail;
+	
+	private String mobile;
+	
+	private String photo;
 	
 	private LocalDate birthday;
 	
 	private String address;
 	
 	private String licensePlate;
-	
-	private String responsibility;
 	
 	private Unit unit;
 	
@@ -70,16 +70,20 @@ public class EmpRequestDTO {
 				.empId(empId)
 				.password(passwordEncoder.encode(password))
 				.empName(empName)
-				.salary(salary)
-				.commission(commission)
-				.unit(unit)
-				.empBell(empBell)
 				.position(position)
 				.responsibility(responsibility)
-				.mobile(mobile)
-				.empMail(empMail)
+				.salary(salary)
+				.commission(commission)
 				.hiredate(hiredate)
+				.unit(unit)
+				.empBell(empBell)
+				.empMail(empMail)
+				.mobile(mobile)
 				.userRoleGrade(userRoleGrade)
+				.birthday(birthday)
+				.address(address)
+				.licensePlate(licensePlate)
+				.photo(photo)
 				.build();
 	}
 	

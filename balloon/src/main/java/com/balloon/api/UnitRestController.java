@@ -1,6 +1,5 @@
 package com.balloon.api;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,16 +29,16 @@ public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;
 
-	@GetMapping(value="/unit/units")
+	@GetMapping(value = "/unit/units")
 	public List<UnitDTO> findUnits() throws Exception {
 		try {
-			List<Unit> unitList = unitSvc.findUnitAll();
-			if (unitList == null) {
+			List<UnitDTO> unitDTOList = unitSvc.findUnitAll();
+			if (unitDTOList == null) {
 				throw new Exception("존재하는 조직이 없습니다.");
 			}
-			
-			List<UnitDTO> unitDTOList = new ArrayList<UnitDTO>();
-			unitList.forEach(unitEntity -> unitDTOList.add(unitEntity.toDTO(unitEntity)));
+
+// 			List<UnitDTO> unitDTOList = new ArrayList<UnitDTO>();
+// 			unitList.forEach(unitEntity -> unitDTOList.add(unitEntity.toDTO(unitEntity)));
 			return unitDTOList;
 
 		} catch (Exception e) {
@@ -47,29 +46,45 @@ public class UnitRestController {
 		}
 	}
 
-	@GetMapping(value="/unit/{unitCode}")
-	public UnitDTO findUnitByUnitCode(@Valid @PathVariable String unitCode) throws Exception{
+	@GetMapping(value = "/unit/{unitCode}")
+	public UnitDTO findUnitByUnitCode(@Valid @PathVariable String unitCode) throws Exception {
 		try {
 			if (unitCode == null) {
 				throw new Exception("조직 번호를 입력받지 못습니다.");
 			}
-			Unit unitEntity = unitSvc.findUnitByUnitCode(unitCode);
-			if(unitEntity == null) {
-				throw new Exception("조직 번호가 존재하지 않습니다.");
-			}
-			return unitEntity.toDTO(unitEntity);
-
+			UnitDTO unitDTO = unitSvc.findUnitByUnitCode(unitCode);
+// 			if (unitEntity == null) {
+// 				throw new Exception("조직 번호가 존재하지 않습니다.");
+// 			}
+			return unitDTO;
 
 		} catch (Exception e) {
 			throw new Exception("조직 번호가 없습니다요.");
 		}
 	}
 
+//	@GetMapping(value = "/childs/")
+//	public UnitDTO findChildUnitByUnitCode(@RequestBody List<UnitDTO> unitDTOList) throws Exception {
+//		try {
+//			if (unitDTOList == null) {
+//				throw new Exception("조직을 입력받지 못습니다.");
+//			}
+//			List<Unit> unitList = unitSvc.findChildUnitByUnitCode(unitDTOList);
+//			if (unitList == null) {
+//				throw new Exception("조직 번호가 존재하지 않습니다.");
+//			}
+//			return unitList.toDTO(unitList);
+//
+//		} catch (Exception e) {
+//			throw new Exception("조직 번호가 없습니다요.");
+//		}
+//	}
+
 	@PostMapping(value = "/unit", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void insertUnit(@Valid @RequestBody UnitDTO unitDTO) throws Exception {
 		try {
 			try {
-				if(unitDTO == null) {
+				if (unitDTO == null) {
 					throw new Exception("입력받은 조직 추가 정보가 없습니다.");
 				}
 				unitSvc.insertUnit(unitDTO);
@@ -86,9 +101,9 @@ public class UnitRestController {
 	public void updateUnit(@RequestBody UnitDTO unitDTO) throws Exception {
 		try {
 			try {
-				if(unitDTO == null) {
+				if (unitDTO == null) {
 					throw new Exception("입력받은 조직 수정 정보가 없습니다.");
-				} 
+				}
 				unitSvc.updateUnit(unitDTO);
 
 			} catch (Exception e) {
@@ -102,16 +117,15 @@ public class UnitRestController {
 	@DeleteMapping(value = "/unit/{unitCode}")
 	public void deleteUnitByUnitCode(@PathVariable String unitCode) throws Exception {
 		try {
-			if(unitCode == null) {
+			if (unitCode == null) {
 				throw new Exception("입력받은 조직번호가 없습니다.");
-			} 
+			}
 			UnitDTO unitDTO = new UnitDTO();
 			unitDTO = findUnitByUnitCode(unitCode);
 			if (unitDTO == null) {
 				throw new Exception("입력한 조직번호에 해당하는 조직이 존재하지 않습니다.");
 			}
 			unitSvc.deleteUnitByUnitCode(unitCode);
-
 
 		} catch (Exception e) {
 			e.getMessage();
