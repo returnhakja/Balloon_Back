@@ -32,7 +32,6 @@ public class CalServiceImpl implements CalService {
 	public CalDTO getCalByscheduleId(Long scheduleId) {
 		Cal calEntity = CalRepository.findAllByscheduleId(scheduleId);
 		CalDTO calDTO = new CalDTO();
-
 		calDTO = calEntity.toDTO(calEntity);
 		return calDTO;
 	}
@@ -46,15 +45,16 @@ public class CalServiceImpl implements CalService {
 	public void insertBycal(CalDTO calDTO) {
 		Cal calEntity = calDTO.toEntity(calDTO);
 		CalRepository.save(calEntity);
+//		CalRepository.saveAll(calEntity);
 	}
 
 	@Override
 	public void updateByCal(CalDTO requestDTO) throws Exception {
-		CalDTO calDTO = null;
+		System.out.println(requestDTO);
+		CalDTO calDTO = new CalDTO();
 		calDTO = getCalByscheduleId(requestDTO.getScheduleId());
-		if (calDTO == null) {
+		if (calDTO != null) {
 			Cal cal = calDTO.toEntity(calDTO);
-
 			cal.updateCal(requestDTO);
 			CalRepository.save(cal);
 		} else {
@@ -78,4 +78,15 @@ public class CalServiceImpl implements CalService {
 
 	}
 
+	@Override
+	public void scheduleListAdd(List<CalDTO> calDTOs) {
+		List<Cal> calEntityList = new ArrayList<Cal>();
+		for (CalDTO calDTO : calDTOs) {
+			calEntityList.add(calDTO.toEntity(calDTO));
+		}
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(calEntityList);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		CalRepository.saveAll(calEntityList);
+	}
 }
