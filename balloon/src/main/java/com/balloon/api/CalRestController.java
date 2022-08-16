@@ -50,12 +50,18 @@ public class CalRestController {
 
 	@PostMapping(value = "/cal/insert", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public void CalByInsert(@Valid @RequestBody CalDTO calDTO) {
-
+		System.out.println(calDTO);
 		calService.insertBycal(calDTO);
+	}
+
+	@PostMapping(value = "/cal/schedule", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public void scheduleListAdd(@RequestBody List<CalDTO> calDTOs) {
+		calService.scheduleListAdd(calDTOs);
 	}
 
 	@PutMapping(value = "/cal/update", consumes = { MediaType.APPLICATION_JSON_VALUE })
 	public void updateCalByscheduleId(@RequestBody CalDTO calDTO) {
+		System.out.println(calDTO);
 		try {
 			calService.updateByCal(calDTO);
 		} catch (Exception e) {

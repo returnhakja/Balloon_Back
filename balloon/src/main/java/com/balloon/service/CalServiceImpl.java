@@ -45,6 +45,7 @@ public class CalServiceImpl implements CalService {
 	public void insertBycal(CalDTO calDTO) {
 		Cal calEntity = calDTO.toEntity(calDTO);
 		CalRepository.save(calEntity);
+//		CalRepository.saveAll(calEntity);
 	}
 
 	@Override
@@ -77,4 +78,15 @@ public class CalServiceImpl implements CalService {
 
 	}
 
+	@Override
+	public void scheduleListAdd(List<CalDTO> calDTOs) {
+		List<Cal> calEntityList = new ArrayList<Cal>();
+		for (CalDTO calDTO : calDTOs) {
+			calEntityList.add(calDTO.toEntity(calDTO));
+		}
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(calEntityList);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		CalRepository.saveAll(calEntityList);
+	}
 }
