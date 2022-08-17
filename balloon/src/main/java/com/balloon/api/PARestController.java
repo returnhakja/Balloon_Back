@@ -43,7 +43,7 @@ public class PARestController {
 
 	// READ ---------------------------------
 	@GetMapping(value = "/pa/{PAId}")
-	public PADTO getPAByEmpId(@PathVariable("PAId") String PAId) {
+	public PADTO getPAByPAId(@PathVariable("PAId") String PAId) {
 		return PASvc.getPAByPAId(PAId);
 	}
 
