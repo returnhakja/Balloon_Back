@@ -41,7 +41,7 @@ public class ChatREmpRestController {
 //	}
 
 	@PostMapping(value = "/insertChatEmp/{chatroomId}")
-	public Employee insertChatEmp(@PathVariable(name = "chatroomId") Long chatroomId,
+	public Employee insertChatEmpList(@PathVariable(name = "chatroomId") Long chatroomId,
 			@RequestBody List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
 		// 채팅방 id 값 넣기
 		ChatroomDTO chatroomDTO = new ChatroomDTO();
@@ -52,6 +52,27 @@ public class ChatREmpRestController {
 			chatroomEmpDto.setChatroomId(chatroomDTO);
 		}
 		return chatREmpServicImpl.getInsertChatEmp(chatroomEmployeeDTO);
+	}
+
+	// 일정등록 시 chatroomEmployee에 만들어진 chatroomId와 empId를 넣어주는 메소드
+	@PostMapping(value = "/insertSch/{chatroomId}")
+	public Employee insertChatEmp(@PathVariable(name = "chatroomId") Long chatroomId,
+			@RequestBody ChatroomEmployeeDTO chatroomEmployeeDTO) {
+
+		ChatroomDTO chatroomDTO = new ChatroomDTO();
+		chatroomDTO.setChatroomId(chatroomId);
+//		EmpDTO empDTO = new EmpDTO();
+//		empDTO.setEmpId(empId);
+		chatroomEmployeeDTO.setChatroomId(chatroomDTO);
+//		ChatroomEmployeeDTO chatroomEmpDTO = new ChatroomEmployeeDTO();
+//		chatroomEmpDTO.setChatroomId(chatroomDTO);
+//		chatroomEmpDTO.setEmpId(empDTO);
+//		System.out.println(chatroomDTO);
+//		System.out.println(chatroomEmpDTO);
+		System.out.println(chatroomEmployeeDTO);
+
+		return chatREmpServicImpl.getInsertSchChat(chatroomEmployeeDTO);
+//		return null;
 	}
 
 	@DeleteMapping(value = "/deleteroom/{chatroomId}/{empId}")

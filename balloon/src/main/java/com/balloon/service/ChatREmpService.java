@@ -19,4 +19,6 @@ public interface ChatREmpService {
 	public void getdeleteChatroom(Long chatroomId, String empId);
 
 	public Employee getInsertChatEmp(List<ChatroomEmployeeDTO> chatroomEmployeeDTO);
+
+	public Employee getInsertSchChat(ChatroomEmployeeDTO chatroomEmployeeDTO);
 }

@@ -14,6 +14,7 @@ import com.balloon.entity.ChatroomEmployee;
 import com.balloon.entity.ChatroomEmployeeId;
 import com.balloon.entity.Employee;
 import com.balloon.repository.ChatREmpRepository;
+import com.balloon.repository.ChatroomRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +23,7 @@ import lombok.RequiredArgsConstructor;
 public class ChatREmpServiceImpl implements ChatREmpService {
 
 	private final ChatREmpRepository chatREmpRepository;
+	private final ChatroomRepository chatroomRepository;
 
 	@Override
 	@Transactional
@@ -67,6 +69,37 @@ public class ChatREmpServiceImpl implements ChatREmpService {
 //			chatroomRepository.save(chatroomDTO.toEntity(chatroomDTO));
 //	}return emp;
 		return null;
+	}
+
+	@Override
+	@Transactional
+	public Employee getInsertSchChat(ChatroomEmployeeDTO chatroomEmployeeDTO) {
+
+//		ChatroomDTO chatroomDTO = new ChatroomDTO();
+//		Chatroom chatroomEntity = chatroomDTO.toEntity(chatroomDTO);
+//
+//		EmpDTO empDTO = new EmpDTO();
+//		Employee empEntity = empDTO.toEntity(empDTO);
+
+		ChatroomEmployee chatroomEmployeeEntity = chatroomEmployeeDTO.toEntity(chatroomEmployeeDTO);
+		return chatREmpRepository.save(chatroomEmployeeEntity).getEmpId();
+
+//		ChatroomEmployee chatroomEmployeeEntity = chatroomEmployeeDTO.toEntity(chatroomEmployeeDTO);
+//		Employee emp = chatREmpRepository.save(chatroomEmployeeEntity).getEmpId();
+//		if (emp != null) {
+//			Chatroom chatroomId = chatroomRepository.findById(chatroomEmployeeDTO.getChatroomId().getChatroomId())
+//					.get();
+//			ChatroomDTO chatroomDTO = new ChatroomDTO();
+//			chatroomDTO.setChatroomId(chatroomId.getChatroomId());
+//			chatroomDTO.setChatroomName(chatroomId.getChatroomName());
+//			chatroomDTO.setHeadCount(chatroomId.getHeadCount());
+//
+//			chatroomRepository.save(chatroomDTO.toEntity(chatroomDTO));
+//			System.out.println(chatroomDTO);
+//			System.out.println(chatroomEmployeeDTO);
+//		}
+
+//		return null;
 	}
 
 	@Override
