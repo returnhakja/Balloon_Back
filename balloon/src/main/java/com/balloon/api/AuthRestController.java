@@ -1,5 +1,7 @@
 package com.balloon.api;
 
+import java.util.List;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
@@ -31,8 +33,19 @@ public class AuthRestController {
 			throws JsonProcessingException {
 		System.out.println(requestDto);
 		try {
-
 			return ResponseEntity.ok(authSvc.signup(requestDto));
+		} catch (Exception e) {
+			e.getMessage();
+		}
+		return null;
+	}
+
+	@PostMapping(value = "/signuplist")
+	public ResponseEntity<EmpResponseDTO> signupList(@Valid @RequestBody List<EmpRequestDTO> requestDtoList)
+			throws JsonProcessingException {
+		System.out.println(requestDtoList);
+		try {
+			return ResponseEntity.ok(authSvc.signupList(requestDtoList));
 		} catch (Exception e) {
 			e.getMessage();
 		}
