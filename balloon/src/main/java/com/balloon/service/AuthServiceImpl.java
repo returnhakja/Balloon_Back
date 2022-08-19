@@ -1,5 +1,6 @@
 package com.balloon.service;
 
+import java.util.List;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -39,11 +40,24 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
+	public EmpResponseDTO signupList(List<EmpRequestDTO> requestDtoList) {
+
+		System.out.println(requestDtoList);
+//		if ((empRepo.existsEmpByEmpId(requestDto.getEmpId())) == true) {
+//			throw new RuntimeException("이미 가입되어 있는 유저입니다");
+//		} else {
+//			Employee employee = requestDto.toEmployee(passwordEncoder);
+//			return EmpResponseDTO.of(empRepo.save(employee));
+//		}
+		return null;
+
+	}
+
+	@Override
 	public TokenDTO login(EmpRequestDTO requestDto) {
 		UsernamePasswordAuthenticationToken authenticationToken = requestDto.toAuthentication();
 		Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);
 		return tokenProvider.generateTokenDTO(authentication);
 	}
-	
 
 }
