@@ -45,11 +45,11 @@ public class ChatroomRestController {
 		return chatroomServiceImpl.getCreateChatroom(chatroomDTO);
 	}
 
+	// 일정을 공유할 사원만큼 채팅방을 생성하는 코드
 	@PostMapping(value = "/createSchChatroom")
 	public List<Chatroom> createSchChatroom(@RequestBody List<ChatroomDTO> chatroomDTO) {
 		System.out.println(chatroomDTO);
 		return chatroomServiceImpl.getCreateSchroom(chatroomDTO);
-//		return null;
 	}
 
 	@PutMapping(value = "/updateroom/{chatroomId}")

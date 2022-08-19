@@ -41,11 +41,7 @@ public class ChatroomServiceImpl implements ChatroomService {
 	@Override
 	@Transactional
 	public List<Chatroom> getCreateSchroom(List<ChatroomDTO> chatroomDTO) {
-//		for (ChatroomEmployeeDTO chatEmpDto : chatroomEmployeeDTO) {
-//			chatroomEmployeeEntity.add(chatEmpDto.toEntity(chatEmpDto));
-//		}
 		List<Chatroom> chatroomEntity = new ArrayList<Chatroom>();
-//		Chatroom chatroomEntity = chatroomDTO.toEntity(chatroomDTO);
 		for (ChatroomDTO chatroomDto : chatroomDTO) {
 			chatroomEntity.add(chatroomDto.toEntity(chatroomDto));
 		}
