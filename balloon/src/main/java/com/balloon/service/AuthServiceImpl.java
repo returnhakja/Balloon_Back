@@ -1,5 +1,6 @@
 package com.balloon.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,17 +41,29 @@ public class AuthServiceImpl implements AuthService {
 	}
 
 	@Override
-	public EmpResponseDTO signupList(List<EmpRequestDTO> requestDtoList) {
+	public boolean signupList(List<EmpRequestDTO> requestDtoList) {
 
-		System.out.println(requestDtoList);
 //		if ((empRepo.existsEmpByEmpId(requestDto.getEmpId())) == true) {
 //			throw new RuntimeException("이미 가입되어 있는 유저입니다");
 //		} else {
 //			Employee employee = requestDto.toEmployee(passwordEncoder);
 //			return EmpResponseDTO.of(empRepo.save(employee));
 //		}
-		return null;
+		if (requestDtoList != null) {
+			System.out.println(requestDtoList);
 
+			List<Employee> empList = new ArrayList<Employee>();
+
+			// unitList.forEach(unitEntity ->
+			// unitDTOList.add(unitEntity.toDTO(unitEntity)));
+
+			requestDtoList.forEach(empDto -> empList.add(empDto.toEmployee(passwordEncoder)));
+
+			empRepo.saveAll(empList);
+			return true;
+		}
+
+		return false;
 	}
 
 	@Override
