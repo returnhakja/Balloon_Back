@@ -10,7 +10,7 @@ public interface AuthService {
 
 	public EmpResponseDTO signup(EmpRequestDTO requestDto);
 
-	public EmpResponseDTO signupList(List<EmpRequestDTO> requestDtoList);
+	public boolean signupList(List<EmpRequestDTO> requestDtoList);
 
 	public TokenDTO login(EmpRequestDTO requestDto);
 
