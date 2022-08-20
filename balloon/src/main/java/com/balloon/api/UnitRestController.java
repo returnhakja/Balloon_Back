@@ -1,6 +1,5 @@
 package com.balloon.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.UnitDTO;
-import com.balloon.entity.Unit;
 import com.balloon.service.UnitServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -95,6 +93,20 @@ public class UnitRestController {
 		} catch (Exception e) {
 			e.getMessage();
 		}
+	}
+
+	@PostMapping(value = "/unitlist", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public Boolean insertUnitList(@Valid @RequestBody List<UnitDTO> unitDtoList) {
+		try {
+			if (unitDtoList == null) {
+				throw new Exception("입력받은 값이 없습니다.");
+
+			}
+		} catch (Exception e) {
+			e.getMessage();
+		}
+
+		return null;
 	}
 
 	@PutMapping(value = "/unit", consumes = MediaType.APPLICATION_JSON_VALUE)

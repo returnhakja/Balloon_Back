@@ -60,6 +60,7 @@ public class AuthServiceImpl implements AuthService {
 			requestDtoList.forEach(empDto -> empList.add(empDto.toEmployee(passwordEncoder)));
 
 			empRepo.saveAll(empList);
+			System.out.println("sssssssssssssssssssssssssssssssssssssssss");
 			return true;
 		}
 
