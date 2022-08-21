@@ -12,7 +12,7 @@ public interface ChatREmpService {
 
 	public List<ChatroomEmployee> getChatroomEmp(Long chatroomId);
 
-	public ChatroomEmployee getoneChatEmp(Long chatroomId);
+	public ChatroomEmployee getBotchatroom(String empId);
 
 //	public Employee getInsertChatEmp(ChatroomEmployeeDTO chatroomEmployeeDTO);
 

@@ -14,7 +14,6 @@ import com.balloon.entity.ChatroomEmployee;
 import com.balloon.entity.ChatroomEmployeeId;
 import com.balloon.entity.Employee;
 import com.balloon.repository.ChatREmpRepository;
-import com.balloon.repository.ChatroomRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 public class ChatREmpServiceImpl implements ChatREmpService {
 
 	private final ChatREmpRepository chatREmpRepository;
-	private final ChatroomRepository chatroomRepository;
 
 	@Override
 	@Transactional
@@ -38,8 +36,8 @@ public class ChatREmpServiceImpl implements ChatREmpService {
 
 	@Override
 	@Transactional
-	public ChatroomEmployee getoneChatEmp(Long chatroomId) {
-		return chatREmpRepository.findChatroomEmployeeBychatroomId(chatroomId);
+	public ChatroomEmployee getBotchatroom(String empId) {
+		return chatREmpRepository.findChatroomEmployeeByempId(empId);
 	}
 
 	@Override
@@ -114,10 +112,9 @@ public class ChatREmpServiceImpl implements ChatREmpService {
 		empDTO.setEmpId(empId);
 		chatroomEmployeeDTO.setEmpId(empDTO);
 
-		System.out.println(chatroomEmployeeDTO);
-
 		ChatroomEmployeeId chatroomEmployeeIdEntity = chatroomEmployeeDTO.toId(chatroomEmployeeDTO);
 		chatREmpRepository.deleteById(chatroomEmployeeIdEntity);
+
 	}
 
 }
