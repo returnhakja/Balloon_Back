@@ -66,4 +66,11 @@ public class BizTpSvcImpl implements BizTpSvc {
 		bizTpRepo.deleteById(bizTpId);
 	}
 
+	@Override
+	public BizTpDTO getBizTpWD() {
+		BusinessTripPlan businessTripPlan = bizTpRepo.findTopByOrderByWriteDateDesc();
+		BizTpDTO bizTpDTO = businessTripPlan.toDTO(businessTripPlan);
+		return bizTpDTO;
+	}
+
 }

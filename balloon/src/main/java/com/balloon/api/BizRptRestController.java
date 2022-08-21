@@ -28,7 +28,7 @@ public class BizRptRestController {
 		bizRptDTO.setBusinessReportId(bizRptDTO.getBusinessReportId());
 		bizRptDTO.setDocumentTitle(bizRptDTO.getDocumentTitle());
 		bizRptDTO.setDocumentContent(bizRptDTO.getDocumentContent());
-		bizRptDTO.setDocumentStatus((byte) 1);
+		bizRptDTO.setDocumentStatus(bizRptDTO.getDocumentStatus());
 		bizRptDTO.setEmpName(bizRptDTO.getEmpName());
 		bizRptDTO.setPosition(bizRptDTO.getPosition());
 		bizRptDTO.setUnitName(bizRptDTO.getUnitName());
@@ -42,6 +42,11 @@ public class BizRptRestController {
 	@GetMapping(value = "/bizrpt/{bizRptId}")
 	public BizRptDTO getBizRptByBisRptId(@PathVariable("bizRptId") String bizRptId) {
 		return BizRptSvc.getBizRptByBizRptId(bizRptId);
+	}
+
+	@GetMapping(value = "/bizrpt/wd")
+	public BizRptDTO getLatestBizRpt() {
+		return BizRptSvc.getBizRptWD();
 	}
 
 	// UPDATE -------------------------------

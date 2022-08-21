@@ -66,7 +66,7 @@ public class BusinessTripPlan {
 	private String position;
 
 	@CreatedDate
-	@Column(name = "write_date")
+	@Column(name = "write_date", updatable = false)
 	private LocalDateTime writeDate;
 
 	@LastModifiedDate

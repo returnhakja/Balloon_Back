@@ -75,4 +75,11 @@ public class BizRptSvcImpl implements BizRptSvc {
 		bizRptRepo.deleteById(bizRptId);
 	}
 
+	@Override
+	public BizRptDTO getBizRptWD() {
+		BusinessReport businessReport = bizRptRepo.findTopByOrderByWriteDateDesc();
+		BizRptDTO bizRptDTO = businessReport.toDTO(businessReport);
+		return bizRptDTO;
+	}
+
 }
