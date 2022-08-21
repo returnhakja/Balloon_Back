@@ -28,7 +28,7 @@ public class PARestController {
 		paDTO.setPersonnelAppointmentId(paDTO.getPersonnelAppointmentId());
 		paDTO.setDocumentTitle(paDTO.getDocumentTitle());
 		paDTO.setDocumentContent(paDTO.getDocumentContent());
-		paDTO.setDocumentStatus((byte) 1);
+		paDTO.setDocumentStatus(paDTO.getDocumentStatus());
 		paDTO.setPersonnelDate(paDTO.getPersonnelDate());
 		paDTO.setPosition(paDTO.getPosition());
 		paDTO.setUnitName(paDTO.getUnitName());
@@ -45,6 +45,11 @@ public class PARestController {
 	@GetMapping(value = "/pa/{PAId}")
 	public PADTO getPAByPAId(@PathVariable("PAId") String PAId) {
 		return PASvc.getPAByPAId(PAId);
+	}
+
+	@GetMapping(value = "/pa/wd")
+	public PADTO getLatestPA() {
+		return PASvc.getPAWD();
 	}
 
 	// UPDATE -------------------------------
