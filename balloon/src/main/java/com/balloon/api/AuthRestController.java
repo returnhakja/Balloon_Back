@@ -42,19 +42,12 @@ public class AuthRestController {
 
 	@PostMapping(value = "/signuplist")
 	public Boolean signupList(@Valid @RequestBody List<EmpRequestDTO> requestDtoList) throws JsonProcessingException {
-		System.out.println(requestDtoList);
 		try {
 			if (requestDtoList == null) {
 				throw new Exception("입력받은 값이 없습니다.");
 			}
 			boolean signupChk = authSvc.signupList(requestDtoList);
-			if (signupChk == true) {
-				return signupChk;
-
-			} else {
-
-				return signupChk;
-			}
+			return signupChk;
 		} catch (Exception e) {
 			e.getMessage();
 		}
