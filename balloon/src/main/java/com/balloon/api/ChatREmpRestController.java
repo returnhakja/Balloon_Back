@@ -35,10 +35,10 @@ public class ChatREmpRestController {
 		return chatREmpServicImpl.getChatroomEmp(chatroomId);
 	}
 
-//	@GetMapping(value = "/OneChatEmp/{chatroomId}")
-//	public ChatroomEmployee oneChatEmp(Long chatroomId) {
-//		return chatREmpServicImpl.getoneChatEmp(chatroomId);
-//	}
+	@GetMapping(value = "/botChatroom/{empId}")
+	public ChatroomEmployee calendarBot(@PathVariable(value = "empId") String empId) {
+		return chatREmpServicImpl.getBotchatroom(empId);
+	}
 
 	@PostMapping(value = "/insertChatEmp/{chatroomId}")
 	public Employee insertChatEmpList(@PathVariable(name = "chatroomId") Long chatroomId,
