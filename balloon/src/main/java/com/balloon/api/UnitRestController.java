@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-//@CrossOrigin(origins = {"http://localhost:3000", "http://localhost:4000"}, allowedHeaders = "*")
+@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" }, allowedHeaders = "*")
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;
@@ -100,12 +101,12 @@ public class UnitRestController {
 		try {
 			if (unitDtoList == null) {
 				throw new Exception("입력받은 값이 없습니다.");
-
 			}
+			boolean insertChk = unitSvc.insertUnitList(unitDtoList);
+			return insertChk;
 		} catch (Exception e) {
 			e.getMessage();
 		}
-
 		return null;
 	}
 
@@ -132,6 +133,8 @@ public class UnitRestController {
 			if (unitCode == null) {
 				throw new Exception("입력받은 조직번호가 없습니다.");
 			}
+			System.out.println("111111111111111111111111111111111111111111111111111111");
+			System.out.println(unitCode);
 			UnitDTO unitDTO = new UnitDTO();
 			unitDTO = findUnitByUnitCode(unitCode);
 			if (unitDTO == null) {

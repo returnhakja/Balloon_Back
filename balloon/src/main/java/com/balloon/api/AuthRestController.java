@@ -47,14 +47,7 @@ public class AuthRestController {
 				throw new Exception("입력받은 값이 없습니다.");
 			}
 			boolean signupChk = authSvc.signupList(requestDtoList);
-			System.out.println("dddddddddddddddddddddddddddddddddddddddddddddddddddddddd");
-			System.out.println(signupChk);
-			if (signupChk == true) {
-				return signupChk;
-
-			} else {
-				return signupChk;
-			}
+			return signupChk;
 		} catch (Exception e) {
 			e.getMessage();
 		}
