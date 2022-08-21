@@ -28,7 +28,7 @@ public class BizTpRestController {
 		bizTpDTO.setBusinessTripId(bizTpDTO.getBusinessTripId());
 		bizTpDTO.setDocumentTitle(bizTpDTO.getDocumentTitle());
 		bizTpDTO.setDocumentContent(bizTpDTO.getDocumentContent());
-		bizTpDTO.setDocumentStatus((byte) 1);
+		bizTpDTO.setDocumentStatus(bizTpDTO.getDocumentStatus());
 		bizTpDTO.setStartDate(bizTpDTO.getStartDate());
 		bizTpDTO.setEndDate(bizTpDTO.getEndDate());
 		bizTpDTO.setDestination(bizTpDTO.getDestination());
@@ -46,6 +46,11 @@ public class BizTpRestController {
 	@GetMapping(value = "/biztp/{bizTpId}")
 	public BizTpDTO getBizTpByBizTpId(@PathVariable("bizTpId") String bizTpId) {
 		return BizTpSvc.getBizTpByBizTpId(bizTpId);
+	}
+
+	@GetMapping(value = "/biztp/wd")
+	public BizTpDTO getLatestBizTp() {
+		return BizTpSvc.getBizTpWD();
 	}
 
 	// UPDATE -------------------------------
