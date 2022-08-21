@@ -62,7 +62,6 @@ public class AuthRestController {
 		if (tokenDTO != null) {
 			// 로그인 완료 후 토큰을 cookie에 넣어주기
 			Cookie createCookie = new Cookie("accessToken", tokenDTO.getAccessToken());
-
 			createCookie.setMaxAge(5 * 60 * 60); // 시간 분 초
 			createCookie.setPath("/");
 			response.addCookie(createCookie);

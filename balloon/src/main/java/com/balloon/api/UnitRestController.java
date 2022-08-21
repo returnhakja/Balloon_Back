@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-@CrossOrigin(origins = { "http://localhost:3000", "http://localhost:4000" }, allowedHeaders = "*")
+@CrossOrigin(origins = { "http://localhost:3000" }, allowedHeaders = "*")
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;

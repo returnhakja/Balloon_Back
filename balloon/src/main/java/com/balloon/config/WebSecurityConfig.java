@@ -56,9 +56,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 				.antMatchers(HttpMethod.POST, "/auth/login").permitAll().antMatchers(HttpMethod.GET, "/api/unit/**")
 				.permitAll().antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")
-				.antMatchers(HttpMethod.POST, "/api/unit/**").hasRole("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/api/unit/**").hasRole("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/api/unit").hasRole("ADMIN").anyRequest().authenticated();
+				.antMatchers(HttpMethod.POST, "/api/unitlist").hasRole("ADMIN")
+				.antMatchers(HttpMethod.DELETE, "/api/unit/**").hasRole("ADMIN").anyRequest().authenticated();
 
 		http.logout().permitAll();
 
