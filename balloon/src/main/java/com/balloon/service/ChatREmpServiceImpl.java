@@ -36,9 +36,12 @@ public class ChatREmpServiceImpl implements ChatREmpService {
 
 	@Override
 	@Transactional
-	public ChatroomEmployee getBotchatroom(String empId) {
+	public List<ChatroomEmployee> getBotchatroom(List<String> empId) {
 		return chatREmpRepository.findChatroomEmployeeByempId(empId);
 	}
+//	public ChatroomEmployee getBotchatroom(List<String> empId) {
+//		return chatREmpRepository.findChatroomEmployeeByempId(empId);
+//	}
 
 	@Override
 	@Transactional
