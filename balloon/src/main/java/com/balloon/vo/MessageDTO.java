@@ -35,5 +35,8 @@ public class MessageDTO {
 		Chat chatEntity = Chat.builder().chatroom(chatRoomId).chatContent(messageDTO.getChatContent())
 				.employee(messageDTO.getWriter().toEntity(messageDTO.getWriter())).build();
 		return chatEntity;
+//		Chat chatEntity = Chat.builder().chatroom(chatRoomId).chatContent(messageDTO.getChatContent())
+//				.employee(employeeId).build();
+//		return chatEntity;
 	}
 }

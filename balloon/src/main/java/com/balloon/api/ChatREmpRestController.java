@@ -2,6 +2,7 @@ package com.balloon.api;
 
 import java.util.List;
 
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -37,10 +38,16 @@ public class ChatREmpRestController {
 		return chatREmpServicImpl.getChatroomEmp(chatroomId);
 	}
 
-	@GetMapping(value = "/botChatroom/{empId}")
-	public ChatroomEmployee calendarBot(@PathVariable(value = "empId") String empId) {
-		return chatREmpServicImpl.getBotchatroom(empId);
+	@PostMapping(value = "/botChatroom", consumes = MediaType.APPLICATION_JSON_VALUE)
+	public List<ChatroomEmployee> calendarBot(@RequestBody List<String> empIds) {
+
+		return chatREmpServicImpl.getBotchatroom(empIds);
+//		return null;
 	}
+//	@GetMapping(value = "/botChatroom/{empId}")
+//	public ChatroomEmployee calendarBot(@PathVariable(value = "empId") List<String> empIds) {
+//		return chatREmpServicImpl.getBotchatroom(empIds);
+//	}
 
 	@PostMapping(value = "/insertChatEmp/{chatroomId}")
 	public Employee insertChatEmpList(@PathVariable(name = "chatroomId") Long chatroomId,
