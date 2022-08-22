@@ -49,8 +49,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.accessDeniedHandler(jwtAccessDeniedHandler);
 
-		http.authorizeRequests()
-//                .antMatchers("/", "/**").permitAll()
+		http.authorizeRequests().antMatchers("/", "/**").permitAll()
 //                .antMatchers("/").hasRole("MANAGER")
 //                .antMatchers("/api/approval/line/**").hasAnyRole("ADMIN", "MANAGER", "USER")
 
