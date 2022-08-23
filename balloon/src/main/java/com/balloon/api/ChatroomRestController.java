@@ -39,7 +39,7 @@ public class ChatroomRestController {
 	}
 
 	// 채팅방 개설
-	@PostMapping(value = "/createhatroom")
+	@PostMapping(value = "/createchatroom")
 	public Long createchatroom(@RequestBody ChatroomDTO chatroomDTO) {
 		System.out.println(chatroomDTO);
 		return chatroomSvc.getCreateChatroom(chatroomDTO);
