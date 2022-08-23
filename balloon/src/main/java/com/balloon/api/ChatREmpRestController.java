@@ -70,18 +70,12 @@ public class ChatREmpRestController {
 
 		ChatroomDTO chatroomDTO = new ChatroomDTO();
 		chatroomDTO.setChatroomId(chatroomId);
-//		EmpDTO empDTO = new EmpDTO();
-//		empDTO.setEmpId(empId);
+
 		chatroomEmployeeDTO.setChatroomId(chatroomDTO);
-//		ChatroomEmployeeDTO chatroomEmpDTO = new ChatroomEmployeeDTO();
-//		chatroomEmpDTO.setChatroomId(chatroomDTO);
-//		chatroomEmpDTO.setEmpId(empDTO);
-//		System.out.println(chatroomDTO);
-//		System.out.println(chatroomEmpDTO);
+
 		System.out.println(chatroomEmployeeDTO);
 
 		return chatREmpServicImpl.getInsertSchChat(chatroomEmployeeDTO);
-//		return null;
 	}
 
 	@DeleteMapping(value = "/deleteroom/{chatroomId}/{empId}")

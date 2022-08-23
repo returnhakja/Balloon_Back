@@ -24,10 +24,8 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = { "http://localhost:3000" })
 public class ChatroomRestController {
 
-//	@Autowired
 	private final ChatroomServiceImpl chatroomServiceImpl;
 
-	// 채팅방 목록 조회
 	@GetMapping(value = "/allChatroom")
 	public List<Chatroom> allChatroom() {
 		return chatroomServiceImpl.getAllChatroom();
@@ -46,7 +44,7 @@ public class ChatroomRestController {
 		return chatroomServiceImpl.getCreateChatroom(chatroomDTO);
 	}
 
-	// 일정을 공유할 사원만큼 채팅방을 생성하는 코드
+	// 일정을 공유할 사원만큼 채팅방을 생성
 	@PostMapping(value = "/createSchChatroom")
 	public List<Chatroom> createSchChatroom(@RequestBody List<ChatroomDTO> chatroomDTO) {
 		System.out.println(chatroomDTO);

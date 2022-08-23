@@ -34,13 +34,6 @@ public class ChatServiceImpl implements ChatService {
 
 	@Override
 	@Transactional
-	public void insertChat(MessageDTO messageDTO) {
-		Chat chat = messageDTO.toChat(messageDTO);
-		chatRepository.save(chat);
-	}
-
-	@Override
-	@Transactional
 	public List<ChatDTO> getChatroomId(Long chatroomId) {
 		List<ChatDTO> ChatList = new ArrayList<ChatDTO>();
 		for (Chat chat : chatRepository.findAllByChatroomChatroomId(chatroomId)) {
@@ -49,10 +42,12 @@ public class ChatServiceImpl implements ChatService {
 		return ChatList;
 	}
 
-//	@Override
-//	public void getInsertChat(ChatDTO chatDTO) {
-//		Chat chatEntity = chatDTO.toEntity(chatDTO);
-//		chatRepository.save(chatEntity);
-//	}
+	// 채팅보내기
+	@Override
+	@Transactional
+	public void insertChat(MessageDTO messageDTO) {
+		Chat chat = messageDTO.toChat(messageDTO);
+		chatRepository.save(chat);
+	}
 
 }

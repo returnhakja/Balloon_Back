@@ -9,10 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.ChatDTO;
-import com.balloon.dto.EmpDTO;
 import com.balloon.entity.Employee;
 import com.balloon.service.ChatServiceImpl;
-import com.balloon.service.EmpServiceImpl;
 
 import lombok.RequiredArgsConstructor;
 
@@ -22,32 +20,18 @@ import lombok.RequiredArgsConstructor;
 @CrossOrigin(origins = { "http://localhost:3000" })
 public class ChatRestController {
 
-	private final EmpServiceImpl empSvc;
 	private final ChatServiceImpl chatServiceImpl;
 
-	@GetMapping(value = "/allEmp")
-	public List<EmpDTO> allEmp() {
-		return empSvc.findEmps();
-	}
-
+	// 마지막으로 보낸 채팅내용 -> 채팅방리스트
 	@GetMapping(value = "/allChat/{empId}")
 	public List<ChatDTO> allChat(@PathVariable(name = "empId") Employee empId) {
 		return chatServiceImpl.getChat(empId);
 	}
 
+	// 채팅방 기록남기기
 	@GetMapping(value = "/chatRecord/{chatroomId}")
 	public List<ChatDTO> chattingRecord(@PathVariable(value = "chatroomId") Long chatroomId) {
 		return chatServiceImpl.getChatroomId(chatroomId);
 	}
 
-//	@PostMapping(value = "/insertChat/{chatroomId}")
-//	public void createChatroom(@PathVariable(value = "chatroomId") Long chatroomId, @RequestBody ChatDTO chatDTO) {
-//		ChatroomDTO chatroomDTO = new ChatroomDTO();
-//		chatroomDTO.setChatroomId(chatroomId);
-//		chatDTO.setChatroom(chatroomDTO.toEntity(chatroomDTO));
-//		System.out.println(chatroomDTO);
-//		System.out.println(chatDTO);
-//
-//		chatServiceImpl.getInsertChat(chatDTO);
-//	}
 }
