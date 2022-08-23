@@ -22,12 +22,12 @@ public class ChatRestController {
 
 	private final ChatServiceImpl chatSvc;
 
-	@GetMapping(value = "/allChat/{empId}")
+	@GetMapping(value = "/allchat/{empId}")
 	public List<ChatDTO> allChat(@PathVariable(name = "empId") Employee empId) {
 		return chatSvc.getChat(empId);
 	}
 
-	@GetMapping(value = "/chatRecord/{chatroomId}")
+	@GetMapping(value = "/chatrecord/{chatroomId}")
 	public List<ChatDTO> chattingRecord(@PathVariable(value = "chatroomId") Long chatroomId) {
 		return chatSvc.getChatroomId(chatroomId);
 	}

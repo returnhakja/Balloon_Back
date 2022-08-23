@@ -17,13 +17,13 @@ import lombok.RequiredArgsConstructor;
 public class MessageController {
 	// 특정 broker로 메세지를 전달
 	private final SimpMessagingTemplate template;
-	private final ChatServiceImpl chatService;
+	private final ChatServiceImpl chatSvc;
 
 	@MessageMapping(value = "/chat/message")
 	public void message(@Payload MessageVO messageVO) {
 		System.out.println(messageVO);
 		System.out.println("연결성공");
-		chatService.insertChat(messageVO);
+		chatSvc.insertChat(messageVO);
 		template.convertAndSend("/topic/message", messageVO);
 	}
 

@@ -42,7 +42,6 @@ public class CalRestController {
 
 	@GetMapping(value = "/{empId}")
 	public List<CalDTO> CalByEmpId(@PathVariable(name = "empId") String empId) {
-		System.out.println("11111111111111111111111111111111111111111111111111111111");
 		System.out.println(empId);
 		return calSvc.getCalByempId(empId);
 	}
