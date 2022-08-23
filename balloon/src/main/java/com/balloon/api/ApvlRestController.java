@@ -50,6 +50,17 @@ public class ApvlRestController {
 		return list;
 	}
 
+	@GetMapping(value = "/apvl/{approver}/{docStatus}")
+	public List<ApvlDTO> getApvlByApproverNameAndDocStatus(@PathVariable("approver") String approver,
+			@PathVariable("docStatus") Byte docStatus) {
+		System.out.println(docStatus);
+		System.out.println(approver);
+		List<ApvlDTO> list = new ArrayList<ApvlDTO>();
+		list.addAll(ApvlSvc.getApvlByApproverNameAndDocStatus(approver, docStatus));
+
+		return list;
+	}
+
 	// UPDATE -------------------------------
 
 	// DELETE -------------------------------

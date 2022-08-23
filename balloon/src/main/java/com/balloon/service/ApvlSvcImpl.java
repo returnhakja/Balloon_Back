@@ -56,6 +56,17 @@ public class ApvlSvcImpl implements ApvlSvc {
 	}
 
 	@Override
+	public List<ApvlDTO> getApvlByApproverNameAndDocStatus(String approver, Byte docStatus) {
+		List<ApvlDTO> apvlDTOList = new ArrayList<ApvlDTO>();
+		List<ApprovalList> approvalLists = ApvlRepo.findApprovalListByApproverNameAndApprovalStatus(approver,
+				docStatus);
+		for (ApprovalList approvalList : approvalLists) {
+			apvlDTOList.add(approvalList.toDTO(approvalList));
+		}
+		return apvlDTOList;
+	}
+
+	@Override
 	public void deleteApvlByBizRptId(String docId) {
 		ApvlRepo.deleteApprovalListByBusinessReportBusinessReportId(docId);
 	}

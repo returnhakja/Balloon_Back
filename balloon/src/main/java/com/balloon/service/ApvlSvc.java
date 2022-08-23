@@ -13,6 +13,8 @@ public interface ApvlSvc {
 
 	public List<ApvlDTO> getApvlByPAId(String docId);
 
+	public List<ApvlDTO> getApvlByApproverNameAndDocStatus(String approver, Byte docStatus);
+
 	public void deleteApvlByBizRptId(String docId);
 
 	public void deleteApvlByBizTpId(String docId);
