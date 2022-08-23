@@ -19,6 +19,8 @@ public interface EmpService {
 
 	public List<EmpDTO> findEmpListInSameUnit(String empId);
 
+	public List<EmpDTO> findApvrListInSameUnit(String empId);
+
 	public List<EmpDTO> findEmps();
 
 	public void deleteByEmpId(String empId);
