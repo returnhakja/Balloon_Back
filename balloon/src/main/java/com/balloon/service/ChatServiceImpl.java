@@ -41,6 +41,8 @@ public class ChatServiceImpl implements ChatService {
 		return ChatList;
 	}
 
+
+	// 채팅보내기
 	@Transactional
 	@Override
 	public void insertChat(MessageVO messageVO) {

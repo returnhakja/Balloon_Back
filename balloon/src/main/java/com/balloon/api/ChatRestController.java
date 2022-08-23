@@ -21,12 +21,15 @@ import lombok.RequiredArgsConstructor;
 public class ChatRestController {
 
 	private final ChatServiceImpl chatSvc;
-
+  
+	// 마지막으로 보낸 채팅내용 -> 채팅방리스트
 	@GetMapping(value = "/allchat/{empId}")
 	public List<ChatDTO> allChat(@PathVariable(name = "empId") Employee empId) {
 		return chatSvc.getChat(empId);
 	}
 
+
+	// 채팅방 기록남기기
 	@GetMapping(value = "/chatrecord/{chatroomId}")
 	public List<ChatDTO> chattingRecord(@PathVariable(value = "chatroomId") Long chatroomId) {
 		return chatSvc.getChatroomId(chatroomId);
