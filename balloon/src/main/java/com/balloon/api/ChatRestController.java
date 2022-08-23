@@ -15,23 +15,24 @@ import com.balloon.service.ChatServiceImpl;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/chat")
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000" })
 public class ChatRestController {
 
-	private final ChatServiceImpl chatServiceImpl;
-
+	private final ChatServiceImpl chatSvc;
+  
 	// 마지막으로 보낸 채팅내용 -> 채팅방리스트
-	@GetMapping(value = "/allChat/{empId}")
+	@GetMapping(value = "/allchat/{empId}")
 	public List<ChatDTO> allChat(@PathVariable(name = "empId") Employee empId) {
-		return chatServiceImpl.getChat(empId);
+		return chatSvc.getChat(empId);
 	}
 
+
 	// 채팅방 기록남기기
-	@GetMapping(value = "/chatRecord/{chatroomId}")
+	@GetMapping(value = "/chatrecord/{chatroomId}")
 	public List<ChatDTO> chattingRecord(@PathVariable(value = "chatroomId") Long chatroomId) {
-		return chatServiceImpl.getChatroomId(chatroomId);
+		return chatSvc.getChatroomId(chatroomId);
 	}
 
 }
