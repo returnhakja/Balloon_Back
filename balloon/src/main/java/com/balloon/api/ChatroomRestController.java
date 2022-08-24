@@ -45,7 +45,6 @@ public class ChatroomRestController {
 		return chatroomSvc.getCreateChatroom(chatroomDTO);
 	}
 
-
 	// 일정을 공유할 사원만큼 채팅방을 생성하는 코드
 	@PostMapping(value = "/createschchatroom")
 	public List<Chatroom> createSchChatroom(@RequestBody List<ChatroomDTO> chatroomDTOList) {
