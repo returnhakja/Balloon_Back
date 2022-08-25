@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/chatroom")
 @RequiredArgsConstructor
-
+@CrossOrigin(origins = { "http://localhost:3000" })
 public class ChatroomRestController {
 
 	private final ChatroomServiceImpl chatroomSvc;
@@ -59,7 +59,6 @@ public class ChatroomRestController {
 		chatroomSvc.getUpdateChatroom(chatroomDTO);
 	}
 
-	@CrossOrigin(origins = { "http://localhost:3000" })
 	@DeleteMapping(value = "/deletechatroom/{chatroomId}")
 	public void deleteChatroom(@PathVariable Long chatroomId) {
 		chatroomSvc.deleteChatroom(chatroomId);
