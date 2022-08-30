@@ -60,6 +60,7 @@ public class ChatroomRestController {
 		chatroomSvc.getUpdateChatroom(chatroomDTO);
 	}
 
+
 	// headCount가 1일 때 채팅방 삭제
 	@DeleteMapping(value = "/deletechatroom/{chatroomId}")
 	public void deleteChatroom(@PathVariable Long chatroomId) {
