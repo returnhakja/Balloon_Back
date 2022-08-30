@@ -13,9 +13,12 @@ import com.balloon.entity.ChatroomEmployeeId;
 @Repository
 public interface ChatREmpRepository extends JpaRepository<ChatroomEmployee, ChatroomEmployeeId> {
 
-	@Query(value = "select * " + "from chatroom_employee "
-			+ "where chatroom_id in (select chatroom_id from chatroom where head_count = 2);", nativeQuery = true)
-	public List<ChatroomEmployee> findAll();
+	@Query(value = "SELECT * FROM chatroom_employee " + "WHERE chatroom_id IN " + "   (SELECT chatroom_id "
+			+ "      FROM chatroom " + "        WHERE head_count = 2 " + "        AND chatroom_id IN "
+			+ "         (SELECT chatroom_id " + "            FROM chatroom_employee "
+			+ "                WHERE emp_id = :empId " + "         ) " + "   ) "
+			+ "AND emp_id != :empId ;", nativeQuery = true)
+	public List<ChatroomEmployee> findAll(@Param("empId") String empId);
 
 	//////
 	public List<ChatroomEmployee> findAllByChatroomIdChatroomId(Long chatroomId);
