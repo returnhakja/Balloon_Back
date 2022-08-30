@@ -33,44 +33,40 @@ import lombok.NoArgsConstructor;
 @EntityListeners(AuditingEntityListener.class)
 @DynamicInsert
 public class Chat {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "chat_id")
 	private Long chatId;
-	
+
 	@Column(name = "chat_content")
 	private String chatContent;
-	
+
 	@Column(name = "chat_time")
 	@CreatedDate
 	private LocalDateTime chatTime;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "chatroom_id")
 	private Chatroom chatroom;
-	
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "emp_id")
 	private Employee employee;
-	
+
+	@Column(name = "status")
+	private Long status;
+
 	public ChatDTO toDTO(Chat chatEntity) {
-		ChatDTO chatDTO = ChatDTO.builder()
-									.chatId(chatEntity.getChatId())
-									.chatContent(chatEntity.getChatContent())
-									.chatTime(chatEntity.getChatTime())
-									.chatroom(chatEntity.getChatroom())
-									.employee(chatEntity.getEmployee())
-									.build();
+		ChatDTO chatDTO = ChatDTO.builder().chatId(chatEntity.getChatId()).chatContent(chatEntity.getChatContent())
+				.chatTime(chatEntity.getChatTime()).chatroom(chatEntity.getChatroom())
+				.employee(chatEntity.getEmployee()).status(chatEntity.getStatus()).build();
 		return chatDTO;
 	}
-	
+
 	public ChatDTO toChatDTO(Chat chatEntity) {
-		ChatDTO chatDTO = ChatDTO.builder()
-				.chatContent(chatEntity.getChatContent())
-				.chatTime(chatEntity.getChatTime())
-				.chatroom(chatEntity.getChatroom())
-				.employee(chatEntity.getEmployee())
+		ChatDTO chatDTO = ChatDTO.builder().chatContent(chatEntity.getChatContent()).chatTime(chatEntity.getChatTime())
+				.chatroom(chatEntity.getChatroom()).employee(chatEntity.getEmployee()).status(chatEntity.getStatus())
 				.build();
 		return chatDTO;
 	}
