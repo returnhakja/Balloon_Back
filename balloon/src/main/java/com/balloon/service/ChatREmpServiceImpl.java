@@ -39,37 +39,17 @@ public class ChatREmpServiceImpl implements ChatREmpService {
 	public List<ChatroomEmployee> getBotchatroom(List<String> empId) {
 		return chatREmpRepository.findChatroomEmployeeByempId(empId);
 	}
-//	public ChatroomEmployee getBotchatroom(List<String> empId) {
-//		return chatREmpRepository.findChatroomEmployeeByempId(empId);
-//	}
 
 	@Override
 	@Transactional
-	public Employee getInsertChatEmp(List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
+	public List<ChatroomEmployee> getInsertChatEmp(List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
 		List<ChatroomEmployee> chatroomEmployeeEntity = new ArrayList<ChatroomEmployee>();
-
-		for (ChatroomEmployeeDTO chatEmpDto : chatroomEmployeeDTO) {
-			chatroomEmployeeEntity.add(chatEmpDto.toEntity(chatEmpDto));
+		for (ChatroomEmployeeDTO chatEmpDTO : chatroomEmployeeDTO) {
+			chatroomEmployeeEntity.add(chatEmpDTO.toEntity(chatEmpDTO));
 		}
 
-		chatREmpRepository.saveAll(chatroomEmployeeEntity);
+		return chatREmpRepository.saveAll(chatroomEmployeeEntity);
 
-//		ChatroomEmployee chatEmpEntity = 
-//		Employee emp = chatREmpRepository.save(chatEmpEntity).getEmpId();
-//		if (emp != null) {
-//			Chatroom chatroomId = chatroomRepository.findById(chatroomEmployeeDTO.getChatroomId().getChatroomId())
-//					.get();
-		// 생성자 패턴 사용할 예정
-		// 생성자 생성 후 처음 chatroomDTO.setChatroomId();만 해줄 시 값은 null임
-		// set메소드로 ChatroomDTO에 있는 id,name,count값을 가져와서 넣어줌
-//			ChatroomDTO chatroomDTO = new ChatroomDTO();
-//			chatroomDTO.setChatroomId(chatroomId.getChatroomId());
-//			chatroomDTO.setChatroomName(chatroomId.getChatroomName());
-//			chatroomDTO.setHeadCount(chatroomId.getHeadCount() + 1);
-		// 사람 많이 추가 시 Controller에서 List로 받아옴, List.size()만큼 head_Counter를 추가해준다
-//			chatroomRepository.save(chatroomDTO.toEntity(chatroomDTO));
-//	}return emp;
-		return null;
 	}
 
 	@Override
