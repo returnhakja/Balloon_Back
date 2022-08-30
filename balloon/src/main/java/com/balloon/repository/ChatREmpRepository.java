@@ -25,10 +25,4 @@ public interface ChatREmpRepository extends JpaRepository<ChatroomEmployee, Chat
 			+ "               WHERE emp_id=\"Y0000001\");", nativeQuery = true)
 	public List<ChatroomEmployee> findChatroomEmployeeByempId(@Param("emp_Ids") List<String> empIds);
 
-	// public ChatroomEmployee findChatroomEmployeeByempId(@Param("emp_id") String
-	// empId);
-//	@Query(value = "SELECT * " + "FROM chatroom_employee " + "WHERE emp_id= :emp_id "
-//			+ "AND chatroom_id IN (SELECT chatroom_id " + "               FROM chatroom_employee "
-//			+ "               WHERE emp_id=\"Y0000001\");", nativeQuery = true)
-//	public ChatroomEmployee findChatroomEmployeeByempId(@Param("emp_id") String empId);
 }
