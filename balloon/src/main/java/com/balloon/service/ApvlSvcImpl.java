@@ -38,7 +38,7 @@ public class ApvlSvcImpl implements ApvlSvc {
 	@Override
 	public List<ApvlDTO> getApvlByBizTpId(String docId) {
 		List<ApvlDTO> apvlDTOList = new ArrayList<ApvlDTO>();
-		List<ApprovalList> approvalLists = ApvlRepo.findApprovalListByBusinessTrip(docId);
+		List<ApprovalList> approvalLists = ApvlRepo.findApprovalListByBusinessTripBusinessTripId(docId);
 		for (ApprovalList approvalList : approvalLists) {
 			apvlDTOList.add(approvalList.toDTO(approvalList));
 		}
@@ -48,7 +48,7 @@ public class ApvlSvcImpl implements ApvlSvc {
 	@Override
 	public List<ApvlDTO> getApvlByPAId(String docId) {
 		List<ApvlDTO> apvlDTOList = new ArrayList<ApvlDTO>();
-		List<ApprovalList> approvalLists = ApvlRepo.findApprovalListByPersonnelAppointment(docId);
+		List<ApprovalList> approvalLists = ApvlRepo.findApprovalListByPersonnelAppointmentPersonnelAppointmentId(docId);
 		for (ApprovalList approvalList : approvalLists) {
 			apvlDTOList.add(approvalList.toDTO(approvalList));
 		}

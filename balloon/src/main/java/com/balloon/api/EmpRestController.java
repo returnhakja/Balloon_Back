@@ -85,7 +85,7 @@ public class EmpRestController {
 		}
 	}
 
-	@PostMapping("/empName")
+	@PostMapping("/name")
 	public ResponseEntity<EmpResponseDTO> updateEmpName(@RequestBody EmpRequestDTO empRequestDTO) {
 		return ResponseEntity.ok(empSvc.changeEmpName(empRequestDTO.getEmpId(), empRequestDTO.getEmpName()));
 	}

@@ -12,9 +12,9 @@ public interface ApvlRepository extends JpaRepository<ApprovalList, Integer> {
 
 	public List<ApprovalList> findApprovalListByBusinessReportBusinessReportId(String BusinessReportId);
 
-	public List<ApprovalList> findApprovalListByBusinessTrip(String docId);
+	public List<ApprovalList> findApprovalListByBusinessTripBusinessTripId(String docId);
 
-	public List<ApprovalList> findApprovalListByPersonnelAppointment(String docId);
+	public List<ApprovalList> findApprovalListByPersonnelAppointmentPersonnelAppointmentId(String docId);
 
 	public List<ApprovalList> findApprovalListByApproverNameAndApprovalStatus(String approver, Byte docStatus);
 
