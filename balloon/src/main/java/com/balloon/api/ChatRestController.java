@@ -29,9 +29,10 @@ public class ChatRestController {
 	}
 
 	// 채팅방 기록남기기
-	@GetMapping(value = "/chatrecord/{chatroomId}")
-	public List<ChatDTO> chattingRecord(@PathVariable(value = "chatroomId") Long chatroomId) {
-		return chatSvc.getChatroomId(chatroomId);
+	@GetMapping(value = "/chatrecord/{chatroomId}/{empId}")
+	public List<ChatDTO> chattingRecord(@PathVariable(value = "chatroomId") Long chatroomId,
+			@PathVariable(value = "empId") String empId) {
+		return chatSvc.getChatroomInfo(chatroomId, empId);
 	}
 
 }
