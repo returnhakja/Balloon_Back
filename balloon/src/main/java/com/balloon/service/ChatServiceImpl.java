@@ -33,14 +33,13 @@ public class ChatServiceImpl implements ChatService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<ChatDTO> getChatroomId(Long chatroomId) {
+	public List<ChatDTO> getChatroomInfo(Long chatroomId, String empId) {
 		List<ChatDTO> ChatList = new ArrayList<ChatDTO>();
-		for (Chat chat : chatRepo.findAllByChatroomChatroomId(chatroomId)) {
+		for (Chat chat : chatRepo.findAll(chatroomId, empId)) {
 			ChatList.add(chat.toChatDTO(chat));
 		}
 		return ChatList;
 	}
-
 
 	// 채팅보내기
 	@Transactional
