@@ -31,12 +31,10 @@ public class ChatDTO {
 
 	private Long status;
 
-	private LocalDateTime inTime;
-
 	public Chat toEntity(ChatDTO chatDTO) {
 		Chat chatEntity = Chat.builder().chatId(chatDTO.getChatId()).chatContent(chatDTO.getChatContent())
 				.chatTime(chatDTO.getChatTime()).chatroom(chatDTO.getChatroom()).employee(chatDTO.getEmployee())
-				.status(chatDTO.getStatus()).inTime(chatDTO.getInTime()).build();
+				.status(chatDTO.getStatus()).build();
 		return chatEntity;
 	}
 

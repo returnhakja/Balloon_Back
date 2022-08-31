@@ -1,7 +1,5 @@
 package com.balloon.vo;
 
-import java.time.LocalDateTime;
-
 import com.balloon.dto.ChatroomDTO;
 import com.balloon.dto.EmpDTO;
 import com.balloon.entity.Chat;
@@ -22,8 +20,6 @@ public class MessageVO {
 
 	String chatContent;
 
-	LocalDateTime inTime;
-
 	public Chat toChat(MessageVO messageVO) {
 		// ---------------chatRoomId 값을 entity로 변환해준 것-----------------------
 		ChatroomDTO chatroomDTO = new ChatroomDTO();
@@ -37,7 +33,7 @@ public class MessageVO {
 
 		// ---------------------------------------------
 		Chat chatEntity = Chat.builder().chatroom(chatRoomId).chatContent(messageVO.getChatContent())
-				.employee(messageVO.getWriter().toEntity(messageVO.getWriter())).inTime(messageVO.getInTime()).build();
+				.employee(messageVO.getWriter().toEntity(messageVO.getWriter())).build();
 		return chatEntity;
 //		Chat chatEntity = Chat.builder().chatroom(chatRoomId).chatContent(messageDTO.getChatContent())
 //				.employee(employeeId).build();

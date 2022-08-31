@@ -24,12 +24,14 @@ public class ChatroomEmployeeDTO {
 
 	private LocalDateTime exitTime;
 
+	private LocalDateTime inTime;
+
 	public ChatroomEmployee toEntity(ChatroomEmployeeDTO chatroomEmployeeDTO) {
 		ChatroomDTO chatroomDTO = chatroomEmployeeDTO.getChatroomId();
 		EmpDTO employeeDTO = chatroomEmployeeDTO.getEmpId();
 		ChatroomEmployee chatroomEmployeeEntity = ChatroomEmployee.builder()
 				.chatroomId(chatroomDTO.toEntity(chatroomDTO)).empId(employeeDTO.toEntity(employeeDTO))
-				.exitTime(chatroomEmployeeDTO.getExitTime()).build();
+				.exitTime(chatroomEmployeeDTO.getExitTime()).inTime(chatroomEmployeeDTO.getInTime()).build();
 		return chatroomEmployeeEntity;
 	}
 

@@ -18,7 +18,7 @@ public interface ChatRepository extends JpaRepository<Chat, Long> {
 			+ "WHERE emp_id = :emp_id) order by chat_id desc; ", nativeQuery = true)
 	public List<Chat> findAll(@Param("emp_id") Employee empId);
 
-	@Query(value = "select * from chat where chatroom_id = :chatroom_id and chat_time > (select in_time from chat "
-			+ "where chatroom_id = :chatroom_id and emp_id = :emp_id and in_time is not null );", nativeQuery = true)
+	@Query(value = "select * from chat where chatroom_id = :chatroom_id and chat_time >= (select in_time from chatroom_employee "
+			+ "where chatroom_id = :chatroom_id and emp_id = :emp_id );", nativeQuery = true)
 	public List<Chat> findAll(@Param("chatroom_id") Long chatroomId, @Param("emp_id") String empId);
 }

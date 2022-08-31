@@ -57,14 +57,10 @@ public class Chat {
 	@Column(name = "status")
 	private Long status;
 
-	@Column(name = "in_time")
-	private LocalDateTime inTime;
-
 	public ChatDTO toDTO(Chat chatEntity) {
 		ChatDTO chatDTO = ChatDTO.builder().chatId(chatEntity.getChatId()).chatContent(chatEntity.getChatContent())
 				.chatTime(chatEntity.getChatTime()).chatroom(chatEntity.getChatroom())
-				.employee(chatEntity.getEmployee()).status(chatEntity.getStatus()).inTime(chatEntity.getInTime())
-				.build();
+				.employee(chatEntity.getEmployee()).status(chatEntity.getStatus()).build();
 		return chatDTO;
 	}
 

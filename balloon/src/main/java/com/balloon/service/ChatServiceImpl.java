@@ -46,7 +46,6 @@ public class ChatServiceImpl implements ChatService {
 	@Override
 	public void insertChat(MessageVO messageVO) {
 		Chat chat = messageVO.toChat(messageVO);
-		System.out.println(chat);
 		chatRepo.save(chat);
 	}
 
