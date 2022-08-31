@@ -9,6 +9,8 @@ public interface UnitService {
 
 	public UnitDTO findUnitByUnitCode(String unitCode) throws Exception;
 
+	public List<UnitDTO> findByHigherOrganization();
+
 	public void insertUnit(UnitDTO unitDTO);
 
 	public boolean insertUnitList(List<UnitDTO> requestDtoList);

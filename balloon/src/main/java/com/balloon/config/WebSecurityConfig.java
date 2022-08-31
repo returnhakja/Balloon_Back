@@ -49,11 +49,15 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 		http.authorizeRequests()
 
-				.antMatchers(HttpMethod.POST, "/auth/login").permitAll().antMatchers(HttpMethod.GET, "/unit/**")
-				.permitAll().antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")
-				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN").antMatchers(HttpMethod.POST, "/unit/add")
-				.hasRole("ADMIN").antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")
-				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN").anyRequest().authenticated();
+				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
+				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
+				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
+//				.permitAll()//
+				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
+				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
+				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
+				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
+				.anyRequest().authenticated();//
 
 		http.logout().permitAll();
 
@@ -65,7 +69,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("http://localhost:3000")
+		registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:80")
 				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
 				.allowCredentials(true).maxAge(MAX_AGE_SECS);
 	}
