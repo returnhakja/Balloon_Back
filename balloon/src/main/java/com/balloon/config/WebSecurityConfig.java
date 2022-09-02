@@ -49,7 +49,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 				.csrf().disable()
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-						.maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
+						.maximumSessions(2).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
 
 		;
 
@@ -63,6 +63,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
 //				.permitAll()//
 				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
+				.antMatchers(HttpMethod.POST, "/employee/emps").hasRole("ADMIN")//
 				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
 				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
 				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
