@@ -20,72 +20,71 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChatREmpServiceImpl implements ChatREmpService {
 
-   private final ChatREmpRepository chatREmpRepository;
+	private final ChatREmpRepository chatREmpRepository;
 
-   @Override
-   @Transactional
-   public List<ChatroomEmployeeDTO> getallChatEmp(String empId) {
-      List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
-      List<ChatroomEmployee> chatroomEmployeeEntityList = chatREmpRepository.findAll(empId);
-      for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
-         chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
-      }
-      return chatroomEmployeeDTOList;
-   }
+	@Override
+	@Transactional
+	public List<ChatroomEmployeeDTO> getallChatEmp(String empId) {
+		List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
+		List<ChatroomEmployee> chatroomEmployeeEntityList = chatREmpRepository.findAll(empId);
+		for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
+			chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
+		}
+		return chatroomEmployeeDTOList;
+	}
 
-   @Override
-   public List<ChatroomEmployeeDTO> getChatroomEmp(Long chatroomId) {
-      List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
-      List<ChatroomEmployee> chatroomEmployeeEntityList = chatREmpRepository
-            .findAllByChatroomIdChatroomId(chatroomId);
-      for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
-         chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
-      }
-      return chatroomEmployeeDTOList;
-   }
+	@Override
+	public List<ChatroomEmployeeDTO> getChatroomEmp(Long chatroomId) {
+		List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
+		List<ChatroomEmployee> chatroomEmployeeEntityList = chatREmpRepository
+				.findAllByChatroomIdChatroomId(chatroomId);
+		for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
+			chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
+		}
+		return chatroomEmployeeDTOList;
+	}
 
-   @Override
-   @Transactional
-   public List<ChatroomEmployeeDTO> getBotchatroom(List<String> empId) {
-      List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
-      List<ChatroomEmployee> chatroomEmployeeEntityList = chatREmpRepository.findChatroomEmployeeByempId(empId);
-      for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
-         chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
-      }
-      return chatroomEmployeeDTOList;
-   }
+	@Override
+	@Transactional
+	public List<ChatroomEmployeeDTO> getBotchatroom(List<String> empId) {
+		List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
+		List<ChatroomEmployee> chatroomEmployeeEntityList = chatREmpRepository.findChatroomEmployeeByempId(empId);
+		for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
+			chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
+		}
+		return chatroomEmployeeDTOList;
+	}
 
-   @Override
-   @Transactional
-   public List<ChatroomEmployeeDTO> getInsertChatEmp(List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
-      List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
-      List<ChatroomEmployee> chatroomEmployeeEntityList = new ArrayList<ChatroomEmployee>();
-      for (ChatroomEmployeeDTO chatEmpDTO : chatroomEmployeeDTO) {
-         chatroomEmployeeEntityList.add(chatEmpDTO.toEntity(chatEmpDTO));
-      }
-      chatroomEmployeeEntityList = chatREmpRepository.saveAll(chatroomEmployeeEntityList);
-      for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
-         chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
-      }
-      return chatroomEmployeeDTOList;
+	@Override
+	@Transactional
+	public List<ChatroomEmployeeDTO> getInsertChatEmp(List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
+		List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
+		List<ChatroomEmployee> chatroomEmployeeEntityList = new ArrayList<ChatroomEmployee>();
+		for (ChatroomEmployeeDTO chatEmpDTO : chatroomEmployeeDTO) {
+			chatroomEmployeeEntityList.add(chatEmpDTO.toEntity(chatEmpDTO));
+		}
+		chatroomEmployeeEntityList = chatREmpRepository.saveAll(chatroomEmployeeEntityList);
+		for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
+			chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
+		}
+		return chatroomEmployeeDTOList;
 
-   }
+	}
 
-   @Override
-   @Transactional
-   public void getdeleteChatroom(Long chatroomId, String empId) {
-      ChatroomEmployeeDTO chatroomEmployeeDTO = new ChatroomEmployeeDTO();
-      ChatroomDTO chatroomDTO = new ChatroomDTO();
-      chatroomDTO.setChatroomId(chatroomId);
-      chatroomEmployeeDTO.setChatroomId(chatroomDTO);
+	@Override
+	@Transactional
+	public void getdeleteChatroom(Long chatroomId, String empId) {
+		ChatroomEmployeeDTO chatroomEmployeeDTO = new ChatroomEmployeeDTO();
+		ChatroomDTO chatroomDTO = new ChatroomDTO();
+		chatroomDTO.setChatroomId(chatroomId);
+		chatroomEmployeeDTO.setChatroomId(chatroomDTO);
 
-      EmpDTO empDTO = new EmpDTO();
-      empDTO.setEmpId(empId);
-      chatroomEmployeeDTO.setEmpId(empDTO);
+		EmpDTO empDTO = new EmpDTO();
+		empDTO.setEmpId(empId);
+		chatroomEmployeeDTO.setEmpId(empDTO);
 
-      ChatroomEmployeeId chatroomEmployeeIdEntity = chatroomEmployeeDTO.toId(chatroomEmployeeDTO);
-      chatREmpRepository.deleteById(chatroomEmployeeIdEntity);
-
-   }
+		ChatroomEmployeeId chatroomEmployeeIdEntity = chatroomEmployeeDTO.toId(chatroomEmployeeDTO);
+		chatREmpRepository.deleteById(chatroomEmployeeIdEntity);
+	}
 
 }

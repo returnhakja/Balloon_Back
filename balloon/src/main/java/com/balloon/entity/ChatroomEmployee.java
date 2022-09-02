@@ -34,26 +34,29 @@ import lombok.ToString;
 @IdClass(ChatroomEmployeeId.class)
 public class ChatroomEmployee {
 
-   @Id
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "chatroom_id")
-   private Chatroom chatroomId;
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "chatroom_id")
+	private Chatroom chatroomId;
 
-   @Id
-   @ManyToOne(fetch = FetchType.LAZY)
-   @JoinColumn(name = "emp_id")
-   private Employee empId;
+	@Id
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "emp_id")
+	private Employee empId;
 
-   @CreatedDate
-   @Column(name = "exit_time")
-   private LocalDateTime exitTime;
+	@CreatedDate
+	@Column(name = "exit_time")
+	private LocalDateTime exitTime;
 
-   public ChatroomEmployeeDTO toDTO(ChatroomEmployee chatroomEmployeeEntity) {
-      Chatroom chatroom = chatroomEmployeeEntity.getChatroomId();
-      Employee employee = chatroomEmployeeEntity.getEmpId();
-      ChatroomEmployeeDTO chatroomEmployeeDTO = ChatroomEmployeeDTO.builder().chatroomId(chatroom.toDTO(chatroom))
-            .empId(employee.toDTO(employee)).exitTime(chatroomEmployeeEntity.getExitTime()).build();
-      return chatroomEmployeeDTO;
-   }
+	@Column(name = "in_time")
+	private LocalDateTime inTime;
 
+	public ChatroomEmployeeDTO toDTO(ChatroomEmployee chatroomEmployeeEntity) {
+		Chatroom chatroom = chatroomEmployeeEntity.getChatroomId();
+		Employee employee = chatroomEmployeeEntity.getEmpId();
+		ChatroomEmployeeDTO chatroomEmployeeDTO = ChatroomEmployeeDTO.builder().chatroomId(chatroom.toDTO(chatroom))
+				.empId(employee.toDTO(employee)).exitTime(chatroomEmployeeEntity.getExitTime())
+				.inTime(chatroomEmployeeEntity.getInTime()).build();
+		return chatroomEmployeeDTO;
+	}
 }

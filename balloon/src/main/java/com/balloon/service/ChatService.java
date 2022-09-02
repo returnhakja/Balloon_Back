@@ -10,7 +10,9 @@ public interface ChatService {
 
    public List<ChatDTO> getChat(Employee empId);
 
-   public List<ChatDTO> getChatroomId(Long chatroomId);
+
+	public List<ChatDTO> getChatroomInfo(Long chatroomId, String empId);
+
 
    public void insertChat(MessageVO messageVO);
 
