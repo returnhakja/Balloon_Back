@@ -10,6 +10,7 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class ChatConfig implements WebSocketMessageBrokerConfigurer {
 
+
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		// registry.addEndpoint("/chatstart").setAllowedOrigins("http://localhost:3000").withSockJS();
@@ -28,3 +29,4 @@ public class ChatConfig implements WebSocketMessageBrokerConfigurer {
 		config.setApplicationDestinationPrefixes("/app");
 	}
 }
+
