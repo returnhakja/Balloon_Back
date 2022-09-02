@@ -33,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class WebSecurityConfig implements WebMvcConfigurer {
 
+
 	private final TokenProvider tokenProvider;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
@@ -53,10 +54,11 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 		;
 
-		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-				.accessDeniedHandler(jwtAccessDeniedHandler);
+      http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            .accessDeniedHandler(jwtAccessDeniedHandler);
 
-		http.authorizeRequests()
+      http.authorizeRequests()
+
 
 				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
 				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
@@ -70,13 +72,22 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
 				.anyRequest().authenticated();//
 
-		http.logout().permitAll();
 
-		http.exceptionHandling().accessDeniedPage("/accesDenied");
-		http.apply(new JwtSecurityConfig(tokenProvider));
+      http.logout().permitAll();
 
-		return http.build();
-	}
+      http.exceptionHandling().accessDeniedPage("/accesDenied");
+      http.apply(new JwtSecurityConfig(tokenProvider));
+
+      return http.build();
+   }
+
+
+   @Override
+   public void addCorsMappings(CorsRegistry registry) {
+      registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:8080", "http://15.164.224.26:80", "ws://15.164.224.26:8080")
+            .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
+            .allowCredentials(true).maxAge(MAX_AGE_SECS);
+   }
 
 	// JSESSIONID 삭제
 	@Bean
@@ -91,11 +102,5 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		};
 	}
 
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:80")
-				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
-				.allowCredentials(true).maxAge(MAX_AGE_SECS);
-	}
 
 }
