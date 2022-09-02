@@ -1,10 +1,19 @@
 package com.balloon.config;
 
+import java.util.Collections;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.SessionCookieConfig;
+import javax.servlet.SessionTrackingMode;
+
+import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
@@ -36,12 +45,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-		http
-//                .httpBasic().disable()
+		http.httpBasic().disable()
 
-				.csrf().disable().sessionManagement(session -> session.maximumSessions(2).maxSessionsPreventsLogin(true)
-						.expiredUrl("/login?exprie=true"))
-//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.csrf().disable()
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+						.maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
+
 		;
 
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
@@ -55,6 +64,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //				.permitAll()//
 				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
 				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
+				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
 				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
 				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
 				.anyRequest().authenticated();//
@@ -65,6 +75,19 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		http.apply(new JwtSecurityConfig(tokenProvider));
 
 		return http.build();
+	}
+
+	// JSESSIONID 삭제
+	@Bean
+	public ServletContextInitializer clearJsession() {
+		return new ServletContextInitializer() {
+			@Override
+			public void onStartup(ServletContext servletContext) throws ServletException {
+				servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
+				SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
+				sessionCookieConfig.setHttpOnly(true);
+			}
+		};
 	}
 
 	@Override

@@ -15,7 +15,7 @@ public interface UnitService {
 
 	public boolean insertUnitList(List<UnitDTO> requestDtoList);
 
-	public void updateUnit(UnitDTO unitDTO);
+	public void updateUnit(UnitDTO unitDTO) throws Exception;
 
 	public void deleteUnitByUnitCode(String unitCode);
 
