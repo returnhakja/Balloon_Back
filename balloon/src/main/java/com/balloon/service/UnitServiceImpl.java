@@ -39,6 +39,16 @@ public class UnitServiceImpl implements UnitService {
 		return unitDTO;
 	};
 
+	@Transactional(readOnly = true)
+	@Override
+	public List<UnitDTO> findByHigherOrganization() {
+		List<Unit> higherList = unitRepo.findUnitByUnitCodeEndsWith("0000");
+		List<UnitDTO> unitDTOList = new ArrayList<UnitDTO>();
+		higherList.forEach(unitEntity -> unitDTOList.add(unitEntity.toDTO(unitEntity)));
+
+		return unitDTOList;
+	}
+
 	@Transactional
 	@Override
 	public void insertUnit(UnitDTO unitDTO) {
