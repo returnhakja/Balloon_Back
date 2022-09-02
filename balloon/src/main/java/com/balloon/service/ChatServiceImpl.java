@@ -18,36 +18,37 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ChatServiceImpl implements ChatService {
 
-	private final ChatRepository chatRepo;
+   private final ChatRepository chatRepo;
 
-	@Transactional(readOnly = true)
-	@Override
-	public List<ChatDTO> getChat(Employee empId) {
-		List<Chat> chatEntityList = chatRepo.findAll(empId);
-		List<ChatDTO> chatDTOList = new ArrayList<ChatDTO>();
+   @Transactional(readOnly = true)
+   @Override
+   public List<ChatDTO> getChat(Employee empId) {
+      List<Chat> chatEntityList = chatRepo.findAll(empId);
+      List<ChatDTO> chatDTOList = new ArrayList<ChatDTO>();
 
-		chatEntityList.forEach(chatEntity -> chatDTOList.add(chatEntity.toDTO(chatEntity)));
+      chatEntityList.forEach(chatEntity -> chatDTOList.add(chatEntity.toDTO(chatEntity)));
 
-		return chatDTOList;
-	}
+      return chatDTOList;
+   }
 
-	@Transactional(readOnly = true)
-	@Override
-	public List<ChatDTO> getChatroomId(Long chatroomId) {
-		List<ChatDTO> ChatList = new ArrayList<ChatDTO>();
-		for (Chat chat : chatRepo.findAllByChatroomChatroomId(chatroomId)) {
-			ChatList.add(chat.toChatDTO(chat));
-		}
-		return ChatList;
-	}
+   @Transactional(readOnly = true)
+   @Override
+   public List<ChatDTO> getChatroomId(Long chatroomId) {
+      List<ChatDTO> ChatList = new ArrayList<ChatDTO>();
+      for (Chat chat : chatRepo.findAllByChatroomChatroomId(chatroomId)) {
+         ChatList.add(chat.toChatDTO(chat));
+      }
+      return ChatList;
+      
+   }
 
 
-	// 채팅보내기
-	@Transactional
-	@Override
-	public void insertChat(MessageVO messageVO) {
-		Chat chat = messageVO.toChat(messageVO);
-		chatRepo.save(chat);
-	}
+   // 채팅보내기
+   @Transactional
+   @Override
+   public void insertChat(MessageVO messageVO) {
+      Chat chat = messageVO.toChat(messageVO);
+      chatRepo.save(chat);
+   }
 
 }

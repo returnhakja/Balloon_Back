@@ -17,22 +17,22 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/chat")
 @RequiredArgsConstructor
-@CrossOrigin(origins = { "http://localhost:3000" })
+//@CrossOrigin(origins = { "http://localhost:3000", "ws://15.164.224.26:8080" })
+@CrossOrigin(origins = { "http://15.164.224.26:8080"})
 public class ChatRestController {
 
-	private final ChatServiceImpl chatSvc;
-  
-	// 마지막으로 보낸 채팅내용 -> 채팅방리스트
-	@GetMapping(value = "/allchat/{empId}")
-	public List<ChatDTO> allChat(@PathVariable(name = "empId") Employee empId) {
-		return chatSvc.getChat(empId);
-	}
+   private final ChatServiceImpl chatSvc;
 
+   // 마지막으로 보낸 채팅내용 -> 채팅방리스트
+   @GetMapping(value = "/allchat/{empId}")
+   public List<ChatDTO> allChat(@PathVariable(name = "empId") Employee empId) {
+      return chatSvc.getChat(empId);
+   }
 
-	// 채팅방 기록남기기
-	@GetMapping(value = "/chatrecord/{chatroomId}")
-	public List<ChatDTO> chattingRecord(@PathVariable(value = "chatroomId") Long chatroomId) {
-		return chatSvc.getChatroomId(chatroomId);
-	}
+   // 채팅방 기록남기기
+   @GetMapping(value = "/chatrecord/{chatroomId}")
+   public List<ChatDTO> chattingRecord(@PathVariable(value = "chatroomId") Long chatroomId) {
+      return chatSvc.getChatroomId(chatroomId);
+   }
 
 }
