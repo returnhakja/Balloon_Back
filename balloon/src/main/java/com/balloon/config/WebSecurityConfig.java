@@ -10,7 +10,6 @@ import javax.servlet.SessionTrackingMode;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -48,26 +47,27 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		http.httpBasic().disable()
 
 				.csrf().disable()
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-						.maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
-
-		;
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//						.maximumSessions(5).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
 
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.accessDeniedHandler(jwtAccessDeniedHandler);
 
 		http.authorizeRequests()
 
-				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
-				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
-				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
-//				.permitAll()//
-				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
-				.anyRequest().authenticated();//
+//				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
+//				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
+//				.antMatchers(HttpMethod.GET, "/employee/unit/list/**").authenticated()//
+//				.antMatchers("/chatstart").authenticated()//
+////				.permitAll()//
+//				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
+//				.anyRequest().authenticated();//
+				.anyRequest().permitAll();//
 
 		http.logout().permitAll();
 
@@ -92,7 +92,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:80")
+		registry.addMapping("/**").allowedOrigins("http://localhost:3000")
 				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
 				.allowCredentials(true).maxAge(MAX_AGE_SECS);
 	}
