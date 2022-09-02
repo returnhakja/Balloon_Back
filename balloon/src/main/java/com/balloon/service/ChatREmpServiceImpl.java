@@ -12,7 +12,6 @@ import com.balloon.dto.ChatroomEmployeeDTO;
 import com.balloon.dto.EmpDTO;
 import com.balloon.entity.ChatroomEmployee;
 import com.balloon.entity.ChatroomEmployeeId;
-import com.balloon.entity.Employee;
 import com.balloon.repository.ChatREmpRepository;
 
 import lombok.RequiredArgsConstructor;
@@ -25,58 +24,51 @@ public class ChatREmpServiceImpl implements ChatREmpService {
 
 	@Override
 	@Transactional
-	public List<ChatroomEmployee> getallChatEmp() {
-		return chatREmpRepository.findAll();
-	}
-
-	@Override
-	public List<ChatroomEmployee> getChatroomEmp(Long chatroomId) {
-		return chatREmpRepository.findAllByChatroomIdChatroomId(chatroomId);
-	}
-
-	@Override
-	@Transactional
-	public List<ChatroomEmployee> getBotchatroom(List<String> empId) {
-		return chatREmpRepository.findChatroomEmployeeByempId(empId);
-	}
-//	public ChatroomEmployee getBotchatroom(List<String> empId) {
-//		return chatREmpRepository.findChatroomEmployeeByempId(empId);
-//	}
-
-	@Override
-	@Transactional
-	public Employee getInsertChatEmp(List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
-		List<ChatroomEmployee> chatroomEmployeeEntity = new ArrayList<ChatroomEmployee>();
-
-		for (ChatroomEmployeeDTO chatEmpDto : chatroomEmployeeDTO) {
-			chatroomEmployeeEntity.add(chatEmpDto.toEntity(chatEmpDto));
+	public List<ChatroomEmployeeDTO> getallChatEmp(String empId) {
+		List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
+		List<ChatroomEmployee> chatroomEmployeeEntityList = chatREmpRepository.findAll(empId);
+		for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
+			chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
 		}
+		return chatroomEmployeeDTOList;
+	}
 
-		chatREmpRepository.saveAll(chatroomEmployeeEntity);
-
-//		ChatroomEmployee chatEmpEntity = 
-//		Employee emp = chatREmpRepository.save(chatEmpEntity).getEmpId();
-//		if (emp != null) {
-//			Chatroom chatroomId = chatroomRepository.findById(chatroomEmployeeDTO.getChatroomId().getChatroomId())
-//					.get();
-		// 생성자 패턴 사용할 예정
-		// 생성자 생성 후 처음 chatroomDTO.setChatroomId();만 해줄 시 값은 null임
-		// set메소드로 ChatroomDTO에 있는 id,name,count값을 가져와서 넣어줌
-//			ChatroomDTO chatroomDTO = new ChatroomDTO();
-//			chatroomDTO.setChatroomId(chatroomId.getChatroomId());
-//			chatroomDTO.setChatroomName(chatroomId.getChatroomName());
-//			chatroomDTO.setHeadCount(chatroomId.getHeadCount() + 1);
-		// 사람 많이 추가 시 Controller에서 List로 받아옴, List.size()만큼 head_Counter를 추가해준다
-//			chatroomRepository.save(chatroomDTO.toEntity(chatroomDTO));
-//	}return emp;
-		return null;
+	@Override
+	public List<ChatroomEmployeeDTO> getChatroomEmp(Long chatroomId) {
+		List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
+		List<ChatroomEmployee> chatroomEmployeeEntityList = chatREmpRepository
+				.findAllByChatroomIdChatroomId(chatroomId);
+		for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
+			chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
+		}
+		return chatroomEmployeeDTOList;
 	}
 
 	@Override
 	@Transactional
-	public Employee getInsertSchChat(ChatroomEmployeeDTO chatroomEmployeeDTO) {
-		ChatroomEmployee chatroomEmployeeEntity = chatroomEmployeeDTO.toEntity(chatroomEmployeeDTO);
-		return chatREmpRepository.save(chatroomEmployeeEntity).getEmpId();
+	public List<ChatroomEmployeeDTO> getBotchatroom(List<String> empId) {
+		List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
+		List<ChatroomEmployee> chatroomEmployeeEntityList = chatREmpRepository.findChatroomEmployeeByempId(empId);
+		for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
+			chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
+		}
+		return chatroomEmployeeDTOList;
+	}
+
+	@Override
+	@Transactional
+	public List<ChatroomEmployeeDTO> getInsertChatEmp(List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
+		List<ChatroomEmployeeDTO> chatroomEmployeeDTOList = new ArrayList<ChatroomEmployeeDTO>();
+		List<ChatroomEmployee> chatroomEmployeeEntityList = new ArrayList<ChatroomEmployee>();
+		for (ChatroomEmployeeDTO chatEmpDTO : chatroomEmployeeDTO) {
+			chatroomEmployeeEntityList.add(chatEmpDTO.toEntity(chatEmpDTO));
+		}
+		chatroomEmployeeEntityList = chatREmpRepository.saveAll(chatroomEmployeeEntityList);
+		for (ChatroomEmployee chatroomEmployeeEntity : chatroomEmployeeEntityList) {
+			chatroomEmployeeDTOList.add(chatroomEmployeeEntity.toDTO(chatroomEmployeeEntity));
+		}
+		return chatroomEmployeeDTOList;
+
 	}
 
 	@Override
@@ -93,7 +85,6 @@ public class ChatREmpServiceImpl implements ChatREmpService {
 
 		ChatroomEmployeeId chatroomEmployeeIdEntity = chatroomEmployeeDTO.toId(chatroomEmployeeDTO);
 		chatREmpRepository.deleteById(chatroomEmployeeIdEntity);
-
 	}
 
 }

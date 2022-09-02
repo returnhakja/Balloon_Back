@@ -75,6 +75,13 @@ public class Unit implements Persistable<String> {
 		return unitCode == null;
 	}
 
+	/* 부서 코드 외 정보 업데이트 할 때 */
+	public void updateUnitInfo(UnitDTO unitDTO) {
+		this.unitName = unitDTO.getUnitName();
+		this.parentUnit = unitDTO.getParentUnit();
+		this.bell = unitDTO.getBell();
+	}
+
 	/* 부서전화번호만 업데이트할 때 */
 	// public void updateBell(UnitDTO unitDTO) {
 	// this.bell = unitDTO.getBell();

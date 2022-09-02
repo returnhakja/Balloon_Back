@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.balloon.config.WebSecurityConfig;
 import com.balloon.dto.EmpRequestDTO;
 import com.balloon.dto.EmpResponseDTO;
 import com.balloon.dto.TokenDTO;
@@ -28,6 +29,8 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class AuthRestController {
 	private final AuthServiceImpl authSvc;
+
+	private final WebSecurityConfig webSecurityConfig;
 
 	@PostMapping(value = "/signup")
 	public ResponseEntity<EmpResponseDTO> signup(@Valid @RequestBody EmpRequestDTO requestDto)
@@ -59,6 +62,7 @@ public class AuthRestController {
 	@PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<TokenDTO> login(@Valid @RequestBody EmpRequestDTO requestDto, HttpServletResponse response)
 			throws Exception {
+
 		TokenDTO tokenDTO = authSvc.login(requestDto);
 
 		if (tokenDTO != null) {
@@ -67,8 +71,8 @@ public class AuthRestController {
 			createCookie.setMaxAge(5 * 60 * 60); // 시간 분 초
 			createCookie.setPath("/");
 			response.addCookie(createCookie);
-
 		} else {
+			webSecurityConfig.clearJsession();
 			throw new Exception("토큰 생성 에러입니다.");
 		}
 
