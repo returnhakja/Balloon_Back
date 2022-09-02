@@ -77,7 +77,7 @@ public class EmpRestController {
 	@GetMapping("/me")
 	public EmpResponseDTO getMyEmpInfo() throws Exception {
 		EmpResponseDTO myInfoBySecurity = empSvc.getMyInfoBySecurity();
-
+		System.out.println("dddddddddddddddddddddddddddddddddddddddddd");
 		if (myInfoBySecurity == null) {
 			throw new Exception("로그인 된 사원의 정보가 없습니다.");
 		} else {
