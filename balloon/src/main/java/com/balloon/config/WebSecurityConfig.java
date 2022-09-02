@@ -60,16 +60,17 @@ public class WebSecurityConfig implements WebMvcConfigurer {
       http.authorizeRequests()
 
 
-				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
-				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
-				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
-//				.permitAll()//
-				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
-				.anyRequest().authenticated();//
+//				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
+//				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
+//				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
+////				.permitAll()//
+//				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
+//				.anyRequest().authenticated();//
+      .anyRequest().permitAll();//
 
 
       http.logout().permitAll();
