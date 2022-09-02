@@ -6,16 +6,18 @@ import com.balloon.dto.ChatroomDTO;
 
 public interface ChatroomService {
 
+
 	public List<ChatroomDTO> getAllChatroom();
 
 	public ChatroomDTO getOneChatroom(Long chatroomId);
 
-	public Long getCreateChatroom(ChatroomDTO chatroomDTO);
+
+   public Long getCreateChatroom(ChatroomDTO chatroomDTO);
 
 	public List<ChatroomDTO> getCreateSchroom(List<ChatroomDTO> chatroomDTO);
 
-	public void getUpdateChatroom(ChatroomDTO chatroomDTO);
+   public void getUpdateChatroom(ChatroomDTO chatroomDTO);
 
-	public void deleteChatroom(Long chatroomId);
+   public void deleteChatroom(Long chatroomId);
 
 }

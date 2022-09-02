@@ -21,17 +21,11 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/cre")
 @RequiredArgsConstructor
-@CrossOrigin(origins = { "http://localhost:3000" })
+//@CrossOrigin(origins = { "http://localhost:3000", "ws://15.164.224.26:8080" })
+@CrossOrigin(origins = { "http://15.164.224.26:8080" })
 public class ChatREmpRestController {
 
-	private final ChatREmpServiceImpl chatREmpServicImpl;
-
-	// headCount 2인 채팅방 목록 불러오기
-	@GetMapping(value = "/allchatemp/{empId}")
-	public List<ChatroomEmployeeDTO> allChatEmp(@PathVariable String empId) {
-		List<ChatroomEmployeeDTO> chatroomDTOList = chatREmpServicImpl.getallChatEmp(empId);
-		return chatroomDTOList;
-	}
+   private final ChatREmpServiceImpl chatREmpServicImpl;
 
 	// chatroomEmployee T에 chatroomId로 사원정보 가져오기
 	@GetMapping(value = "/onechatemp/{chatroomId}")

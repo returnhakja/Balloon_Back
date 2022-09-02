@@ -59,5 +59,4 @@ public class ChatroomEmployee {
 				.inTime(chatroomEmployeeEntity.getInTime()).build();
 		return chatroomEmployeeDTO;
 	}
-
 }
