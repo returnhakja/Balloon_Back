@@ -11,6 +11,7 @@ install:
   - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 before_install:
+  - cd ./ballon
   - chmod +x mvnw
 
 # Travis CI 서버의 Home
