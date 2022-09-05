@@ -23,7 +23,6 @@ local.properties
 .loadpath
 .recommenders
 application-mysql.properties
-application.yml
 
 # servers
 servers/
