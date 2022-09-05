@@ -77,17 +77,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
       http.exceptionHandling().accessDeniedPage("/accesDenied");
       http.apply(new JwtSecurityConfig(tokenProvider));
-
       return http.build();
    }
 
 
-   @Override
-   public void addCorsMappings(CorsRegistry registry) {
-      registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:8080", "http://15.164.224.26:80", "ws://15.164.224.26:8080")
-            .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
-            .allowCredentials(true).maxAge(MAX_AGE_SECS);
-   }
 
 	// JSESSIONID 삭제
 	@Bean
@@ -101,6 +94,16 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 			}
 		};
 	}
+}
 
+	}
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:80")
+				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
+				.allowCredentials(true).maxAge(MAX_AGE_SECS);
+	}
 
 }
+
