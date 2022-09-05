@@ -9,7 +9,7 @@ branches:
 install:
   - mvn -N io.takari:maven:wrapper
   - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
- mvn install
+  - mvn install
 before_install:
   - cd ./balloon
   - chmod +x mvnw
