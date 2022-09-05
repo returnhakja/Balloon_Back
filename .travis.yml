@@ -5,14 +5,16 @@ jdk:
 branches:
   only:
     - main
+    
+before_install:
+  - cd ./balloon
+  - chmod +x mvnw
 
 install:
   - mvn -N io.takari:maven:wrapper
   - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-  - mvn install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
-before_install:
-  - cd ./balloon
-  - chmod +x mvnw
+  
+
 
 # Travis CI 서버의 Home
 cache:
