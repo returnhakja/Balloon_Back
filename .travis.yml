@@ -7,7 +7,6 @@ branches:
     - main
 
 install:
-  - true
   - mvn -N io.takari:maven:wrapper
   - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
@@ -25,7 +24,6 @@ script:
   - java --version
   - ./mvnw clean install
   - ./mvnw test
-  - mvn install
 
 
 before_deploy:
