@@ -8,7 +8,11 @@ branches:
     
 before_install:
   - cd ./balloon
+  - openssl aes-256-cbc -K $encrypted_ed2a430b953b_key -iv $encrypted_ed2a430b953b_iv -in ap.tar.enc -out ap.tar -d
+  - tar xvf ap.tar -C ./src/main/resources
   - chmod +x mvnw
+  
+
 
 install:
   - mvn -N io.takari:maven:wrapper
