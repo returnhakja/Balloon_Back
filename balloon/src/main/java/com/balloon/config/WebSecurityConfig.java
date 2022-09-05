@@ -90,6 +90,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
    }
 
 	// JSESSIONID 삭제
+   // 수정
 	@Bean
 	public ServletContextInitializer clearJsession() {
 		return new ServletContextInitializer() {
