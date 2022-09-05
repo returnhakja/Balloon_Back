@@ -23,6 +23,7 @@ local.properties
 .loadpath
 .recommenders
 application-mysql.properties
+application-jwt.properties
 
 # servers
 servers/
