@@ -3,11 +3,11 @@ spring:
 #  # DB
 #  profiles:
 #    include: mysql
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: balloon
-    url: jdbc:mysql://balloon.cgcnztu7kfnc.ap-northeast-2.rds.amazonaws.com:3306/balloon?rewriteBatchedStatements=true&profileSQL=true&logger=Slf4JLogger&maxQuerySizeToLog=999999
-    password: balloon1234
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    username: balloon
+#    url: jdbc:mysql://balloon.cgcnztu7kfnc.ap-northeast-2.rds.amazonaws.com:3306/balloon?rewriteBatchedStatements=true&profileSQL=true&logger=Slf4JLogger&maxQuerySizeToLog=999999
+#    password: balloon1234
 
   # JPA
   jpa:
