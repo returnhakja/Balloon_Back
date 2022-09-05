@@ -1,8 +1,9 @@
 spring:
 
-#  # DB
-#  profiles:
-#    include: mysql
+  # DB
+  profiles:
+    include: mysql, jwt
+
 
   # JPA
   jpa:
@@ -38,12 +39,4 @@ spring:
 logging:
   level:
     com.balloon: debug    
-
-jwt:
-  header: Authorization
-  #Because it will use the HS512 algorithm, it should use 512 bits, or a secret key of 64 bytes or more.
-  secret: YmFsbG9vbi1wcm9qZWN0LWFpci13ZS1tYWRlLW1lc3Nlbmdlci1jYWxlbmRhci1lbGVjdHJvbmljQXBwcm92YWwtc3ByaW5nLXNlY3VyaXR5Cg==
-  token-validity-in-seconds: 86400
   
-  
-
