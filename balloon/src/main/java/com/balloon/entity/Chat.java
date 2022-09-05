@@ -34,6 +34,7 @@ import lombok.NoArgsConstructor;
 @DynamicInsert
 public class Chat {
 
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "chat_id")
@@ -46,6 +47,9 @@ public class Chat {
 	@CreatedDate
 	private LocalDateTime chatTime;
 
+	@Column(name = "status")
+	private Long status;
+
 	@ManyToOne
 	@JoinColumn(name = "chatroom_id")
 	private Chatroom chatroom;
@@ -54,19 +58,16 @@ public class Chat {
 	@JoinColumn(name = "emp_id")
 	private Employee employee;
 
-	@Column(name = "status")
-	private Long status;
-
 	public ChatDTO toDTO(Chat chatEntity) {
 		ChatDTO chatDTO = ChatDTO.builder().chatId(chatEntity.getChatId()).chatContent(chatEntity.getChatContent())
-				.chatTime(chatEntity.getChatTime()).chatroom(chatEntity.getChatroom())
-				.employee(chatEntity.getEmployee()).status(chatEntity.getStatus()).build();
+				.chatTime(chatEntity.getChatTime()).status(chatEntity.getStatus()).chatroom(chatEntity.getChatroom())
+				.employee(chatEntity.getEmployee()).build();
 		return chatDTO;
 	}
 
 	public ChatDTO toChatDTO(Chat chatEntity) {
 		ChatDTO chatDTO = ChatDTO.builder().chatContent(chatEntity.getChatContent()).chatTime(chatEntity.getChatTime())
-				.chatroom(chatEntity.getChatroom()).employee(chatEntity.getEmployee()).status(chatEntity.getStatus())
+				.status(chatEntity.getStatus()).chatroom(chatEntity.getChatroom()).employee(chatEntity.getEmployee())
 				.build();
 		return chatDTO;
 	}

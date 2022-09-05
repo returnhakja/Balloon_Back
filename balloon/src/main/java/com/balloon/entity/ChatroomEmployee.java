@@ -48,12 +48,15 @@ public class ChatroomEmployee {
 	@Column(name = "exit_time")
 	private LocalDateTime exitTime;
 
+	@Column(name = "in_time")
+	private LocalDateTime inTime;
+
 	public ChatroomEmployeeDTO toDTO(ChatroomEmployee chatroomEmployeeEntity) {
 		Chatroom chatroom = chatroomEmployeeEntity.getChatroomId();
 		Employee employee = chatroomEmployeeEntity.getEmpId();
 		ChatroomEmployeeDTO chatroomEmployeeDTO = ChatroomEmployeeDTO.builder().chatroomId(chatroom.toDTO(chatroom))
-				.empId(employee.toDTO(employee)).exitTime(chatroomEmployeeEntity.getExitTime()).build();
+				.empId(employee.toDTO(employee)).exitTime(chatroomEmployeeEntity.getExitTime())
+				.inTime(chatroomEmployeeEntity.getInTime()).build();
 		return chatroomEmployeeDTO;
 	}
-
 }

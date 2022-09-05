@@ -18,28 +18,28 @@ import lombok.ToString;
 @ToString
 public class ChatroomEmployeeDTO {
 
-	private ChatroomDTO chatroomId;
-
-	private EmpDTO empId;
-
-	private LocalDateTime exitTime;
+   private ChatroomDTO chatroomId;
+   private EmpDTO empId;
+   private LocalDateTime exitTime;
+	 private LocalDateTime inTime;
 
 	public ChatroomEmployee toEntity(ChatroomEmployeeDTO chatroomEmployeeDTO) {
 		ChatroomDTO chatroomDTO = chatroomEmployeeDTO.getChatroomId();
 		EmpDTO employeeDTO = chatroomEmployeeDTO.getEmpId();
 		ChatroomEmployee chatroomEmployeeEntity = ChatroomEmployee.builder()
 				.chatroomId(chatroomDTO.toEntity(chatroomDTO)).empId(employeeDTO.toEntity(employeeDTO))
-				.exitTime(chatroomEmployeeDTO.getExitTime()).build();
+				.exitTime(chatroomEmployeeDTO.getExitTime()).inTime(chatroomEmployeeDTO.getInTime()).build();
 		return chatroomEmployeeEntity;
 	}
 
-	public ChatroomEmployeeId toId(ChatroomEmployeeDTO chatroomEmployeeDTO) {
-		ChatroomDTO chatroomDTO = chatroomEmployeeDTO.getChatroomId();
-		EmpDTO employeeDTO = chatroomEmployeeDTO.getEmpId();
-		ChatroomEmployeeId chatroomEmployeeIdEntity = ChatroomEmployeeId.builder()
-				.chatroomId(chatroomDTO.toEntity(chatroomDTO).getChatroomId())
-				.empId(employeeDTO.toEntity(employeeDTO).getEmpId()).build();
-		return chatroomEmployeeIdEntity;
-	}
+
+   public ChatroomEmployeeId toId(ChatroomEmployeeDTO chatroomEmployeeDTO) {
+      ChatroomDTO chatroomDTO = chatroomEmployeeDTO.getChatroomId();
+      EmpDTO employeeDTO = chatroomEmployeeDTO.getEmpId();
+      ChatroomEmployeeId chatroomEmployeeIdEntity = ChatroomEmployeeId.builder()
+            .chatroomId(chatroomDTO.toEntity(chatroomDTO).getChatroomId())
+            .empId(employeeDTO.toEntity(employeeDTO).getEmpId()).build();
+      return chatroomEmployeeIdEntity;
+   }
 
 }

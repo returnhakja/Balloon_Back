@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.ChatroomDTO;
-import com.balloon.entity.Chatroom;
 import com.balloon.service.ChatroomServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -22,34 +21,34 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/chatroom")
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000" })
+//@CrossOrigin(origins = {"http://15.164.224.26:8080"})
 public class ChatroomRestController {
 
-	private final ChatroomServiceImpl chatroomSvc;
+   private final ChatroomServiceImpl chatroomSvc;
+
 
 	// 채팅방 목록 조회
 	@GetMapping(value = "/allchatroom")
-	public List<Chatroom> allChatroom() {
+	public List<ChatroomDTO> allChatroom() {
 		return chatroomSvc.getAllChatroom();
 	}
 
 	// 채팅방 조회
 	@GetMapping(value = "/onechatroom/{chatroomId}")
-	public Chatroom onechatroom(@PathVariable Long chatroomId) {
+	public ChatroomDTO onechatroom(@PathVariable Long chatroomId) {
 		return chatroomSvc.getOneChatroom(chatroomId);
 	}
 
 	// 채팅방 개설
 	@PostMapping(value = "/createchatroom")
 	public Long createchatroom(@RequestBody ChatroomDTO chatroomDTO) {
-		System.out.println(chatroomDTO);
 		return chatroomSvc.getCreateChatroom(chatroomDTO);
 	}
 
 	// 일정을 공유할 사원만큼 채팅방을 생성하는 코드
 	@PostMapping(value = "/createschchatroom")
-	public List<Chatroom> createSchChatroom(@RequestBody List<ChatroomDTO> chatroomDTOList) {
-		System.out.println(chatroomDTOList);
-		return chatroomSvc.getCreateSchroom(chatroomDTOList);
+	public List<ChatroomDTO> createSchChatroom(@RequestBody List<ChatroomDTO> chatroomDTO) {
+		return chatroomSvc.getCreateSchroom(chatroomDTO);
 	}
 
 	// 채팅방 이름 수정

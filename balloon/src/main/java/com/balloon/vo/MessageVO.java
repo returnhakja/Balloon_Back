@@ -20,10 +20,12 @@ public class MessageVO {
 
 	String chatContent;
 
-	public Chat toChat(MessageVO messageDTO) {
+	Long status;
+
+	public Chat toChat(MessageVO messageVO) {
 		// ---------------chatRoomId 값을 entity로 변환해준 것-----------------------
 		ChatroomDTO chatroomDTO = new ChatroomDTO();
-		chatroomDTO.setChatroomId(Long.parseLong(messageDTO.getChatroomId()));
+		chatroomDTO.setChatroomId(Long.parseLong(messageVO.getChatroomId()));
 		Chatroom chatRoomId = chatroomDTO.toEntity(chatroomDTO);
 		// --------------------------------------------------
 		// ---------------EmployeeId 값을 entity로 변환해준 것-----------------------
@@ -32,8 +34,8 @@ public class MessageVO {
 //		Employee employeeId = employeeDTO.toEntity(employeeDTO);
 
 		// ---------------------------------------------
-		Chat chatEntity = Chat.builder().chatroom(chatRoomId).chatContent(messageDTO.getChatContent())
-				.employee(messageDTO.getWriter().toEntity(messageDTO.getWriter())).build();
+		Chat chatEntity = Chat.builder().chatroom(chatRoomId).chatContent(messageVO.getChatContent())
+				.employee(messageVO.getWriter().toEntity(messageVO.getWriter())).status(messageVO.getStatus()).build();
 		return chatEntity;
 //		Chat chatEntity = Chat.builder().chatroom(chatRoomId).chatContent(messageDTO.getChatContent())
 //				.employee(employeeId).build();

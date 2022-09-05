@@ -33,6 +33,7 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class WebSecurityConfig implements WebMvcConfigurer {
 
+
 	private final TokenProvider tokenProvider;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
@@ -53,29 +54,33 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 		;
 
-		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-				.accessDeniedHandler(jwtAccessDeniedHandler);
+      http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+            .accessDeniedHandler(jwtAccessDeniedHandler);
 
-		http.authorizeRequests()
+      http.authorizeRequests()
 
-				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
-				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
-				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
-//				.permitAll()//
-				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
-				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
-				.anyRequest().authenticated();//
 
-		http.logout().permitAll();
+//				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
+//				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
+//				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
+////				.permitAll()//
+//				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
+//				.anyRequest().authenticated();//
+      .anyRequest().permitAll();//
 
-		http.exceptionHandling().accessDeniedPage("/accesDenied");
-		http.apply(new JwtSecurityConfig(tokenProvider));
 
-		return http.build();
-	}
+      http.logout().permitAll();
+
+      http.exceptionHandling().accessDeniedPage("/accesDenied");
+      http.apply(new JwtSecurityConfig(tokenProvider));
+      return http.build();
+   }
+
+
 
 	// JSESSIONID 삭제
 	@Bean
@@ -89,6 +94,9 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 			}
 		};
 	}
+}
+
+	}
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
@@ -98,3 +106,4 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 	}
 
 }
+

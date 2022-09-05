@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.dto.ChatroomDTO;
 import com.balloon.dto.ChatroomEmployeeDTO;
-import com.balloon.entity.ChatroomEmployee;
 import com.balloon.service.ChatREmpServiceImpl;
 
 import lombok.RequiredArgsConstructor;
@@ -23,42 +22,35 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/cre")
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000" })
+//@CrossOrigin(origins = { "http://15.164.224.26:8080" })
 public class ChatREmpRestController {
 
-	private final ChatREmpServiceImpl chatREmpServicImpl;
-
-	// headCount 2인 채팅방 목록 불러오기
-	@GetMapping(value = "/allchatemp")
-	public List<ChatroomEmployee> allChatEmp() {
-		return chatREmpServicImpl.getallChatEmp();
-	}
+   private final ChatREmpServiceImpl chatREmpServicImpl;
 
 	// chatroomEmployee T에 chatroomId로 사원정보 가져오기
 	@GetMapping(value = "/onechatemp/{chatroomId}")
-	public List<ChatroomEmployee> chatroomEmp(@PathVariable(value = "chatroomId") Long chatroomId) {
+	public List<ChatroomEmployeeDTO> chatroomEmp(@PathVariable(value = "chatroomId") Long chatroomId) {
 		return chatREmpServicImpl.getChatroomEmp(chatroomId);
 	}
 
 	// 이미 일정봇과 채팅이 존재하는 사원 찾기
 	@PostMapping(value = "/botchatroom", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public List<ChatroomEmployee> calendarBot(@RequestBody List<String> empIds) {
+	public List<ChatroomEmployeeDTO> calendarBot(@RequestBody List<String> empIds) {
 		return chatREmpServicImpl.getBotchatroom(empIds);
 	}
 
 	// chatroomEmployee T에 초대할 사람과 초대한 사람 넣어주기
 	@PostMapping(value = "/insertchatemp/{chatroomId}")
-	public List<ChatroomEmployee> insertChatEmpList(@PathVariable(name = "chatroomId") Long chatroomId,
+	public List<ChatroomEmployeeDTO> insertChatEmpList(@PathVariable(name = "chatroomId") Long chatroomId,
 			@RequestBody List<ChatroomEmployeeDTO> chatroomEmployeeDTO) {
 		// 채팅방 id 값 넣기
 		ChatroomDTO chatroomDTO = new ChatroomDTO();
 		chatroomDTO.setChatroomId(chatroomId);
-
 		// 모든 사원 리스트
 		for (ChatroomEmployeeDTO chatroomEmpDTO : chatroomEmployeeDTO) {
 			chatroomEmpDTO.setChatroomId(chatroomDTO);
 		}
 		return chatREmpServicImpl.getInsertChatEmp(chatroomEmployeeDTO);
-
 	}
 
 	// 채팅방 혼자 나가기
