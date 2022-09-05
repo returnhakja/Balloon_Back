@@ -4,7 +4,7 @@ jdk:
 
 branches:
   only:
-    - feature/cal2
+    - main
     
 before_install:
   - cd ./balloon
@@ -16,6 +16,7 @@ before_install:
 
 install:
   - mvn -N io.takari:maven:wrapper
+  - ls
   - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
  # - ./mvnw clean package
   
@@ -30,6 +31,7 @@ script:
   - java --version
   - ./mvnw clean install
   - ./mvnw test
+  - pwd
 
 
 before_deploy:
