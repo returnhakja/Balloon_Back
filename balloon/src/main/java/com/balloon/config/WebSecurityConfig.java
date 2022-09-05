@@ -49,8 +49,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		http.httpBasic().disable()
 
 				.csrf().disable()
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-						.maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//						.maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
 
 		;
 
