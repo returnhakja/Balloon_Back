@@ -8,7 +8,7 @@ branches:
 
 install:
   - mvn -N io.takari:maven:wrapper
-  - ./mvnw install
+  - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
 
 before_install:
   - cd ./balloon
