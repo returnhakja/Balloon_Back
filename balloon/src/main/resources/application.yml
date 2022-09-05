@@ -1,8 +1,9 @@
 spring:
 
-#  # DB
-#  profiles:
-#    include: mysql
+  # DB
+  profiles:
+    include: mysql
+
 
   # JPA
   jpa:
