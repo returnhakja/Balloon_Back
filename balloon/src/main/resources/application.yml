@@ -2,7 +2,7 @@ spring:
 
   # DB
   profiles:
-    include: mysql, jwt
+    include: mysql, jwt 
   # 테스트으
   # JPA
   jpa:
@@ -39,3 +39,5 @@ logging:
   level:
     com.balloon: debug    
   
+
+
