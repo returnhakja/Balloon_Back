@@ -30,7 +30,7 @@ cache:
     - '$HOME/.m2'
 
 script:
-  - java --version
+  - java -version
   - ./mvnw clean install
   - ./mvnw test
   - pwd
