@@ -12,7 +12,7 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_642a38c09945_key -iv $encrypted_642a38c09945_iv -in ap-jwt.tar.enc -out ap-jwt.tar -d
   - tar xvf ap.tar -C ./src/main/resources
   - tar xvf ap-jwt.tar -C ./src/main/resources
-  - mvn clean install
+  - mvnw clean install
   - chmod +x mvnw
   
 
