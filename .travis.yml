@@ -20,7 +20,7 @@ install:
   - mvn -N io.takari:maven:wrapper
   - ls
   - ./mvnw install -DskipTests=true -Dmaven.javadoc.skip=true -B -V
- # - ./mvnw clean package
+
   
 
 
