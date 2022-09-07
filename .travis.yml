@@ -12,7 +12,6 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_642a38c09945_key -iv $encrypted_642a38c09945_iv -in ap-jwt.tar.enc -out ap-jwt.tar -d
   - tar xvf ap.tar -C ./src/main/resources
   - tar xvf ap-jwt.tar -C ./src/main/resources
-  - mvn clean install
   - chmod +x mvnw
   
 
@@ -32,8 +31,8 @@ cache:
 
 script:
   - java -version
-  - ./mvnw clean install
-  - ./mvnw test
+#  - ./mvnw clean install
+#  - ./mvnw test
   - pwd
 
 
@@ -55,7 +54,10 @@ deploy:
     skip_cleanup: true
     acl: private # zip 파일 접근을 private으로
     local_dir: deploy # before_deploy에서 생성한 디렉토리
-    wait-until-deployed: true
+    wait-until-deployed: true 
+    on:
+      all_branches: true
+  # ??
 
   - provider: codedeploy
     access_key_id: $AWS_ACCESS_KEY # Travis repo settings에 설정된 값
@@ -67,6 +69,8 @@ deploy:
     deployment_group: freelec-springboot2-webservice-group # 웹 콘솔에서 등록한 CodeDeploy 배포 그룹
     region: ap-northeast-2
     wait-until-deployed: true
+    on:
+      all_branches: true
 
 # CI 실행 완료시 메일로 알람
 notifications:
