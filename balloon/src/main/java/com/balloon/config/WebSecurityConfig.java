@@ -57,8 +57,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 //				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
 //				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
-//				.antMatchers(HttpMethod.GET, "/employee/unit/list/**").authenticated()//
-//				.antMatchers("/chatstart").authenticated()//
+////				.antMatchers(HttpMethod.GET, "/employee/unit/list/**").hasAnyRole("USER", "MANAGER", "ADMIN")//
+//				.antMatchers("/chatstart").hasAnyRole("USER", "MANAGER", "ADMIN")//
 ////				.permitAll()//
 //				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
@@ -66,7 +66,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
-//				.anyRequest().authenticated();//
+//				.antMatchers(HttpMethod.PUT, "/employee/update/admin").hasRole("ADMIN")//
+//				.anyRequest().hasAnyRole("USER", "MANAGER", "ADMIN");//
 				.anyRequest().permitAll();//
 
 		http.logout().permitAll();
