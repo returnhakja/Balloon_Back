@@ -20,8 +20,10 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/chat")
 @RequiredArgsConstructor
-@CrossOrigin(origins = { "http://localhost:3000" })
+//@CrossOrigin(origins = { "http://localhost:3000", "ws://15.164.224.26:8080" })
+@CrossOrigin(origins = { "http://15.164.224.26:8080"})
 public class ChatRestController {
+
 
 	private final ChatServiceImpl chatSvc;
 
@@ -38,6 +40,7 @@ public class ChatRestController {
 		return chatSvc.getChatroomInfo(chatroomId, empId);
 	}
 
+
 	// list형태로 DB에 채팅을 담기위해서
 	@PostMapping(value = "/messages")
 	public void messages(@RequestBody List<MessageVO> messageVOList) {
@@ -47,3 +50,4 @@ public class ChatRestController {
 	}
 
 }
+
