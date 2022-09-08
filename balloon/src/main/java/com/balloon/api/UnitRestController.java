@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/unit")
 @RequiredArgsConstructor
-@CrossOrigin(origins = { "http://localhost:3000" }, allowedHeaders = "*")
+//@CrossOrigin(origins = { "http://localhost:3000" })
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;
@@ -118,6 +118,7 @@ public class UnitRestController {
 		return null;
 	}
 
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@PutMapping(value = "/change", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateUnit(@RequestBody UnitDTO unitDTO) throws Exception {
 		try {
@@ -135,6 +136,7 @@ public class UnitRestController {
 		}
 	}
 
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@DeleteMapping(value = "/{unitCode}")
 	public void deleteUnitByUnitCode(@PathVariable String unitCode) throws Exception {
 		try {

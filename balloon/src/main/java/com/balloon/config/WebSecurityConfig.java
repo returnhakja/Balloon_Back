@@ -39,10 +39,9 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		http.httpBasic().disable()
 
 				.csrf().disable()
-				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-						.maximumSessions(2).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//						.maximumSessions(5).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
 
-		;
 
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.accessDeniedHandler(jwtAccessDeniedHandler);
@@ -51,16 +50,17 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 //				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
 //				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
-//				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
+////				.antMatchers(HttpMethod.GET, "/employee/unit/list/**").hasAnyRole("USER", "MANAGER", "ADMIN")//
+//				.antMatchers("/chatstart").hasAnyRole("USER", "MANAGER", "ADMIN")//
 ////				.permitAll()//
+//				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
-//				.antMatchers(HttpMethod.POST, "/employee/emps").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
-//				.antMatchers(HttpMethod.DELETE, "/employee/me/**").authenticated()//
-//				.antMatchers(HttpMethod.GET, "/employee/**").hasRole("ADMIN")//
-//				.anyRequest().authenticated();//
+//				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
+//				.antMatchers(HttpMethod.PUT, "/employee/update/admin").hasRole("ADMIN")//
+//				.anyRequest().hasAnyRole("USER", "MANAGER", "ADMIN");//
 				.anyRequest().permitAll();//
 
 		http.logout().permitAll();
@@ -79,18 +79,5 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
 				.allowCredentials(true).maxAge(MAX_AGE_SECS);
 	}
-
-//	// JSESSIONID 삭제
-//	@Bean
-//	public ServletContextInitializer clearJsession() {
-//		return new ServletContextInitializer() {
-//			@Override
-//			public void onStartup(ServletContext servletContext) throws ServletException {
-//				servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
-//				SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
-//				sessionCookieConfig.setHttpOnly(true);
-//			}
-//		};
-//	}
 
 }
