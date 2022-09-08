@@ -36,4 +36,4 @@ sudo chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 
-sudo nohup java -jar $JAR_NAME &
+sudo nohup java -jar $JAR_NAME >$JAR_NAME.out 2>&1 &
