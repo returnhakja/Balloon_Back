@@ -12,7 +12,7 @@ sudo cp $REPOSITORY/zip/*.jar $REALREPOSITORY
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
-CURRENT_PID=$(pgrep -fl jar awk '{print $1}')
+CURRENT_PID=$(pgrep -fl jar | awk '{print $1}')
 
 echo "현재 구동중인 어플리케이션 pid: $CURRENT_PID"
 
@@ -36,4 +36,5 @@ sudo chmod +x $JAR_NAME
 
 echo "> $JAR_NAME 실행"
 
+nohup java -jar $JAR_NAME > $REPOSITORY/nohup.out 2>&1 &
 sudo nohup java -jar $JAR_NAME > $REALREPOSITORY/nohup.out 2>&1 &
