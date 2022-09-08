@@ -42,7 +42,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 //						.maximumSessions(5).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
 
-
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.accessDeniedHandler(jwtAccessDeniedHandler);
 
