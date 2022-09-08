@@ -27,8 +27,8 @@ public class ApvlRestController {
 
 	// CREATE -------------------------------
 	@PostMapping(value = "/apvl", consumes = MediaType.APPLICATION_JSON_VALUE)
-	public void insertApvl(@RequestBody ApvlDTO apvlDTO) {
-		ApvlSvc.insertApvl(apvlDTO);
+	public void insertApvl(@RequestBody List<ApvlDTO> apvlDTOList) {
+		ApvlSvc.insertApvl(apvlDTOList);
 	}
 
 	// READ ---------------------------------

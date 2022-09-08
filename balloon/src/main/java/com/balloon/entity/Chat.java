@@ -34,7 +34,6 @@ import lombok.NoArgsConstructor;
 @DynamicInsert
 public class Chat {
 
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "chat_id")
