@@ -2,10 +2,13 @@
 
 REPOSITORY=/home/ubuntu/Balloon_Back
 PROJECT_NAME=Balloon
+REALREPOSITORY=/home/ubuntu/Real_Balloon_Back
 
 echo "> Build 파일 복사"
 
-sudo cp $REPOSITORY/zip/*.jar $REPOSITORY/
+mkdir -p $REALREPOSITORY
+
+sudo cp $REPOSITORY/zip/*.jar $REALREPOSITORY
 
 echo "> 현재 구동중인 애플리케이션 pid 확인"
 
@@ -23,7 +26,7 @@ fi
 
 echo "> 새 어플리케이션 배포"
 
-JAR_NAME=$(ls -tr $REPOSITORY/*.jar | tail -n 1)
+JAR_NAME=$(ls -tr $ReALREPOSITORY/*.jar | tail -n 1)
 
 echo "> JAR Name: $JAR_NAME"
 
