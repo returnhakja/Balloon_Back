@@ -17,7 +17,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class EmpResponseDTO {
 
-
 	private String empId;              
 	private String empName;
 	private String position;
@@ -59,4 +58,3 @@ public class EmpResponseDTO {
 	}
 
 }
-
