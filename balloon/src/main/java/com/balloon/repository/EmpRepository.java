@@ -31,7 +31,7 @@ public interface EmpRepository extends JpaRepository<Employee, String> {
 	@Query(value = "SELECT * FROM employee e " + "	    WHERE e.unit_code = (SELECT u.parent_unit FROM unit u "
 			+ "											WHERE u.unit_code = ( SELECT ee.unit_code FROM employee ee "
 			+ "																WHERE ee.emp_id = :empId) "
-			+ "					 ) " + "ORDER BY e.emp_name ASC;", nativeQuery = true)
+			+ "					 ) " + "AND e.emp_id NOT LIKE \"Y%\" " + "ORDER BY e.emp_name ASC;", nativeQuery = true)
 	public List<Employee> findEmpListOnParentCode(@Param("empId") String empId);
 
 	@Query(value = "SELECT * FROM employee e " + "	   WHERE e.unit_code IN (SELECT u.unit_code FROM unit u "
