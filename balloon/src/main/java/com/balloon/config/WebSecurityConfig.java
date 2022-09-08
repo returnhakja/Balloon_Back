@@ -64,10 +64,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 		http.logout().permitAll();
 
-
 		http.exceptionHandling().accessDeniedPage("/accesDenied");
 		http.apply(new JwtSecurityConfig(tokenProvider));
-
 
 		return http.build();
 	}

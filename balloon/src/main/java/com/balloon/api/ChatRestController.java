@@ -40,7 +40,6 @@ public class ChatRestController {
 		return chatSvc.getChatroomInfo(chatroomId, empId);
 	}
 
-
 	// list형태로 DB에 채팅을 담기위해서
 	@PostMapping(value = "/messages")
 	public void messages(@RequestBody List<MessageVO> messageVOList) {
@@ -50,4 +49,3 @@ public class ChatRestController {
 	}
 
 }
-

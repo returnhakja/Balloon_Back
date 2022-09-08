@@ -10,7 +10,6 @@ import org.springframework.web.socket.config.annotation.WebSocketMessageBrokerCo
 @EnableWebSocketMessageBroker
 public class ChatConfig implements WebSocketMessageBrokerConfigurer {
 
-
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
 		// websocket에 접근하기위한 Endpoint -> localhost:8000/chatstart/topic 으로 발행 또는 구독시에만
@@ -28,4 +27,3 @@ public class ChatConfig implements WebSocketMessageBrokerConfigurer {
 		config.setApplicationDestinationPrefixes("/app");
 	}
 }
-
