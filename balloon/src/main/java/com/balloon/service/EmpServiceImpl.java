@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.balloon.config.SecurityUtil;
 import com.balloon.dto.EmpDTO;
+import com.balloon.dto.EmpResByAdminDTO;
 import com.balloon.dto.EmpResponseDTO;
 import com.balloon.dto.PageRequestDTO;
 import com.balloon.dto.PageResultDTO;
@@ -46,6 +47,17 @@ public class EmpServiceImpl implements EmpService {
 			throw new Exception("사원 정보가 존재하지 않습니다.");
 		} else {
 			return empEntity.toDTO(empEntity);
+		}
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public EmpResByAdminDTO findEmpInfoByEmpIdUseAdmin(String empId) throws Exception {
+		Employee empEntity = empRepo.findEmpByEmpId(empId);
+		if (empEntity == null) {
+			throw new Exception("사원 정보가 존재하지 않습니다.");
+		} else {
+			return empEntity.toDTOByAdmin(empEntity);
 		}
 	}
 
@@ -108,9 +120,21 @@ public class EmpServiceImpl implements EmpService {
 
 	}
 
+	@Transactional
 	@Override
 	public void deleteByEmpId(String empId) {
 		empRepo.deleteById(empId);
+	}
+
+	@Transactional
+	@Override
+	public void updateEmpByAdmin(EmpResByAdminDTO empDTO) {
+		Employee employee = empRepo.findEmpByEmpId(empDTO.getEmpId());
+		if (employee == null) {
+			throw new RuntimeException("로그인 유저 정보가 없습니다.");
+		}
+		employee.updateEmpByAdmin(empDTO, passwordEncoder);
+		empRepo.save(employee);
 	}
 
 	@Transactional

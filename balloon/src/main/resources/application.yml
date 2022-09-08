@@ -1,13 +1,8 @@
 spring:
 
-#  # DB
-#  profiles:
-#    include: mysql
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: balloon
-    url: jdbc:mysql://balloon.cgcnztu7kfnc.ap-northeast-2.rds.amazonaws.com:3306/balloon?rewriteBatchedStatements=true&profileSQL=true&logger=Slf4JLogger&maxQuerySizeToLog=999999
-    password: balloon1234
+  # DB
+  profiles:
+    include: mysql, jwt, aws
 
   # JPA
   jpa:
@@ -43,12 +38,3 @@ spring:
 logging:
   level:
     com.balloon: debug    
-
-jwt:
-  header: Authorization
-  #Because it will use the HS512 algorithm, it should use 512 bits, or a secret key of 64 bytes or more.
-  secret: YmFsbG9vbi1wcm9qZWN0LWFpci13ZS1tYWRlLW1lc3Nlbmdlci1jYWxlbmRhci1lbGVjdHJvbmljQXBwcm92YWwtc3ByaW5nLXNlY3VyaXR5Cg==
-  token-validity-in-seconds: 86400
-  
-  
-

@@ -22,10 +22,10 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @CrossOrigin(origins = { "http://localhost:3000" })
 //@CrossOrigin(origins = {"http://15.164.224.26:8080"})
+
 public class ChatroomRestController {
 
-   private final ChatroomServiceImpl chatroomSvc;
-
+	private final ChatroomServiceImpl chatroomSvc;
 
 	// 채팅방 목록 조회
 	@GetMapping(value = "/allchatroom")

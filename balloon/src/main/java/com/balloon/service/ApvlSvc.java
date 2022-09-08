@@ -5,7 +5,7 @@ import java.util.List;
 import com.balloon.dto.ApvlDTO;
 
 public interface ApvlSvc {
-	public void insertApvl(ApvlDTO apvlDTO);
+	public void insertApvl(List<ApvlDTO> approverDTOList);
 
 	public List<ApvlDTO> getApvlByBizRptId(String docId);
 
