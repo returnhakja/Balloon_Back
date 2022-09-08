@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/unit")
 @RequiredArgsConstructor
-@CrossOrigin(origins = { "http://localhost:3000" }, allowedHeaders = "*")
+//@CrossOrigin(origins = { "http://localhost:3000" })
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;
@@ -55,6 +55,20 @@ public class UnitRestController {
 			throw new Exception("조직 번호가 없습니다요.");
 		}
 	}
+
+	@GetMapping(value = "/higherorganization")
+	public List<UnitDTO> findByHigherOrganization() throws Exception {
+		try {
+			List<UnitDTO> unitDTOList = unitSvc.findByHigherOrganization();
+			if (unitDTOList == null) {
+				throw new Exception("존재하는 조직이 없습니다.");
+			}
+			return unitDTOList;
+
+		} catch (Exception e) {
+			throw new Exception("존재하는 조직이 없습니다.");
+		}
+	};
 
 //	@GetMapping(value = "/childs/")
 //	public UnitDTO findChildUnitByUnitCode(@RequestBody List<UnitDTO> unitDTOList) throws Exception {
@@ -104,6 +118,7 @@ public class UnitRestController {
 		return null;
 	}
 
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@PutMapping(value = "/change", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateUnit(@RequestBody UnitDTO unitDTO) throws Exception {
 		try {
@@ -121,6 +136,7 @@ public class UnitRestController {
 		}
 	}
 
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@DeleteMapping(value = "/{unitCode}")
 	public void deleteUnitByUnitCode(@PathVariable String unitCode) throws Exception {
 		try {

@@ -20,14 +20,22 @@ public class ChatroomServiceImpl implements ChatroomService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public List<Chatroom> getAllChatroom() {
-		return chatroomRepo.findAll();
+	public List<ChatroomDTO> getAllChatroom() {
+		List<ChatroomDTO> chatroomDTOList = new ArrayList<ChatroomDTO>();
+		List<Chatroom> chatroomEntityList = chatroomRepo.findAll();
+		for (Chatroom chatroomEntity : chatroomEntityList) {
+			chatroomDTOList.add(chatroomEntity.toDTO(chatroomEntity));
+		}
+		return chatroomDTOList;
 	}
 
 	@Transactional(readOnly = true)
 	@Override
-	public Chatroom getOneChatroom(Long chatroomId) {
-		return chatroomRepo.findChatroomByChatroomId(chatroomId);
+	public ChatroomDTO getOneChatroom(Long chatroomId) {
+		ChatroomDTO chatroomDTO = new ChatroomDTO();
+		Chatroom chatroomEntity = chatroomRepo.findChatroomByChatroomId(chatroomId);
+		chatroomDTO = chatroomEntity.toDTO(chatroomEntity);
+		return chatroomDTO;
 	}
 
 	@Transactional
@@ -39,12 +47,19 @@ public class ChatroomServiceImpl implements ChatroomService {
 
 	@Transactional
 	@Override
-	public List<Chatroom> getCreateSchroom(List<ChatroomDTO> chatroomDTOList) {
+	public List<ChatroomDTO> getCreateSchroom(List<ChatroomDTO> chatroomDTO) {
+		List<ChatroomDTO> chatroomDTOList = new ArrayList<ChatroomDTO>();
 		List<Chatroom> chatroomEntityList = new ArrayList<Chatroom>();
-		for (ChatroomDTO chatroomDTO : chatroomDTOList) {
-			chatroomEntityList.add(chatroomDTO.toEntity(chatroomDTO));
+
+		for (ChatroomDTO chatroomDto : chatroomDTO) {
+			chatroomEntityList.add(chatroomDto.toEntity(chatroomDto));
 		}
-		return chatroomRepo.saveAll(chatroomEntityList);
+		chatroomEntityList = chatroomRepo.saveAll(chatroomEntityList);
+
+		for (Chatroom chatroomEntity : chatroomEntityList) {
+			chatroomDTOList.add(chatroomEntity.toDTO(chatroomEntity));
+		}
+		return chatroomDTOList;
 	}
 
 	@Transactional

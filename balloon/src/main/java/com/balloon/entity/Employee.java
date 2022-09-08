@@ -19,8 +19,10 @@ import javax.validation.constraints.NotNull;
 
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.balloon.dto.EmpDTO;
+import com.balloon.dto.EmpResByAdminDTO;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
@@ -133,6 +135,17 @@ public class Employee implements Persistable<String> {
 		return employeeDTO;
 	}
 
+	public EmpResByAdminDTO toDTOByAdmin(Employee employeeEntity) {
+		EmpResByAdminDTO employeeDTO = EmpResByAdminDTO.builder().empId(employeeEntity.getEmpId())
+				.password(employeeEntity.getPassword()).empName(employeeEntity.getEmpName())
+				.position(employeeEntity.getPosition()).responsibility(employeeEntity.getResponsibility())
+				.salary(employeeEntity.getSalary()).commission(employeeEntity.getCommission())
+				.photo(employeeEntity.getPhoto()).empBell(employeeEntity.getEmpBell()).unit(employeeEntity.getUnit())
+				.userRoleGrade(employeeEntity.getUserRoleGrade()).build();
+
+		return employeeDTO;
+	}
+
 	@Override
 	public String getId() {
 		return empId;
@@ -141,6 +154,42 @@ public class Employee implements Persistable<String> {
 	@Override
 	public boolean isNew() {
 		return hiredate == null;
+	}
+
+	public void updatePhoto(EmpDTO empDTO) {
+		this.photo = empDTO.getPhoto();
+	}
+
+	/* 관리자가 사원 정보 수정 */
+	public void updateEmpByAdmin(EmpResByAdminDTO empDTO, PasswordEncoder passwordEncoder) {
+		this.empId = empDTO.getEmpId();
+		if (empDTO.getPassword() != null) {
+			this.password = passwordEncoder.encode(empDTO.getPassword());
+		}
+		this.empName = empDTO.getEmpName();
+		this.position = empDTO.getPosition();
+		this.responsibility = empDTO.getResponsibility();
+		this.salary = empDTO.getSalary();
+		this.commission = empDTO.getCommission();
+		this.empBell = empDTO.getEmpBell();
+		if (empDTO.getPhoto() != null) {
+			this.photo = empDTO.getPhoto();
+		}
+		this.unit = empDTO.getUnit();
+		this.userRoleGrade = empDTO.getUserRoleGrade();
+	}
+
+	public void updateEmpByUser(EmpDTO empDTO) {
+		this.mobile = empDTO.getMobile();
+		this.photo = empDTO.getPhoto();
+		this.empMail = empDTO.getEmpMail();
+		this.address = empDTO.getAddress();
+		this.licensePlate = empDTO.getLicensePlate();
+	}
+
+	public void updateEmpByPerssonelAppointment(EmpDTO empDTO) {
+		this.unit = empDTO.getUnit();
+		this.position = empDTO.getPosition();
 	}
 
 }
