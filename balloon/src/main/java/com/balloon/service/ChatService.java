@@ -14,4 +14,6 @@ public interface ChatService {
 
 	public void insertChat(MessageVO messageVO);
 
+	public void insertChats(List<MessageVO> messageVO);
+
 }

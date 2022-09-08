@@ -18,23 +18,17 @@ import lombok.ToString;
 @Data
 @ToString
 public class ChatDTO {
-
 	private Long chatId;
-
 	private String chatContent;
-
 	private LocalDateTime chatTime;
-
-	private Chatroom chatroom;
-
-	private Employee employee;
-
 	private Long status;
+	private Chatroom chatroom;
+	private Employee employee;
 
 	public Chat toEntity(ChatDTO chatDTO) {
 		Chat chatEntity = Chat.builder().chatId(chatDTO.getChatId()).chatContent(chatDTO.getChatContent())
-				.chatTime(chatDTO.getChatTime()).chatroom(chatDTO.getChatroom()).employee(chatDTO.getEmployee())
-				.status(chatDTO.getStatus()).build();
+				.chatTime(chatDTO.getChatTime()).status(chatDTO.getStatus()).chatroom(chatDTO.getChatroom())
+				.employee(chatDTO.getEmployee()).build();
 		return chatEntity;
 	}
 
