@@ -40,6 +40,7 @@ import lombok.ToString;
 @ToString
 @EntityListeners(AuditingEntityListener.class)
 public class Employee implements Persistable<String> {
+
 	@Id
 	@Column(name = "emp_id", length = 10)
 	private String empId;
