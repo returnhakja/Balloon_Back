@@ -60,4 +60,3 @@ public class ChatServiceImpl implements ChatService {
 	}
 
 }
-

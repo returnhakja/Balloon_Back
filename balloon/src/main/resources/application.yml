@@ -16,7 +16,7 @@ spring:
 #        generate_statistics: true
 #        jdbc:
 #          batch_size: 50
-#        order_inserts: true
+#        order_inserts: true 
     # DB    
     database-platform: org.hibernate.dialect.MySQL8Dialect
 

@@ -76,5 +76,4 @@ public class ChatroomServiceImpl implements ChatroomService {
 	public void deleteChatroom(Long chatroomId) {
 		chatroomRepo.deleteById(chatroomId);
 	}
-
 }
