@@ -39,6 +39,16 @@ public class UnitServiceImpl implements UnitService {
 		return unitDTO;
 	};
 
+	@Transactional(readOnly = true)
+	@Override
+	public List<UnitDTO> findByHigherOrganization() {
+		List<Unit> higherList = unitRepo.findUnitByUnitCodeEndsWith("0000");
+		List<UnitDTO> unitDTOList = new ArrayList<UnitDTO>();
+		higherList.forEach(unitEntity -> unitDTOList.add(unitEntity.toDTO(unitEntity)));
+
+		return unitDTOList;
+	}
+
 	@Transactional
 	@Override
 	public void insertUnit(UnitDTO unitDTO) {
@@ -65,18 +75,24 @@ public class UnitServiceImpl implements UnitService {
 
 	@Transactional
 	@Override
-	public void updateUnit(UnitDTO unitDTO) {
+	public void updateUnit(UnitDTO unitDTO) throws Exception {
 		/* 부서의 모든 정보를 수정할 때 */
 		Unit unitEntity = unitDTO.toEntity(unitDTO);
 
 //		/* 부서 정보의 일부분만 수정할 때 */
-//		Unit unit = findUnitByUnitCode(unitDTO.getUnitCode());
+		Unit unit = unitRepo.findUnitByUnitCode(unitEntity.getUnitCode());
+		if (unit != null) {
+
+			unit.updateUnitInfo(unitDTO);
 //		/* 부서전화번호만 수정할 때 */
 //		unit.updateBell(unitDTO);
 //		/* 부서전화번호와 부서명만 수정할 때 */
 //		unit.updateUnitNameAndBell(unitDTO);
 
-		unitRepo.save(unitEntity);
+			unitRepo.save(unitEntity);
+		} else {
+			throw new Exception("입력한 조직번호에 해당하는 조직이 존재하지 않습니다.");
+		}
 	};
 
 	@Transactional

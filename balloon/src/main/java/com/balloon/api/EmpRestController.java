@@ -77,7 +77,7 @@ public class EmpRestController {
 	@GetMapping("/me")
 	public EmpResponseDTO getMyEmpInfo() throws Exception {
 		EmpResponseDTO myInfoBySecurity = empSvc.getMyInfoBySecurity();
-
+		System.out.println("dddddddddddddddddddddddddddddddddddddddddd");
 		if (myInfoBySecurity == null) {
 			throw new Exception("로그인 된 사원의 정보가 없습니다.");
 		} else {
@@ -85,7 +85,7 @@ public class EmpRestController {
 		}
 	}
 
-	@PostMapping("/empName")
+	@PostMapping("/name")
 	public ResponseEntity<EmpResponseDTO> updateEmpName(@RequestBody EmpRequestDTO empRequestDTO) {
 		return ResponseEntity.ok(empSvc.changeEmpName(empRequestDTO.getEmpId(), empRequestDTO.getEmpName()));
 	}
