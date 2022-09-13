@@ -11,9 +11,9 @@ before_install:
   - openssl aes-256-cbc -K $encrypted_f3a04567eeab_key -iv $encrypted_f3a04567eeab_iv -in jwt.tar.enc -out jwt.tar -d
   - openssl aes-256-cbc -K $encrypted_279d18307899_key -iv $encrypted_279d18307899_iv -in aws.tar.enc -out aws.tar -d
   - openssl aes-256-cbc -K $encrypted_029489973163_key -iv $encrypted_029489973163_iv -in mysql.tar.enc -out mysql.tar -d
-  - tar xvf ap.tar -C
-  - tar xvf ap-jwt.tar -C
-  - tar xvf ap-mysql.tar -C
+  - tar xvf ap.tar
+  - tar xvf ap-jwt.tar
+  - tar xvf ap-mysql.tar
   - ls ./src/main/resources
   - chmod +x mvnw
   
