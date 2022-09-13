@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class S3Controller {
 
-	private S3ServiceImpl s3Svc;
+	private final S3ServiceImpl s3Svc;
 
 	@PostMapping("/upload/profile")
 	public ResponseEntity<String> uploadProfile(@RequestParam(value = "file") MultipartFile multiFile) {
