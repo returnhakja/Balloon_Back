@@ -2,6 +2,7 @@ package com.balloon.api;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,12 +24,10 @@ public class S3Controller {
 
 	private final S3ServiceImpl s3Svc;
 
-	@PostMapping("/upload/profile")
-	public ResponseEntity<String> uploadProfile(@RequestParam(value = "file") MultipartFile multiFile) {
-		System.out.println("dddddddddddddd");
-		System.out.println(multiFile);
-		System.out.println("dddddddddddddd");
-		return new ResponseEntity<>(s3Svc.uploadProfile(multiFile), HttpStatus.OK);
+	@PostMapping(value = "/upload/profile/{empId}", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+	public ResponseEntity<String> uploadProfile(@RequestParam(value = "file") MultipartFile multiFile,
+			@PathVariable(value = "empId") String empId) {
+		return new ResponseEntity<>(s3Svc.uploadProfile(multiFile, empId), HttpStatus.OK);
 	}
 
 	@GetMapping("/download/{fileName}")
