@@ -2,7 +2,7 @@ spring:
 
   # DB
   profiles:
-    include: mysql.tar,jwt.tar,aws.tar
+    include: mysql,jwt,aws
 
   # JPA
   jpa:
