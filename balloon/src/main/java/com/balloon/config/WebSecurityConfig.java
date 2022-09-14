@@ -71,8 +71,8 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**")
-				.allowedOrigins("http://localhost:3000", "http://54.180.148.125:80", "http://54.180.148.125:8080")
+		registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://54.180.148.125:8080",
+				"http://54.180.148.125:80", "ws://54.180.148.125:8080")
 //				.allowedOrigins("http://localhost:3000")
 //				.allowedOrigins("http://54.180.148.125:80")
 				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")

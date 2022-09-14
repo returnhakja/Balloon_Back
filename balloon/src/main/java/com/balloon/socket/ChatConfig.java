@@ -16,8 +16,7 @@ public class ChatConfig implements WebSocketMessageBrokerConfigurer {
 		// 메세지 발행, 구독이 가능하다.
 		registry.addEndpoint("/chatstart")
 //		.setAllowedOrigins("http://localhost:3000", "http://15.164.224.26:8080")
-				.setAllowedOrigins("http://localhost:3000").setAllowedOrigins("http://54.180.148.125:8080")
-				.withSockJS();
+				.setAllowedOrigins("http://localhost:3000").setAllowedOrigins("http://54.180.148.125").withSockJS();
 	}
 
 	@Override
