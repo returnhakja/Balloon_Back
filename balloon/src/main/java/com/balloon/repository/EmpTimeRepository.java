@@ -21,7 +21,7 @@ public interface EmpTimeRepository extends JpaRepository<EmployeeTime, EmployeeT
 	@Transactional
 	public int startWork(@Param(value = "empId") String empId);
 
-	@Query(value = "UPDATE employee_time SET leave_work=\"퇴근\" ,outd_time= CURRENT_TIMESTAMP WHERE emp_id= :empId AND work_date = current_date();", nativeQuery = true)
+	@Query(value = "UPDATE employee_time SET leave_work=\"퇴근\" ,out_time= CURRENT_TIMESTAMP WHERE emp_id= :empId AND work_date = current_date();", nativeQuery = true)
 	@Modifying
 	@Transactional
 	public int endWork(@Param(value = "empId") String empId);
