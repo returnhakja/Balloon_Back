@@ -48,7 +48,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		http.authorizeRequests()
 
 //				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
-////				.antMatchers(HttpMethod.GET, "/employee/unit/list/**").hasAnyRole("USER", "MANAGER", "ADMIN")//
+//				.antMatchers(HttpMethod.GET, "/employee/unit/list/**").hasAnyRole("USER", "MANAGER", "ADMIN")//
 //				.antMatchers("/chatstart").hasAnyRole("USER", "MANAGER", "ADMIN")//
 ////				.permitAll()//
 //				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
@@ -58,7 +58,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.PUT, "/employee/update/admin").hasRole("ADMIN")//
-//				.anyRequest().hasAnyRole("USER", "MANAGER", "ADMIN");//
+//				.anyRequest().hasAnyRole("USER", "MANAGER", "ADMIN")//
 				.anyRequest().permitAll();//
 
 		http.logout().permitAll();
@@ -69,12 +69,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		return http.build();
 	}
 
-//	@Override
-//	public void addCorsMappings(CorsRegistry registry) {
-//		registry.addMapping("/**").allowedOrigins("http://54.180.148.125:8080")
-////				.allowedOrigins("http://localhost:3000")
-//				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
-//				.allowCredentials(true).maxAge(MAX_AGE_SECS);
-//	}
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("/**").allowedOrigins("http://54.180.148.125:8080").allowedOrigins("http://localhost:3000")
+				.allowedOrigins("http://54.180.148.125:80")
+				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
+				.allowCredentials(true).maxAge(MAX_AGE_SECS);
+	}
 
 }
