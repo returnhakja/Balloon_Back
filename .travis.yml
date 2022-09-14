@@ -27,7 +27,7 @@ install:
   
 
 
-# Travis CI 서버의 Home
+# Travis CI 서버의 Home 1
 cache:
   directories:
     - '$HOME/.m2'
