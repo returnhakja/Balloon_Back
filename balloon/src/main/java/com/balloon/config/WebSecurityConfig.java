@@ -69,12 +69,12 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		return http.build();
 	}
 
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-		registry.addMapping("/**").allowedOrigins("http://54.180.148.125:8080").allowedOrigins("http://localhost:3000")
-				.allowedOrigins("http://54.180.148.125:80")
-				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
-				.allowCredentials(true).maxAge(MAX_AGE_SECS);
-	}
+// 	@Override
+// 	public void addCorsMappings(CorsRegistry registry) {
+// 		registry.addMapping("/**").allowedOrigins("http://54.180.148.125:8080").allowedOrigins("http://localhost:3000")
+// 				.allowedOrigins("http://54.180.148.125:80")
+// 				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
+// 				.allowCredentials(true).maxAge(MAX_AGE_SECS);
+// 	}
 
 }
