@@ -14,9 +14,6 @@ before_install:
   - tar xvf jwt.tar -C ./src/main/resources
   - tar xvf aws.tar -C ./src/main/resources
   - tar xvf mysql.tar -C ./src/main/resources
-  - cat application-mysql.properties
-  - cat application-aws.properties
-  - cat application-jwt.properties
   - ls ./src/main/resources
   - chmod +x mvnw
   
