@@ -136,7 +136,8 @@ public class UnitRestController {
 		}
 	}
 
-	@CrossOrigin(origins = { "http://localhost:3000" })
+//	@CrossOrigin(origins = { "http://localhost:3000" })
+	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 	@DeleteMapping(value = "/{unitCode}")
 	public void deleteUnitByUnitCode(@PathVariable String unitCode) throws Exception {
 		try {

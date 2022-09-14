@@ -30,6 +30,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/employee")
 @RequiredArgsConstructor
 //@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 public class EmpRestController {
 
 	private final EmpServiceImpl empSvc;
@@ -147,7 +148,8 @@ public class EmpRestController {
 	}
 
 	// delete
-	@CrossOrigin(origins = { "http://localhost:3000" })
+//	@CrossOrigin(origins = { "http://localhost:3000" })
+	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 	@DeleteMapping("/{empId}")
 	public void deleteByEmpId(@Valid @PathVariable String empId) {
 		try {
@@ -161,7 +163,8 @@ public class EmpRestController {
 		}
 	}
 
-	@CrossOrigin(origins = { "http://localhost:3000" })
+//	@CrossOrigin(origins = { "http://localhost:3000" })
+	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 	@PutMapping("/update/admin")
 	public void updateEmpByAdmin(@Valid @RequestBody EmpResByAdminDTO empDTO) {
 		try {
@@ -175,7 +178,8 @@ public class EmpRestController {
 		}
 	}
 
-	@CrossOrigin(origins = { "http://localhost:3000" })
+//	@CrossOrigin(origins = { "http://localhost:3000" })
+	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 	@PutMapping("/update/mypage")
 	public void updateEmpByMypage(@Valid @RequestBody EmpResponseDTO empDTO) {
 		try {
