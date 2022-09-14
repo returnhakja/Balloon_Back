@@ -74,7 +74,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		registry.addMapping("/**")
 //		.allowedOrigins("http://localhost:3000", "http://15.164.224.26:8080")
 //				.allowedOrigins("http://localhost:3000")
-				.allowedOrigins("http://54.180.148.125:8080")
+				.allowedOrigins("http://54.180.148.125:80")
 				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
 				.allowCredentials(true).maxAge(MAX_AGE_SECS);
 	}
