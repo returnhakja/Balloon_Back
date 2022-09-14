@@ -2,20 +2,15 @@ package com.balloon.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Function;
 
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.balloon.config.SecurityUtil;
 import com.balloon.dto.EmpDTO;
+import com.balloon.dto.EmpResByAdminDTO;
 import com.balloon.dto.EmpResponseDTO;
-import com.balloon.dto.PageRequestDTO;
-import com.balloon.dto.PageResultDTO;
 import com.balloon.entity.Employee;
 import com.balloon.repository.EmpRepository;
 
@@ -30,22 +25,23 @@ public class EmpServiceImpl implements EmpService {
 
 	@Transactional(readOnly = true)
 	@Override
-	public PageResultDTO<EmpDTO, Employee> findEmpList(PageRequestDTO pageRequestDTO) {
-		Pageable pageable = pageRequestDTO.getPageable(Sort.by("empId").descending());
-		Page<Employee> result = empRepo.findAll(pageable);
-		Function<Employee, EmpDTO> function = (empEntity -> empEntity.toDTO(empEntity));
-
-		return new PageResultDTO<EmpDTO, Employee>(result, function);
-	};
-
-	@Transactional(readOnly = true)
-	@Override
 	public EmpDTO findEmpByEmpId(String empId) throws Exception {
 		Employee empEntity = empRepo.findEmpByEmpId(empId);
 		if (empEntity == null) {
 			throw new Exception("사원 정보가 존재하지 않습니다.");
 		} else {
 			return empEntity.toDTO(empEntity);
+		}
+	}
+
+	@Transactional(readOnly = true)
+	@Override
+	public EmpResByAdminDTO findEmpInfoByEmpIdUseAdmin(String empId) throws Exception {
+		Employee empEntity = empRepo.findEmpByEmpId(empId);
+		if (empEntity == null) {
+			throw new Exception("사원 정보가 존재하지 않습니다.");
+		} else {
+			return empEntity.toDTOByAdmin(empEntity);
 		}
 	}
 
@@ -89,7 +85,6 @@ public class EmpServiceImpl implements EmpService {
 		sameParentCodeList.forEach(empEntity -> empDTOList.add(empEntity.toDTO(empEntity)));
 
 		return empDTOList;
-
 	}
 
 	@Transactional
@@ -108,9 +103,43 @@ public class EmpServiceImpl implements EmpService {
 
 	}
 
+	@Transactional
 	@Override
 	public void deleteByEmpId(String empId) {
 		empRepo.deleteById(empId);
+	}
+
+	@Transactional
+	@Override
+	public void updateEmpByAdmin(EmpResByAdminDTO empDTO) {
+		Employee employee = empRepo.findEmpByEmpId(empDTO.getEmpId());
+		if (employee == null) {
+			throw new RuntimeException("로그인 유저 정보가 없습니다.");
+		}
+		employee.updateEmpByAdmin(empDTO, passwordEncoder);
+		empRepo.save(employee);
+	}
+
+	@Transactional
+	@Override
+	public void updateEmpByMypage(EmpResponseDTO empDTO) {
+		Employee employee = empRepo.findEmpByEmpId(empDTO.getEmpId());
+		if (employee == null) {
+			throw new RuntimeException("로그인 유저 정보가 없습니다.");
+		}
+		employee.updateEmpByUser(empDTO);
+		empRepo.save(employee);
+	}
+
+	@Transactional
+	@Override
+	public void updateEmpByProfile(String empId, String photo) {
+		Employee employee = empRepo.findEmpByEmpId(empId);
+		if (employee == null) {
+			throw new RuntimeException("로그인 유저 정보가 없습니다.");
+		}
+		employee.updatePhotoByUser(photo);
+		empRepo.save(employee);
 	}
 
 	@Transactional
