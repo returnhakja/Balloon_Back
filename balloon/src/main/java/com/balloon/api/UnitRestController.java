@@ -24,6 +24,7 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/unit")
 @RequiredArgsConstructor
 //@CrossOrigin(origins = { "http://localhost:3000" })
+@CrossOrigin(origins = { "http://54.180.148.125" })
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;
@@ -137,7 +138,7 @@ public class UnitRestController {
 	}
 
 //	@CrossOrigin(origins = { "http://localhost:3000" })
-	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
+	@CrossOrigin(origins = { "http://54.180.148.125" })
 	@DeleteMapping(value = "/{unitCode}")
 	public void deleteUnitByUnitCode(@PathVariable String unitCode) throws Exception {
 		try {
