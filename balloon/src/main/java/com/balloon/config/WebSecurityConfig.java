@@ -68,13 +68,4 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		return http.build();
 	}
 
-//	@Override
-//	public void addCorsMappings(CorsRegistry registry) {
-//		registry.addMapping("/**")
-////		.allowedOrigins("http://localhost:3000", "http://15.164.224.26:8080")
-//				.allowedOrigins("http://localhost:3000")
-//				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
-//				.allowCredentials(true).maxAge(MAX_AGE_SECS);
-//	}
-
 }
