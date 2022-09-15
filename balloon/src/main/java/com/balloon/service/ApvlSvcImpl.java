@@ -20,9 +20,12 @@ public class ApvlSvcImpl implements ApvlSvc {
 	private final ApvlRepository ApvlRepo;
 
 	@Override
-	public void insertApvl(ApvlDTO apvlDTO) {
-		ApprovalList approvalList = apvlDTO.toEntity(apvlDTO);
-		ApvlRepo.save(approvalList);
+	public void insertApvl(List<ApvlDTO> approverDTOList) {
+		List<ApprovalList> newApprovalList = new ArrayList<ApprovalList>();
+		approverDTOList.forEach(v -> newApprovalList.add(v.toEntity(v)));
+		ApvlRepo.saveAll(newApprovalList);
+//		ApprovalList approvalList = apvlDTO.toEntity(apvlDTO);
+//		ApvlRepo.save(approvalList);
 	}
 
 	@Override

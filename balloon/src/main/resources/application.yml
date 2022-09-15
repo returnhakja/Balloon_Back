@@ -4,6 +4,7 @@ spring:
   profiles:
     include: mysql, jwt, aws
   # 테스트으
+
   # JPA
   jpa:
     hibernate:
@@ -16,7 +17,7 @@ spring:
 #        generate_statistics: true
 #        jdbc:
 #          batch_size: 50
-#        order_inserts: true
+#        order_inserts: true 
     # DB    
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
@@ -38,4 +39,4 @@ spring:
 logging:
   level:
     com.balloon: debug    
-  
+

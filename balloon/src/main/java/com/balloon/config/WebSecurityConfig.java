@@ -1,13 +1,5 @@
 package com.balloon.config;
 
-import java.util.Collections;
-
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.SessionCookieConfig;
-import javax.servlet.SessionTrackingMode;
-
-import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -48,25 +40,30 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 				.csrf().disable()
 				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-//						.maximumSessions(1).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
-
-		;
+//						.maximumSessions(5).maxSessionsPreventsLogin(true).expiredUrl("/login?exprie=true"))
 
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
 				.accessDeniedHandler(jwtAccessDeniedHandler);
 
+//				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
+
 		http.authorizeRequests()
 
-//				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
 //				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
-//				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
+////				.antMatchers(HttpMethod.GET, "/employee/unit/list/**").hasAnyRole("USER", "MANAGER", "ADMIN")//
+//				.antMatchers("/chatstart").hasAnyRole("USER", "MANAGER", "ADMIN")//
 ////				.permitAll()//
+//				.antMatchers(HttpMethod.POST, "/auth/**").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.POST, "/unit/list").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.POST, "/unit/add").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.PUT, "/unit/change").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
+
 //				.anyRequest().authenticated();//
+
+//				.antMatchers(HttpMethod.PUT, "/employee/update/admin").hasRole("ADMIN")//
+//				.anyRequest().hasAnyRole("USER", "MANAGER", "ADMIN");//
 				.anyRequest().permitAll();//
 
 		http.logout().permitAll();
@@ -85,20 +82,6 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 						"ws://54.180.148.125:8080")
 				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
 				.allowCredentials(true).maxAge(MAX_AGE_SECS);
-	}
-
-	// JSESSIONID 삭제
-	// 수정
-	@Bean
-	public ServletContextInitializer clearJsession() {
-		return new ServletContextInitializer() {
-			@Override
-			public void onStartup(ServletContext servletContext) throws ServletException {
-				servletContext.setSessionTrackingModes(Collections.singleton(SessionTrackingMode.COOKIE));
-				SessionCookieConfig sessionCookieConfig = servletContext.getSessionCookieConfig();
-				sessionCookieConfig.setHttpOnly(true);
-			}
-		};
 	}
 
 }
