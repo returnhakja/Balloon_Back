@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.config.WebSecurityConfig;
@@ -24,7 +23,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/auth", method = { RequestMethod.POST, RequestMethod.GET })
+@RequestMapping(value = "/auth")
+//@RequestMapping(value = "/auth", method = { RequestMethod.POST, RequestMethod.GET })
 @RequiredArgsConstructor
 public class AuthRestController {
 	private final AuthServiceImpl authSvc;
