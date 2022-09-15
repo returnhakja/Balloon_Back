@@ -12,6 +12,7 @@ public class ChatConfig implements WebSocketMessageBrokerConfigurer {
 
 	@Override
 	public void registerStompEndpoints(StompEndpointRegistry registry) {
+
 		registry.addEndpoint("/chatstart").setAllowedOrigins("http://localhost:3000")
 //      .setAllowedOrigins("http://15.164.224.26")
 				.setAllowedOrigins("http://54.180.148.125").withSockJS();
@@ -20,7 +21,6 @@ public class ChatConfig implements WebSocketMessageBrokerConfigurer {
 		// 메세지 발행, 구독이 가능하다.
 	}
 
-//
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 		config.enableSimpleBroker("/topic"); // 1:n / 1:1
