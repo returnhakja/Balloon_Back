@@ -63,6 +63,9 @@ public class AuthRestController {
 	public ResponseEntity<TokenDTO> login(@Valid @RequestBody EmpRequestDTO requestDto, HttpServletResponse response)
 			throws Exception {
 
+		System.out
+				.println("requestDtorequestDtorequestDtorequestDtorequestDtorequestDtorequestDtorequestDtorequestDto");
+		System.out.println(requestDto);
 		TokenDTO tokenDTO = authSvc.login(requestDto);
 
 		if (tokenDTO != null) {

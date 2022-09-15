@@ -9,7 +9,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.balloon.jwt.JwtAccessDeniedHandler;
@@ -71,14 +70,14 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 		return http.build();
 	}
 
-	@Override
-	public void addCorsMappings(CorsRegistry registry) {
-//      registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:8080", "http://15.164.224.26:80", "ws://15.164.224.26:8080")
-		registry.addMapping("/**")
-				.allowedOrigins("http://localhost:3000", "http://54.180.148.125:8080", "http://54.180.148.125:80",
-						"ws://54.180.148.125:8080")
-				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
-				.allowCredentials(true).maxAge(MAX_AGE_SECS);
-	}
+//	@Override
+//	public void addCorsMappings(CorsRegistry registry) {
+////      registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:8080", "http://15.164.224.26:80", "ws://15.164.224.26:8080")
+//		registry.addMapping("/**")
+//				.allowedOrigins("http://localhost:3000", "http://54.180.148.125:8080", "http://54.180.148.125:80",
+//						"ws://54.180.148.125:8080")
+//				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
+//				.allowCredentials(true).maxAge(MAX_AGE_SECS);
+//	}
 
 }
