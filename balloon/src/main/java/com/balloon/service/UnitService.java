@@ -11,7 +11,9 @@ public interface UnitService {
 
 	public List<UnitDTO> findByHigherOrganization();
 
-	public void insertUnit(UnitDTO unitDTO);
+	public String findMaxUnitCodeByParentUnit(String parentUnit);
+
+	public void insertUnit(UnitDTO unitDTO) throws Exception;
 
 	public boolean insertUnitList(List<UnitDTO> requestDtoList);
 
