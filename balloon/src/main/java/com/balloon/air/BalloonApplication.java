@@ -15,7 +15,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan(basePackages = { "com.balloon.api", "com.balloon.config", "com.balloon.controller", "com.balloon.dto",
 		"com.balloon.exception", "com.balloon.jwt", "com.balloon.service", "com.balloon.socket" })
 public class BalloonApplication {
-
+//
 	public static void main(String[] args) {
 		SpringApplication.run(BalloonApplication.class, args);
 	}
