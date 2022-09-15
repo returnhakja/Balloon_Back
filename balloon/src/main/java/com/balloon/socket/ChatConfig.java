@@ -20,6 +20,7 @@ public class ChatConfig implements WebSocketMessageBrokerConfigurer {
 		// 메세지 발행, 구독이 가능하다.
 	}
 
+//
 	@Override
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 		config.enableSimpleBroker("/topic"); // 1:n / 1:1
