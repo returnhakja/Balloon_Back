@@ -28,7 +28,7 @@ public class BizTpEmpSvcImpl implements BizTpEmpSvc {
 	@Override
 	public List<BizTpEmpDTO> getBizTpEmpByBizTpId(String bizTpId) {
 		List<BizTpEmpDTO> DTOList = new ArrayList<BizTpEmpDTO>();
-		List<BusinessTripEmployee> bizTpEmpList = bizTpEmpRepo.findEmpByBusinessTripBusinessTripId(bizTpId);
+		List<BusinessTripEmployee> bizTpEmpList = bizTpEmpRepo.findEmpIdByBusinessTripBusinessTripId(bizTpId);
 
 		for (BusinessTripEmployee businessTripEmployee : bizTpEmpList) {
 			DTOList.add(businessTripEmployee.toDTO(businessTripEmployee));
