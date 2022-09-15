@@ -63,7 +63,7 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //				.anyRequest().authenticated();//
 //				.antMatchers(HttpMethod.PUT, "/employee/update/admin").hasRole("ADMIN")//
 //				.anyRequest().hasAnyRole("USER", "MANAGER", "ADMIN");//
-  				.anyRequest().permitAll();//
+				.anyRequest().permitAll();//
 		http.logout().permitAll();
 		http.exceptionHandling().accessDeniedPage("/accesDenied");
 		http.apply(new JwtSecurityConfig(tokenProvider));
