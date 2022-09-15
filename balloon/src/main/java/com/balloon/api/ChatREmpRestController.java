@@ -21,8 +21,8 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/cre")
 @RequiredArgsConstructor
-//@CrossOrigin(origins = { "http://localhost:3000" })
-@CrossOrigin(origins = { "http://54.180.148.125" })
+@CrossOrigin(origins = { "http://localhost:3000" })
+//@CrossOrigin(origins = { "http://54.180.148.125" })
 public class ChatREmpRestController {
 
 	private final ChatREmpServiceImpl chatREmpServicImpl;
