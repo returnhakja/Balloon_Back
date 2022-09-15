@@ -10,7 +10,6 @@ import javax.servlet.SessionTrackingMode;
 import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -33,7 +32,6 @@ import lombok.RequiredArgsConstructor;
 @Component
 public class WebSecurityConfig implements WebMvcConfigurer {
 
-
 	private final TokenProvider tokenProvider;
 	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
@@ -54,11 +52,10 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 
 		;
 
-      http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-            .accessDeniedHandler(jwtAccessDeniedHandler);
+		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+				.accessDeniedHandler(jwtAccessDeniedHandler);
 
-      http.authorizeRequests()
-
+		http.authorizeRequests()
 
 //				.antMatchers(HttpMethod.POST, "/auth/login").permitAll()//
 //				.antMatchers(HttpMethod.GET, "/unit/**").permitAll()//
@@ -70,27 +67,28 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 //				.antMatchers(HttpMethod.DELETE, "/unit/**").hasRole("ADMIN")//
 //				.antMatchers(HttpMethod.DELETE, "/employee/**").hasRole("ADMIN")//
 //				.anyRequest().authenticated();//
-      .anyRequest().permitAll();//
+				.anyRequest().permitAll();//
 
+		http.logout().permitAll();
 
-      http.logout().permitAll();
+		http.exceptionHandling().accessDeniedPage("/accesDenied");
+		http.apply(new JwtSecurityConfig(tokenProvider));
 
-      http.exceptionHandling().accessDeniedPage("/accesDenied");
-      http.apply(new JwtSecurityConfig(tokenProvider));
+		return http.build();
+	}
 
-      return http.build();
-   }
-
-
-   @Override
-   public void addCorsMappings(CorsRegistry registry) {
-      registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:8080", "http://15.164.224.26:80", "ws://15.164.224.26:8080")
-            .allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
-            .allowCredentials(true).maxAge(MAX_AGE_SECS);
-   }
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+//      registry.addMapping("/**").allowedOrigins("http://localhost:3000", "http://15.164.224.26:8080", "http://15.164.224.26:80", "ws://15.164.224.26:8080")
+		registry.addMapping("/**")
+				.allowedOrigins("http://localhost:3000", "http://54.180.148.125:8080", "http://54.180.148.125:80",
+						"ws://54.180.148.125:8080")
+				.allowedMethods("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS").allowedHeaders("*")
+				.allowCredentials(true).maxAge(MAX_AGE_SECS);
+	}
 
 	// JSESSIONID 삭제
-   // 수정
+	// 수정
 	@Bean
 	public ServletContextInitializer clearJsession() {
 		return new ServletContextInitializer() {
@@ -102,6 +100,5 @@ public class WebSecurityConfig implements WebMvcConfigurer {
 			}
 		};
 	}
-
 
 }
