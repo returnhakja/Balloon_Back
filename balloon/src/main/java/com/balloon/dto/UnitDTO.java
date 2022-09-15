@@ -2,9 +2,7 @@ package com.balloon.dto;
 
 import java.util.List;
 
-import javax.persistence.Column;
 import javax.persistence.FetchType;
-import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -22,15 +20,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UnitDTO {
 
-	@Id
-	@Column(name = "unit_code")
 	private String unitCode;
 
-	@Column(name = "unit_name", length = 20)
 	private String unitName;
 
-	@Column(length = 15)
 	private String bell;
+
+	private int prior;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "unit_id", referencedColumnName = "parent_unit")
@@ -41,8 +37,8 @@ public class UnitDTO {
 
 	public Unit toEntity(UnitDTO unitDTO) {
 		Unit unitEntity = Unit.builder().unitCode(unitDTO.getUnitCode()).unitName(unitDTO.getUnitName())
-				.bell(unitDTO.getBell()).parentUnit(unitDTO.getParentUnit()).childUnits(unitDTO.getChildUnits())
-				.build();
+				.bell(unitDTO.getBell()).prior(unitDTO.getPrior()).parentUnit(unitDTO.getParentUnit())
+				.childUnits(unitDTO.getChildUnits()).build();
 
 		return unitEntity;
 	}
