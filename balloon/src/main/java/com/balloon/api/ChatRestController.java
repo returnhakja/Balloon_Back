@@ -21,9 +21,9 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping("/chat")
 @RequiredArgsConstructor
 //@CrossOrigin(origins = { "http://localhost:3000" })
-//@CrossOrigin(origins = { "http://15.164.224.26:8080"})
-@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 
+
+@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 public class ChatRestController {
 
 	private final ChatServiceImpl chatSvc;

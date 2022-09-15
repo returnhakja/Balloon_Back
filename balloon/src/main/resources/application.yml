@@ -39,4 +39,3 @@ spring:
 logging:
   level:
     com.balloon: debug    
-
