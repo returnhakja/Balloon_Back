@@ -11,7 +11,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.balloon.config.WebSecurityConfig;
@@ -24,7 +23,8 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping(value = "/auth", method = { RequestMethod.POST, RequestMethod.GET })
+@RequestMapping(value = "/auth")
+//@RequestMapping(value = "/auth", method = { RequestMethod.POST, RequestMethod.GET })
 @RequiredArgsConstructor
 public class AuthRestController {
 	private final AuthServiceImpl authSvc;
@@ -58,7 +58,7 @@ public class AuthRestController {
 	}
 
 //	@CrossOrigin(origins = { "http://localhost:3000" })
-	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
+//	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 	@PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<TokenDTO> login(@Valid @RequestBody EmpRequestDTO requestDto, HttpServletResponse response)
 			throws Exception {
