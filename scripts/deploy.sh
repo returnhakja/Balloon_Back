@@ -4,14 +4,7 @@ REPOSITORY=/home/ubuntu/Balloon_Back
 PROJECT_NAME=Balloon
 REALREPOSITORY=/home/ubuntu/Real_Balloon_Back
 
-echo "> Build 파일 복사"
-
-mkdir -p $REALREPOSITORY
-
-sudo cp $REPOSITORY/zip/*.jar $REALREPOSITORY
-
 echo "> 현재 구동중인 애플리케이션 pid 확인"
-
 CURRENT_PID=$(pgrep -fl jar | awk '{print $1}')
 
 echo "현재 구동중인 어플리케이션 pid: $CURRENT_PID"
@@ -21,8 +14,16 @@ if [ -z "$CURRENT_PID" ]; then
 else
     echo "> kill -15 $CURRENT_PID"
     sudo kill -15 $CURRENT_PID
-    sleep 5
+    echo "> 동작 중인 파일 삭제"
+    rm -rf $REALREPOSITORY/*.jar    
+    sleep 10
 fi
+
+echo "> Build 파일 복사"
+
+mkdir -p $REALREPOSITORY
+
+sudo cp $REPOSITORY/zip/*.jar $REALREPOSITORY
 
 echo "> 새 어플리케이션 배포"
 
