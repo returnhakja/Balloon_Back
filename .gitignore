@@ -24,11 +24,8 @@ local.properties
 .recommenders
 application-mysql.properties
 application-jwt.properties
-<<<<<<< HEAD
-=======
+application-aws.properties
 *.properties
-
->>>>>>> ccb73fab62b140c77434cb691bc325fd0109e0a1
 
 # servers
 servers/
