@@ -2,7 +2,8 @@ spring:
 
   # DB
   profiles:
-    include: mysql,jwt,aws
+    include: mysql, jwt, aws
+  # 테스트으
 
   # JPA
   jpa:

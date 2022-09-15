@@ -163,8 +163,8 @@ public class EmpRestController {
 		}
 	}
 
-//	@CrossOrigin(origins = { "http://localhost:3000" })
-	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
+
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@PutMapping("/update/admin")
 	public void updateEmpByAdmin(@Valid @RequestBody EmpResByAdminDTO empDTO) {
 		try {
@@ -178,8 +178,7 @@ public class EmpRestController {
 		}
 	}
 
-//	@CrossOrigin(origins = { "http://localhost:3000" })
-	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
+	@CrossOrigin(origins = { "http://localhost:3000" })
 	@PutMapping("/update/mypage")
 	public void updateEmpByMypage(@Valid @RequestBody EmpResponseDTO empDTO) {
 		try {
