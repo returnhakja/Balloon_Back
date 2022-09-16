@@ -11,6 +11,6 @@ import com.balloon.entity.BusinessTripEmployeeId;
 @Repository
 public interface BizTpEmpRepository extends JpaRepository<BusinessTripEmployee, BusinessTripEmployeeId> {
 
-	List<BusinessTripEmployee> findEmpByBusinessTripBusinessTripId(String bizTpId);
+	List<BusinessTripEmployee> findEmpIdByBusinessTripBusinessTripId(String bizTpId);
 
 }

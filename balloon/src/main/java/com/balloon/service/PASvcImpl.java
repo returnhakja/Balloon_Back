@@ -68,9 +68,13 @@ public class PASvcImpl implements PASvc {
 
 	@Override
 	public PADTO getPAWD() {
-		PersonnelAppointment personnelAppointment = PARepo.findTopByOrderByWriteDateDesc();
-		PADTO paDTO = personnelAppointment.toDTO(personnelAppointment);
-		return paDTO;
+		if (PARepo.findTopByOrderByWriteDateDesc() != null) {
+			PersonnelAppointment personnelAppointment = PARepo.findTopByOrderByWriteDateDesc();
+			PADTO paDTO = personnelAppointment.toDTO(personnelAppointment);
+			return paDTO;
+		} else {
+			return null;
+		}
 	}
 
 }

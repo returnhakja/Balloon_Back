@@ -71,6 +71,21 @@ public class UnitRestController {
 		}
 	};
 
+	@GetMapping(value = "/max/{parentUnit}")
+	public String findMaxUnitCodeByParentUnit(@Valid @PathVariable String parentUnit) throws Exception {
+		String unitCode = null;
+		try {
+			if (parentUnit == null) {
+				throw new Exception("입력받은 값이 없습니다.");
+			}
+			unitCode = unitSvc.findMaxUnitCodeByParentUnit(parentUnit);
+			return unitCode;
+
+		} catch (Exception e) {
+			throw new Exception("존재하는 조직이 없습니다.");
+		}
+	}
+
 //	@GetMapping(value = "/childs/")
 //	public UnitDTO findChildUnitByUnitCode(@RequestBody List<UnitDTO> unitDTOList) throws Exception {
 //		try {
