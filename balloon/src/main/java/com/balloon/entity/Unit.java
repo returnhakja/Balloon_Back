@@ -34,7 +34,6 @@ import lombok.ToString;
 @ToString
 public class Unit implements Persistable<String> {
 
-//	@JsonIgnore
 	@Id
 	@Column(name = "unit_code", length = 10)
 	private String unitCode;
@@ -47,7 +46,10 @@ public class Unit implements Persistable<String> {
 	@Column(length = 15)
 	private String bell;
 
-//	@JsonManagedReference
+	@NotNull
+	@Column(length = 15)
+	private int prior;
+
 	@ManyToOne
 	@JoinColumn(name = "parent_unit", referencedColumnName = "unit_code")
 	@JsonIgnore
@@ -59,7 +61,7 @@ public class Unit implements Persistable<String> {
 
 	public UnitDTO toDTO(Unit unitEntity) {
 		UnitDTO unitDTO = UnitDTO.builder().unitCode(unitEntity.getUnitCode()).unitName(unitEntity.getUnitName())
-				.bell(unitEntity.getBell()).parentUnit(unitEntity.getParentUnit())
+				.bell(unitEntity.getBell()).prior(unitEntity.getPrior()).parentUnit(unitEntity.getParentUnit())
 				.childUnits(unitEntity.getChildUnits()).build();
 
 		return unitDTO;

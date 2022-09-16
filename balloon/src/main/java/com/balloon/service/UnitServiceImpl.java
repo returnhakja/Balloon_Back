@@ -49,9 +49,48 @@ public class UnitServiceImpl implements UnitService {
 		return unitDTOList;
 	}
 
+	@Transactional(readOnly = true)
+	@Override
+	public String findMaxUnitCodeByParentUnit(String parentUnit) {
+		String unitCode = unitRepo.findTopUnitCodeByParentUnitOrderByUnitCodeDesc(parentUnit);
+
+		return unitCode;
+	}
+
 	@Transactional
 	@Override
-	public void insertUnit(UnitDTO unitDTO) {
+	public void insertUnit(UnitDTO unitDTO) throws Exception {
+		if (unitDTO.getParentUnit().getUnitCode() == null) {
+			throw new Exception("상위 조직이 없습니다.");
+		}
+		String getUnitCode = unitRepo
+				.findTopUnitCodeByParentUnitOrderByUnitCodeDesc(unitDTO.getParentUnit().getUnitCode());
+
+		String frontUnitCode = getUnitCode.substring(0, 4);
+		String backUnitCode = getUnitCode.substring(4);
+
+		Integer frontNum = Integer.parseInt(frontUnitCode + "0000");
+		Integer backNum = Integer.parseInt(backUnitCode);
+
+		if (Integer.parseInt(getUnitCode) % 10000 == 0) {
+			frontNum += 10000;
+		} else {
+			if (frontNum == 9999) {
+				throw new Exception("하위 부서를 추가할 수 없습니다.");
+			} else {
+				backNum += 1;
+			}
+		}
+
+		Integer sumNum = frontNum + backNum;
+		String putUnitCode = sumNum.toString();
+
+		for (int i = putUnitCode.length(); i < 8; i++) {
+			putUnitCode = "0" + putUnitCode;
+		}
+
+		unitDTO.setUnitCode(putUnitCode);
+
 		Unit unitEntity = unitDTO.toEntity(unitDTO);
 
 		unitRepo.save(unitEntity);
