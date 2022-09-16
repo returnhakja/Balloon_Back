@@ -16,28 +16,28 @@ import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 public class JwtFilter extends OncePerRequestFilter {
-    public static final String AUTHORIZATION_HEADER = "Authorization";
-    public static final String BEARER_PREFIX = "Bearer ";
-    private final TokenProvider tokenProvider;
+	public static final String AUTHORIZATION_HEADER = "Authorization";
+	public static final String BEARER_PREFIX = "Bearer ";
+	private final TokenProvider tokenProvider;
 
+	private String resolveToken(HttpServletRequest request) {
+		String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+		if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
+			System.out.println(bearerToken);
+			return bearerToken.substring(7);
+		}
+		return null;
+	}
 
-    private String resolveToken(HttpServletRequest request) {
-        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
-        	System.out.println(bearerToken);
-            return bearerToken.substring(7);
-        }
-        return null;
-    }
+	@Override
+	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+			throws ServletException, IOException {
+		String jwt = resolveToken(request);
+		if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt, response)) {
+			Authentication authentication = tokenProvider.getAuthentication(jwt);
+			SecurityContextHolder.getContext().setAuthentication(authentication);
+		}
 
-    @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        String jwt = resolveToken(request);
-        if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
-            Authentication authentication = tokenProvider.getAuthentication(jwt);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-        }
-
-        filterChain.doFilter(request, response);
-    }
+		filterChain.doFilter(request, response);
+	}
 }
