@@ -21,8 +21,8 @@ public class MessageController {
 
 	@MessageMapping(value = "/chat/message")
 	public void message(@Payload MessageVO messageVO) {
-//                System.out.println(messageVO);
-//                System.out.println("연결성공");
+		System.out.println(messageVO);
+		System.out.println("연결성공");
 		chatSvc.insertChat(messageVO);
 		template.convertAndSend("/topic/message", messageVO);
 	}
