@@ -61,8 +61,8 @@ public class BizRptSvcImpl implements BizRptSvc {
 
 	@Override
 	public BizRptDTO getBizRptWD() {
-		BusinessReport businessReport = bizRptRepo.findTopByOrderByBusinessReportIdDesc();
-		if (businessReport != null) {
+		if (bizRptRepo.findTopByOrderByWriteDateDesc() != null) {
+			BusinessReport businessReport = bizRptRepo.findTopByOrderByWriteDateDesc();
 			BizRptDTO bizRptDTO = businessReport.toDTO(businessReport);
 			return bizRptDTO;
 		} else {
