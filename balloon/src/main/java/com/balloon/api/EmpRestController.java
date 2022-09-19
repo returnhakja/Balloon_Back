@@ -184,7 +184,6 @@ public class EmpRestController {
 			if (empDTO == null) {
 				throw new Exception("사원 정보가 들어오지 않음");
 			} else {
-				System.out.println(empDTO);
 				empSvc.updateEmpByMypage(empDTO);
 			}
 		} catch (Exception e) {
