@@ -48,7 +48,8 @@ public class PARestController {
 	}
 
 	// DELETE -------------------------------
-	@CrossOrigin(origins = { "http://localhost:3000" })
+//	@CrossOrigin(origins = { "http://localhost:3000" })
+	@CrossOrigin(origins = { "http://54.180.148.125" })
 	@DeleteMapping(value = "/pa/{PAId}")
 	public void deletePAByPAId(@PathVariable("PAId") String PAId) {
 		PASvc.deletePAByPAId(PAId);
