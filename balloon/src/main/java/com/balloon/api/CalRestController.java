@@ -22,7 +22,6 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/cal")
 @RequiredArgsConstructor
-// CICD 테스트 주석임
 public class CalRestController {
 
 	private final CalServiceImpl calSvc;
