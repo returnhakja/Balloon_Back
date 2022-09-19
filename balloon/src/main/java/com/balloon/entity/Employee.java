@@ -181,10 +181,18 @@ public class Employee implements Persistable<String> {
 	}
 
 	public void updateEmpByUser(EmpResponseDTO empDTO) {
-		this.mobile = empDTO.getMobile();
-		this.empMail = empDTO.getEmpMail();
-		this.address = empDTO.getAddress();
-		this.licensePlate = empDTO.getLicensePlate();
+		if (empDTO.getMobile() != null) {
+			this.mobile = empDTO.getMobile();
+		}
+		if (empDTO.getEmpMail() != null) {
+			this.empMail = empDTO.getEmpMail();
+		}
+		if (empDTO.getAddress() != null) {
+			this.address = empDTO.getAddress();
+		}
+		if (empDTO.getLicensePlate() != null) {
+			this.licensePlate = empDTO.getLicensePlate();
+		}
 	}
 
 	public void updatePhotoByUser(String photo) {
