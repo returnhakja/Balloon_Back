@@ -18,11 +18,9 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
-<<<<<<< HEAD
 //@CrossOrigin(origins = { "http://localhost:3000" })
 //@CrossOrigin(origins = { "http://54.180.148.125:8080" })
-=======
->>>>>>> 28cd69fa1279cfc7504235ebc9523ad34ec3d86b
+
 public class BizRptRestController {
 
 	private final BizRptSvcImpl BizRptSvc;
