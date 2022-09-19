@@ -128,6 +128,7 @@ public class EmpServiceImpl implements EmpService {
 			throw new RuntimeException("로그인 유저 정보가 없습니다.");
 		}
 		employee.updateEmpByUser(empDTO);
+
 		empRepo.save(employee);
 	}
 
