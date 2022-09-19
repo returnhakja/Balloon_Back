@@ -20,6 +20,6 @@ public interface BizRptRepository
 	public List<BusinessReport> findBusinessReportIdAndDocumentTitleAndUpdateDateByUnitUnitCodeStartingWithAndDocumentStatus(
 			String unitCode, Byte documentStatus);
 
-	public BusinessReport findTopByOrderByWriteDateDesc();
+	public BusinessReport findTopByOrderByBusinessReportIdDesc();
 
 }
