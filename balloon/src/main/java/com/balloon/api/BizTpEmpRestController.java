@@ -3,6 +3,7 @@ package com.balloon.api;
 import java.util.List;
 
 import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -41,5 +42,9 @@ public class BizTpEmpRestController {
 	// UPDATE -------------------------------
 
 	// DELETE -------------------------------
+	@DeleteMapping(value = "/biztpemp/{bizTpId}")
+	public void deleteBizTpEmpByBizTpId(@PathVariable("bizTpId") String bizTpId) {
+		BizTpEmpSvc.deleteBizTpEmpByBizTpId(bizTpId);
+	}
 
 }

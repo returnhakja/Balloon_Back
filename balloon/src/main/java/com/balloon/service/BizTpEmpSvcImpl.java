@@ -35,4 +35,9 @@ public class BizTpEmpSvcImpl implements BizTpEmpSvc {
 		}
 		return DTOList;
 	}
+
+	@Override
+	public void deleteBizTpEmpByBizTpId(String bizTpId) {
+		bizTpEmpRepo.deleteByBusinessTripBusinessTripId(bizTpId);
+	}
 }
