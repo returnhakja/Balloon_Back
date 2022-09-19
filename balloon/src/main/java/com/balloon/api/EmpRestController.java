@@ -146,8 +146,6 @@ public class EmpRestController {
 	}
 
 	// delete
-//	@CrossOrigin(origins = { "http://localhost:3000" })
-	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 	@DeleteMapping("/{empId}")
 	public void deleteByEmpId(@Valid @PathVariable String empId) {
 		try {
