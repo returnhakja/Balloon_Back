@@ -28,7 +28,7 @@ public class ChatConfig implements WebSocketMessageBrokerConfigurer {
 	public void configureMessageBroker(MessageBrokerRegistry config) {
 
 		config.enableSimpleBroker("/topic"); // 1:n / 1:1
-
+		// 테스트
 		// "/app" 접두사가 붙은 url로 발행한 메세지만 핸들러로 라우팅
 		config.setApplicationDestinationPrefixes("/app");
 	}
