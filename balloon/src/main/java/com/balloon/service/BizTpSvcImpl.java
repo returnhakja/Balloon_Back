@@ -1,5 +1,6 @@
 package com.balloon.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +41,8 @@ public class BizTpSvcImpl implements BizTpSvc {
 	}
 
 	@Override
-	public List<DocVO> getDocbyEmpIdAndDocStatusByDate(String empId, Byte docStatus) {
+	public List<DocVO> getDocbyEmpIdAndDocStatusByDate(String empId, Byte docStatus, LocalDateTime sunDay,
+			LocalDateTime saturDay) {
 		String id = empId;
 		Byte status = docStatus;
 		List<DocVO> voList = new ArrayList<DocVO>();

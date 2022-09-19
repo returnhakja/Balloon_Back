@@ -1,10 +1,13 @@
 package com.balloon.api;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,20 +42,24 @@ public class DocRestController {
 		return list;
 	}
 
-	@GetMapping(value = { "/empdocs/date/{empId}/{docStatus}" })
+	@PostMapping(value = "/empdocs/date/{empId}/{docStatus}")
 	public List<DocVO> getDocbyEmpIdByDate(@PathVariable("empId") String empId,
 			@PathVariable("docStatus") Byte docStatus, @RequestBody DocDateVO docDateVO) {
 		System.out.println("aaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbba");
 		System.out.println(docDateVO);
 
-//		List<DocVO> list = new ArrayList<DocVO>();
-//		list.addAll(BizRptSvc.getDocbyEmpIdAndDocStatusByDate(empId, docStatus, sunDay, saturDay));
-//		list.addAll(BizTpSvc.getDocbyEmpIdAndDocStatusByDate(empId, docStatus, sunDay, saturDay));
-//		list.addAll(PASvc.getDocbyEmpIdAndDocStatusByDate(empId, docStatus, sunDay, saturDay));
-//
-////		System.out.println(list); -> stackoverflow
-//		return list;
-		return null;
+		LocalDateTime sunDay = LocalDateTime.parse(docDateVO.getSunDay() + " 00:00:00",
+				DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+		LocalDateTime saturDay = LocalDateTime.parse(docDateVO.getSunDay() + " 00:00:00",
+				DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
+
+		List<DocVO> list = new ArrayList<DocVO>();
+		list.addAll(BizRptSvc.getDocbyEmpIdAndDocStatusByDate(empId, docStatus, sunDay, saturDay));
+		list.addAll(BizTpSvc.getDocbyEmpIdAndDocStatusByDate(empId, docStatus, sunDay, saturDay));
+		list.addAll(PASvc.getDocbyEmpIdAndDocStatusByDate(empId, docStatus, sunDay, saturDay));
+
+		return list;
+//		return null;
 	}
 
 	@GetMapping(value = "/unitdocs/{unitCode}")

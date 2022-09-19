@@ -1,5 +1,6 @@
 package com.balloon.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import com.balloon.dto.BizTpDTO;
@@ -10,7 +11,8 @@ public interface BizTpSvc {
 
 	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte documentStatus);
 
-	public List<DocVO> getDocbyEmpIdAndDocStatusByDate(String empId, Byte docStatus);
+	public List<DocVO> getDocbyEmpIdAndDocStatusByDate(String empId, Byte docStatus, LocalDateTime sunDay,
+			LocalDateTime saturDay);
 
 	public List<DocVO> getDocbyUnitCode(String unitCode);
 
