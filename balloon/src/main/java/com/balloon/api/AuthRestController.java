@@ -33,7 +33,6 @@ public class AuthRestController {
 	@PostMapping(value = "/signup")
 	public ResponseEntity<EmpResponseDTO> signup(@Valid @RequestBody EmpRequestDTO requestDto)
 			throws JsonProcessingException {
-		System.out.println(requestDto);
 		try {
 			return ResponseEntity.ok(authSvc.signup(requestDto));
 		} catch (Exception e) {

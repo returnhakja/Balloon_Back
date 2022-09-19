@@ -12,6 +12,8 @@ public interface BizRptSvc {
 
 	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte documentStatus);
 
+	public List<DocVO> getDocbyEmpIdAndDocStatusByDate(String empId, Byte docStatus);
+
 	public List<DocVO> getDocbyUnitCode(String unitCode);
 
 //	public List<DocVO> getDocByEmpName(String empName);

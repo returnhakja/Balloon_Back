@@ -10,6 +10,8 @@ public interface BizTpSvc {
 
 	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte documentStatus);
 
+	public List<DocVO> getDocbyEmpIdAndDocStatusByDate(String empId, Byte docStatus);
+
 	public List<DocVO> getDocbyUnitCode(String unitCode);
 
 	public BizTpDTO getBizTpByBizTpId(String businessTripId);
