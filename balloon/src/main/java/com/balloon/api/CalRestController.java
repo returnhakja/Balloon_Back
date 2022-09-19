@@ -22,9 +22,12 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/cal")
 @RequiredArgsConstructor
+<<<<<<< HEAD
 //@CrossOrigin(origins = { "http://localhost:3000" })
 //@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 // CICD 테스트 주석임
+=======
+>>>>>>> 28cd69fa1279cfc7504235ebc9523ad34ec3d86b
 public class CalRestController {
 
 	private final CalServiceImpl calSvc;

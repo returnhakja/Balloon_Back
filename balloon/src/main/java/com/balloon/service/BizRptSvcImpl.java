@@ -25,17 +25,6 @@ public class BizRptSvcImpl implements BizRptSvc {
 		bizRptRepo.save(bizRptEntity);
 	}
 
-//	@Override
-//	public PageResultDTO<BizRptDTO, BusinessReport> getList(PageRequestDTO pageRequestDTO) {
-//		Pageable pageable = pageRequestDTO.getPageable(Sort.by("businessReportId").descending());
-//
-//		Page<BusinessReport> result = bizRptRepo.findAll(pageable);
-//
-//		Function<BusinessReport, BizRptDTO> function = (businessReport -> businessReport.toDTO(businessReport));
-//
-//		return new PageResultDTO<BizRptDTO, BusinessReport>(result, function);
-//	}
-
 	@Override
 	public List<DocVO> getDocbyEmpIdAndDocStatus(String empId, Byte docStatus) {
 		String id = empId;
@@ -63,22 +52,11 @@ public class BizRptSvcImpl implements BizRptSvc {
 		return voList;
 	}
 
-//	@Override
-//	public List<DocVO> getDocByEmpName(String empName) {
-//		
-//		return null;
-//	}
-
 	@Override
 	public BizRptDTO getBizRptByBizRptId(String bizRptId) {
 		BusinessReport businessReport = bizRptRepo.findBusinessReportByBusinessReportId(bizRptId);
 		BizRptDTO bizRptDTO = businessReport.toDTO(businessReport);
 		return bizRptDTO;
-	}
-
-	@Override
-	public void deleteBizRptByBizRptId(String bizRptId) {
-		bizRptRepo.deleteById(bizRptId);
 	}
 
 	@Override
@@ -90,6 +68,11 @@ public class BizRptSvcImpl implements BizRptSvc {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public void deleteBizRptByBizRptId(String bizRptId) {
+		bizRptRepo.deleteById(bizRptId);
 	}
 
 }

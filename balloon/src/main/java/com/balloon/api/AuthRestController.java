@@ -24,7 +24,10 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(value = "/auth")
+<<<<<<< HEAD
 //@RequestMapping(value = "/auth", method = { RequestMethod.POST, RequestMethod.GET })
+=======
+>>>>>>> 28cd69fa1279cfc7504235ebc9523ad34ec3d86b
 @RequiredArgsConstructor
 public class AuthRestController {
 	private final AuthServiceImpl authSvc;

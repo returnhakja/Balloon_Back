@@ -29,8 +29,11 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/employee")
 @RequiredArgsConstructor
+<<<<<<< HEAD
 //@CrossOrigin(origins = { "http://localhost:3000" })
 //@CrossOrigin(origins = { "http://54.180.148.125" })
+=======
+>>>>>>> 28cd69fa1279cfc7504235ebc9523ad34ec3d86b
 public class EmpRestController {
 
 	private final EmpServiceImpl empSvc;
@@ -148,8 +151,6 @@ public class EmpRestController {
 	}
 
 	// delete
-//	@CrossOrigin(origins = { "http://localhost:3000" })
-	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 	@DeleteMapping("/{empId}")
 	public void deleteByEmpId(@Valid @PathVariable String empId) {
 		try {
