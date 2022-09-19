@@ -100,7 +100,6 @@
 			<artifactId>spring-websocket</artifactId>
 			<version>5.2.22.RELEASE</version><!--$NO-MVN-MAN-VER$ --><!-- 5.3.22 -->
 		</dependency>
-
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-messaging</artifactId>
