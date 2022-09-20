@@ -77,20 +77,19 @@ public class BizTpSvcImpl implements BizTpSvc {
 	}
 
 	@Override
-	public void deleteBizTpByBizTpId(String bizTpId) {
-		bizTpRepo.deleteById(bizTpId);
-	}
-
-	@Override
 	public BizTpDTO getBizTpWD() {
-		if (bizTpRepo.findTopByOrderByWriteDateDesc() != null) {
-			BusinessTripPlan businessTripPlan = bizTpRepo.findTopByOrderByWriteDateDesc();
+		BusinessTripPlan businessTripPlan = bizTpRepo.findTopByOrderByBusinessTripIdDesc();
+		if (businessTripPlan != null) {
 			BizTpDTO bizTpDTO = businessTripPlan.toDTO(businessTripPlan);
 			return bizTpDTO;
-
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public void deleteBizTpByBizTpId(String bizTpId) {
+		bizTpRepo.deleteById(bizTpId);
 	}
 
 }
