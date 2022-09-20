@@ -24,7 +24,7 @@ public class MessageController {
 		System.out.println(messageVO);
 		System.out.println("연결성공");
 		chatSvc.insertChat(messageVO);
-		template.convertAndSend("/topic/message", messageVO);
+		template.convertAndSend("/topic/message/" + messageVO.getChatroomId(), messageVO);
 	}
 
 	// 실시간으로 알림을 받기위해
