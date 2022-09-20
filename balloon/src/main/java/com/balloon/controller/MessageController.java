@@ -21,8 +21,6 @@ public class MessageController {
 
 	@MessageMapping(value = "/chat/message")
 	public void message(@Payload MessageVO messageVO) {
-		System.out.println(messageVO);
-		System.out.println("연결성공");
 		chatSvc.insertChat(messageVO);
 		template.convertAndSend("/topic/message/" + messageVO.getChatroomId(), messageVO);
 	}
@@ -30,8 +28,6 @@ public class MessageController {
 	// 실시간으로 알림을 받기위해
 	@MessageMapping(value = "/chat/schedulemsg")
 	public void schedulemsg(@Payload MessageVO messageVO) {
-		System.out.println(messageVO);
-		System.out.println("연결성공");
 		template.convertAndSend("/topic/message", messageVO);
 	}
 
