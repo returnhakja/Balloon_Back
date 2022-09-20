@@ -1,5 +1,6 @@
 package com.balloon.service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,6 +34,21 @@ public class PASvcImpl implements PASvc {
 		List<DocVO> voList = new ArrayList<DocVO>();
 		List<PersonnelAppointment> personnelAppointmentList = PARepo
 				.findPersonnelAppointmentIdAndDocumentTitleAndUpdateDateByEmpEmpIdAndDocumentStatus(id, status);
+		for (PersonnelAppointment personnelAppointment : personnelAppointmentList) {
+			voList.add(personnelAppointment.toVO(personnelAppointment));
+		}
+		return voList;
+	}
+
+	@Override
+	public List<DocVO> getDocbyEmpIdAndDocStatusByDate(String empId, Byte docStatus, LocalDateTime sunDay,
+			LocalDateTime saturDay) {
+		String id = empId;
+		Byte status = docStatus;
+		List<DocVO> voList = new ArrayList<DocVO>();
+		List<PersonnelAppointment> personnelAppointmentList = PARepo
+				.findPersonnelAppointmentIdAndDocumentTitleAndUpdateDateByEmpEmpIdAndDocumentStatusAndWriteDateBetween(
+						id, status, sunDay, saturDay);
 		for (PersonnelAppointment personnelAppointment : personnelAppointmentList) {
 			voList.add(personnelAppointment.toVO(personnelAppointment));
 		}

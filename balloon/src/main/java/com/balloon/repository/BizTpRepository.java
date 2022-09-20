@@ -1,5 +1,6 @@
 package com.balloon.repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -16,6 +17,9 @@ public interface BizTpRepository
 
 	public List<BusinessTripPlan> findBusinessTripIdAndDocumentTitleAndUpdateDateByEmpEmpIdAndDocumentStatus(
 			String empId, Byte documentStatus);
+
+	public List<BusinessTripPlan> findBusinessTripIdAndDocumentTitleAndUpdateDateByEmpEmpIdAndDocumentStatusAndWriteDateBetween(
+			String empId, Byte documentStatus, LocalDateTime sunDay, LocalDateTime saturDay);
 
 	public List<BusinessTripPlan> findBusinessTripIdAndDocumentTitleAndUpdateDateByUnitUnitCodeStartingWithAndDocumentStatus(
 			String unitCode, Byte documentStatus);
