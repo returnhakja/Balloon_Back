@@ -1,5 +1,7 @@
 package com.balloon.service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,21 @@ public class BizRptSvcImpl implements BizRptSvc {
 		List<DocVO> voList = new ArrayList<DocVO>();
 		List<BusinessReport> businessReportsList = bizRptRepo
 				.findBusinessReportIdAndDocumentTitleAndUpdateDateByEmpEmpIdAndDocumentStatus(id, status);
+		for (BusinessReport businessReport : businessReportsList) {
+			voList.add(businessReport.toVO(businessReport));
+		}
+		return voList;
+	}
+
+	@Override
+	public List<DocVO> getDocbyEmpIdAndDocStatusByDate(String empId, Byte docStatus, LocalDateTime sunDay,
+			LocalDateTime saturDay) {
+		String id = empId;
+		Byte status = docStatus;
+		List<DocVO> voList = new ArrayList<DocVO>();
+		List<BusinessReport> businessReportsList = bizRptRepo
+				.findBusinessReportIdAndDocumentTitleAndUpdateDateByEmpEmpIdAndDocumentStatusAndWriteDateBetween(id,
+						status, sunDay, saturDay);
 		for (BusinessReport businessReport : businessReportsList) {
 			voList.add(businessReport.toVO(businessReport));
 		}
