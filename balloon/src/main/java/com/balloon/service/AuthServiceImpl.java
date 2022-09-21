@@ -73,6 +73,11 @@ public class AuthServiceImpl implements AuthService {
 	@Override
 	public TokenDTO login(EmpRequestDTO requestDto) {
 		UsernamePasswordAuthenticationToken authenticationToken = requestDto.toAuthentication();
+
+		System.out.println(
+				"authenticationTokenauthenticationTokenauthenticationTokenauthenticationTokenauthenticationToken");
+		System.out.println(authenticationToken);
+
 		Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);
 		return tokenProvider.generateTokenDTO(authentication);
 	}

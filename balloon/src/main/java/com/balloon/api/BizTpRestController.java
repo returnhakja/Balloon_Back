@@ -1,7 +1,6 @@
 package com.balloon.api;
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -48,7 +47,7 @@ public class BizTpRestController {
 	}
 
 	// DELETE -------------------------------
-	@CrossOrigin(origins = { "http://localhost:3000" })
+//	@CrossOrigin(origins = { "http://localhost:3000" })
 	@DeleteMapping(value = "/biztp/{bizTpId}")
 	public void deleteBizTpByBizTpId(@PathVariable("bizTpId") String bizTpId) {
 		BizTpSvc.deleteBizTpByBizTpId(bizTpId);

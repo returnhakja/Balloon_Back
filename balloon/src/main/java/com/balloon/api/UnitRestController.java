@@ -5,7 +5,6 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -23,7 +22,11 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/unit")
 @RequiredArgsConstructor
+
 //@CrossOrigin(origins = { "http://localhost:3000" })
+
+//@CrossOrigin(origins = { "http://54.180.148.125" })
+
 public class UnitRestController {
 
 	private final UnitServiceImpl unitSvc;
@@ -133,7 +136,7 @@ public class UnitRestController {
 		return null;
 	}
 
-	@CrossOrigin(origins = { "http://localhost:3000" })
+//	@CrossOrigin(origins = { "http://localhost:3000" })
 	@PutMapping(value = "/change", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void updateUnit(@RequestBody UnitDTO unitDTO) throws Exception {
 		try {
@@ -151,7 +154,10 @@ public class UnitRestController {
 		}
 	}
 
-	@CrossOrigin(origins = { "http://localhost:3000" })
+//	@CrossOrigin(origins = { "http://localhost:3000" })
+
+//	@CrossOrigin(origins = { "http://localhost:3000" })
+
 	@DeleteMapping(value = "/{unitCode}")
 	public void deleteUnitByUnitCode(@PathVariable String unitCode) throws Exception {
 		try {

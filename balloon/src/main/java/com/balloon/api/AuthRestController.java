@@ -24,6 +24,8 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(value = "/auth")
+//@RequestMapping(value = "/auth", method = { RequestMethod.POST, RequestMethod.GET })
+
 @RequiredArgsConstructor
 public class AuthRestController {
 	private final AuthServiceImpl authSvc;
@@ -56,10 +58,14 @@ public class AuthRestController {
 	}
 
 //	@CrossOrigin(origins = { "http://localhost:3000" })
+//	@CrossOrigin(origins = { "http://54.180.148.125:8080" })
 	@PostMapping(value = "/login", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<TokenDTO> login(@Valid @RequestBody EmpRequestDTO requestDto, HttpServletResponse response)
 			throws Exception {
 
+		System.out
+				.println("requestDtorequestDtorequestDtorequestDtorequestDtorequestDtorequestDtorequestDtorequestDto");
+		System.out.println(requestDto);
 		TokenDTO tokenDTO = authSvc.login(requestDto);
 
 		if (tokenDTO != null) {
