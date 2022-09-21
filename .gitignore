@@ -99,6 +99,7 @@ web.xml
 ### Java ###
 # Compiled class file
 *.class
+ChatConfig.java
 
 # Log file
 *.log
