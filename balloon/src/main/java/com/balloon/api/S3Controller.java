@@ -26,8 +26,9 @@ public class S3Controller {
 
 	@PostMapping(value = "/upload/profile/{empId}", consumes = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.MULTIPART_FORM_DATA_VALUE })
-	public ResponseEntity<String> uploadProfile(@RequestParam("file") MultipartFile multiFile,
+	public ResponseEntity<String> uploadProfile(@RequestParam(value = "file") MultipartFile multiFile,
 			@PathVariable(value = "empId") String empId) {
+		system.out.println(multiFile);
 		return new ResponseEntity<>(s3Svc.uploadProfile(multiFile, empId), HttpStatus.OK);
 	}
 
