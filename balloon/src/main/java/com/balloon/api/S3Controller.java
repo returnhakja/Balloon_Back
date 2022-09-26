@@ -28,7 +28,7 @@ public class S3Controller {
 			MediaType.MULTIPART_FORM_DATA_VALUE })
 	public ResponseEntity<String> uploadProfile(@RequestParam("file") MultipartFile multiFile,
 			@PathVariable(value = "empId") String empId) {
-		system.out.println(multiFile);
+		
 		return new ResponseEntity<>(s3Svc.uploadProfile(multiFile, empId), HttpStatus.OK);
 	}
 
