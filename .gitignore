@@ -22,10 +22,10 @@ local.properties
 .settings/
 .loadpath
 .recommenders
-application-mysql.properties
-application-jwt.properties
-application-aws.properties
-*.properties
+#application-mysql.properties
+#application-jwt.properties
+#application-aws.properties
+#*.properties
 
 # servers
 servers/
